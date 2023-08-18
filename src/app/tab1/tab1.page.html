@@ -1,17 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Point Of Sale</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-row class="products_row">
+    <ion-col size="7" offset="1">
+      <ion-searchbar
+        placeholder="Filter Products"
+        inputmode="decimal"
+        type="decimal"
+        [debounce]="250"
+        showCancelButton="always"
+      ></ion-searchbar>
+      <ion-segment value="pizza">
+        <ion-segment-button value="pizza">
+          <ion-label>Pizza</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="paseta">
+          <ion-label>Pasta</ion-label>
+          <ion-label>Pizza</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="w">
+          <ion-label>Pasta</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="q">
+          <ion-label>Pasta</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div class="products_container">
+        <ion-card *ngFor="let item of productArray">
+          <ion-card-header>
+            <ion-card-subtitle> {{item.name}}</ion-card-subtitle>
+            <ion-card-title>{{item.price}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content> <img class="p_image" src="{{item.image_path}}"  alt=""> </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-col>
+    <ion-col size="4"> <app-cart name="cart"></app-cart></ion-col>
+  </ion-row>
 </ion-content>

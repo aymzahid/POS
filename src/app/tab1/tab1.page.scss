@@ -1,0 +1,17 @@
+.products_row {
+  ion-card {
+    width: 16vw;
+    margin: 10px;
+    padding: 0px;
+  }
+  .products_container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .p_image {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+  }
+}
