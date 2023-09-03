@@ -1,7 +1,12 @@
+ion-content {
+  --background: #eaf9f4;
+  --color: #3880ff;
+}
+
 .products_row {
   ion-card {
     width: 16vw;
-    margin: 10px;
+    // margin: 10px;
     padding: 0px;
   }
   .products_container {
@@ -13,5 +18,14 @@
     width: 150px;
     height: 150px;
     border-radius: 12px;
+  }
+
+  .sub_cat {
+    border-radius: 18px;
+    box-shadow: burlywood;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 7px 2px 11px teal;
+    margin: 3px;
   }
 }

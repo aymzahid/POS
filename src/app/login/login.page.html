@@ -11,7 +11,11 @@
     </ion-toolbar>
   </ion-header>
 
-   <a routerLink="/cart">
-  link to user component
-</a>
+  <!-- <a routerLink="[/cart]"> link to user component </a> -->
+
+  <ion-input
+    type="text"
+    (ionChange)="triggerEvent()"
+    [(ngModel)]="property"
+  ></ion-input>
 </ion-content>

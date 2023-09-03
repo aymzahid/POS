@@ -1,0 +1,78 @@
+import { Injectable } from '@angular/core';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GlobalVariable } from 'src/global';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ServiceService {
+  httpOptions: { headers: HttpHeaders };
+  constructor(public globals: GlobalVariable, public http: HttpClient) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }),
+    };
+  }
+
+  // getProjectList(data: any) {
+  //   console.log('data get project list', data);
+  //   let path;
+  //   if (data.business_type === 'developers') {
+  //     path = this.globals.baseURL + 'projectsList';
+  //   } else {
+  //     path = this.globals.baseURL + 'res_projectsList';
+  //   }
+
+  //   return this.http.post<any>(path, data);
+  // }
+
+  // getLatestResidentialProjects() {
+  //   let path;
+
+  //   let business_open = localStorage.getItem('business_open');
+  //   if (business_open === 'developers') {
+  //     path = this.globals.baseURL + 'latestResidentialProjectList';
+  //   } else {
+  //     path = this.globals.baseURL + 'res_latestResidentialProjectList';
+  //   }
+
+  //   return this.http.get<any>(path);
+  // }
+  // getLatestCommercialProjects(): Observable<any> {
+  //   let path;
+  //   let business_open = localStorage.getItem('business_open');
+  //   if (business_open === 'developers') {
+  //     path = this.globals.baseURL + 'latestCommercialProjectList';
+  //   } else {
+  //     path = this.globals.baseURL + 'res_latestCommercialProjectList';
+  //   }
+
+  //   return this.http.get<any>(path);
+  // }
+
+  getProductsList() {
+    let path = this.globals.baseURL + 'products-list';
+
+    return this.http.get<any>(path);
+  }
+
+  //POST
+
+  submitOrder(data: any) {
+    for (var pair of data.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
+    }
+    let path = this.globals.baseURL + 'createOrder';
+
+    return this.http.post<any>(path, data);
+  }
+
+  contactUs(data: any) {
+    let path = this.globals.baseURL + 'contactUs';
+
+    return this.http.post<any>(path, data);
+  }
+}

@@ -27,14 +27,13 @@ const routes: Routes = [
         path: 'more',
         redirectTo: '/login',
       },
-      {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full',
-      },
     ],
   },
-  
+  {
+    path: '',
+    redirectTo: 'tabs/tab1',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

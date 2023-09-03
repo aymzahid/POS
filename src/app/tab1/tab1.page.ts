@@ -8,8 +8,8 @@ import { CartComponent } from '../cart/cart.component';
 })
 export class Tab1Page {
   productArray: any = [
-    { name: 'abc', price: '123', image_path: 'assets/images/1.jpg' },
-    { name: 'abc', price: '123', image_path: 'assets/images/3.jpg' },
+    { name: 'abc', price: '40', image_path: 'assets/images/1.jpg' },
+    { name: 'abc', price: '50', image_path: 'assets/images/3.jpg' },
     { name: 'abc', price: '123', image_path: 'assets/images/2.jpg' },
     { name: 'abc', price: '123', image_path: 'assets/images/3.jpg' },
     { name: 'abc', price: '123', image_path: 'assets/images/1.jpg' },
@@ -19,4 +19,5 @@ export class Tab1Page {
   ];
 
   constructor() {}
+  ionViewWillEnter() {}
 }
