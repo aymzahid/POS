@@ -16,8 +16,7 @@ ion-row {
 
 .top_grid {
   height: 70vh;
-  overflow: scroll;
-  scroll-behavior: red;
+  overflow-y: scroll;
 }
 .head_row {
   background: #373434c4;
