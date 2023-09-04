@@ -9,11 +9,16 @@
         <ion-col size="2"> Price </ion-col>
       </ion-row>
 
-      <ion-row class="list_row">
+      <ion-row class="list_row" *ngFor="let item of cartItems; let i = index">
         <ion-col size="3" offset="1">
-          <ion-button fill="clear" size="small" color="danger">
+          <ion-button
+            (click)="removeItem(i)"
+            fill="clear"
+            size="small"
+            color="danger"
+          >
             <ion-icon name="trash-outline"></ion-icon> </ion-button
-          >Straberry
+          >{{ item.name }}
         </ion-col>
         <ion-col size="5" offset="1" class="qty">
           <ion-button fill="clear" size="small">
@@ -24,7 +29,7 @@
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </ion-col>
-        <ion-col size="2"> $8.0 </ion-col>
+        <ion-col size="2"> {{ item.price }} </ion-col>
       </ion-row>
     </ion-grid>
     <ion-grid class="payment_detail">
@@ -50,4 +55,9 @@
       </ion-row>
     </ion-grid>
   </div>
+
+  <!-- <div class="empty_cart">
+    <ion-icon slot="center" name="cart-outline"></ion-icon>
+    <span>Empty Cart</span>
+  </div> -->
 </ion-content>

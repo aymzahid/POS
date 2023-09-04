@@ -1,3 +1,4 @@
+import { CartserviceService } from '../services/cartservice.service';
 import { Component } from '@angular/core';
 import { CartComponent } from '../cart/cart.component';
 
@@ -18,6 +19,12 @@ export class Tab1Page {
     { name: 'abc', price: '123', image_path: 'assets/images/2.jpg' },
   ];
 
-  constructor() {}
+  constructor(private cartService: CartserviceService) {}
   ionViewWillEnter() {}
+
+  addToCart(product: any) {
+    console.log('product',product);
+
+    this.cartService.addToCart(product);
+  }
 }

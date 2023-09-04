@@ -80,7 +80,7 @@
       </ion-segment>
 
       <div class="products_container">
-        <ion-card *ngFor="let item of productArray">
+        <ion-card *ngFor="let item of productArray" (click)="addToCart(item)" >
           <ion-card-header>
             <ion-card-title color="primary">{{item.price}}</ion-card-title>
             <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
