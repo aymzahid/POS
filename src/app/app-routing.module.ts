@@ -13,16 +13,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
-  {
-    path: '',
-    component: CartComponent,
-  },
-
   // {
   //   path: '',
-  //   redirectTo: 'tabs',
-  //   pathMatch: 'full',
+  //   component: CartComponent,
   // },
+
+  {
+    path: '',
+    redirectTo: 'tabs',
+    pathMatch: 'full',
+  },
 ];
 @NgModule({
   imports: [

@@ -23,7 +23,7 @@
   </ion-header>
 
   <ion-row class="products_row">
-    <ion-col size="7" offset="1" >
+    <ion-col size="6.5" offset="1">
       <ion-row
         style="text-align: center; align-items: center; font-size: 1.8rem"
       >
@@ -82,15 +82,23 @@
       <div class="products_container">
         <ion-card *ngFor="let item of productArray">
           <ion-card-header>
-            <ion-card-subtitle> {{item.name}}</ion-card-subtitle>
-            <ion-card-title>{{item.price}}</ion-card-title>
+            <ion-card-title color="primary">{{item.price}}</ion-card-title>
+            <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
           </ion-card-header>
+          <!-- <ion-card-content
+            [style.background]="'url(' + item.image_path + ')'"
+            [style.width.px]="200"
+            [style.height.px]="150"
+          > -->
+
           <ion-card-content>
-            <img class="p_image" src="{{item.image_path}}" alt="" />
+            <img class="p_image" src="{{item.image_path}}" alt="" /> 
           </ion-card-content>
         </ion-card>
       </div>
     </ion-col>
-    <ion-col size="4" class="ion-no-padding"> <app-cart name="cart"></app-cart></ion-col>
+    <ion-col size="4.5" class="ion-no-padding">
+      <app-cart name="cart"></app-cart
+    ></ion-col>
   </ion-row>
 </ion-content>

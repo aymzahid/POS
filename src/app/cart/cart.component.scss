@@ -14,6 +14,11 @@ ion-row {
   text-align: center;
 }
 
+.top_grid {
+  height: 70vh;
+  overflow: scroll;
+  scroll-behavior: red;
+}
 .head_row {
   background: #373434c4;
   font-size: 1.2rem;
@@ -24,15 +29,15 @@ ion-row {
 ion-icon {
   font-size: 2rem;
   vertical-align: middle;
-  padding: 0px 10px;
+  padding: 0px 5px;
 }
 .list_row {
   font-size: 1.2rem;
   letter-spacing: 1px;
   text-transform: uppercase;
+  border-bottom: 1px dotted black;
 
   ion-col {
-    border-bottom: 1px dotted black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,4 +47,19 @@ ion-icon {
 
 .payment_detail {
   background-color: white;
+  padding: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  position: absolute;
+  height: 48%;
+  width: 100%;
+  bottom: 0vh;
+
+  ion-row {
+    text-align: end;
+  }
+  .total {
+    background-image: radial-gradient(#08ff1f, #67cd85);
+    font-size: 1.8rem;
+  }
 }

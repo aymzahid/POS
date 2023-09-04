@@ -1,13 +1,51 @@
 ion-content {
   --background: #eaf9f4;
   --color: #3880ff;
+
+  ion-segment-button {
+    // --background: #3880ff;
+    // --background-checked: #3880ff;
+    // --background-focused: #3880ff;
+    // --background-focused-opacity: 1;
+    // --background-hover: #3880ff;
+    // --background-hover-opacity: 1;
+    // --border-color: #3880ff;
+    // --border-radius: 4px;
+    // --border-style: solid;
+    // --border-width: 8px;
+    // --color: #ffff;
+    // --color-checked: #3880ff;
+    // --color-focused: #3880ff;
+    // --color-hover: #3880ff;
+    // --indicator-box-shadow: 10px 10px;
+    // --indicator-color: #3880ff;
+    // --indicator-height: 20px;
+    // --indicator-transform: rotate(90deg);
+    // --indicator-transition: background-color 15ms linear;
+    // --margin-bottom: 4px;
+    // --margin-end: 4px;
+    // --margin-start: 4px;
+    // --margin-top: 4px;
+    // --padding-bottom: 4px;
+    // --padding-end: 4px;
+    // --padding-start: 4px;
+    // --padding-top: 4px;
+    --transition: background-color 15ms linear;
+  }
 }
 
 .products_row {
   ion-card {
-    width: 16vw;
+    width: 15vw;
+    text-align: center;
     // margin: 10px;
     padding: 0px;
+    ion-card-title {
+      font-size: 1.3rem;
+    }
+    ion-card-subtitle {
+      font-size: 1.4rem;
+    }
   }
   .products_container {
     display: flex;
