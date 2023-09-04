@@ -13,10 +13,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
-  // {
-  //   path: '',
-  //   component: CartComponent,
-  // },
+  {
+    path: 'cart',
+    component: CartComponent,
+  },
 
   {
     path: '',

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartserviceService } from '../services/cartservice.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { CartserviceService } from '../services/cartservice.service';
 })
 export class CartComponent implements OnInit {
   cartItems: any = [];
-  constructor(private cartService: CartserviceService) {
+  constructor(private cartService: CartserviceService, private router: Router) {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items;
     });
@@ -22,5 +23,9 @@ export class CartComponent implements OnInit {
     this.cartItems.splice(productindex, 1);
 
     console.log('after cart item', this.cartItems);
+  }
+
+  goToCart() {
+    this.router.navigateByUrl('/cart');
   }
 }
