@@ -1,3 +1,4 @@
+import { GlobalVariable } from 'src/global';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -8,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent],
 
@@ -17,10 +19,10 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     AppRoutingModule,
     RouterModule,
-
+    HttpClientModule,
   ],
 
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },GlobalVariable],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

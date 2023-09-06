@@ -28,4 +28,8 @@ export class CartComponent implements OnInit {
   goToCart() {
     this.router.navigateByUrl('/cart');
   }
+
+  pay() {
+    console.log('cart item', this.cartItems);
+  }
 }

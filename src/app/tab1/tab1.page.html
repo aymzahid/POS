@@ -82,7 +82,7 @@
       <div class="products_container">
         <ion-card *ngFor="let item of productArray" (click)="addToCart(item)" >
           <ion-card-header>
-            <ion-card-title color="primary">{{item.price}}</ion-card-title>
+          <ion-card-title color="primary">{{item.p_price}}</ion-card-title>
             <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
           </ion-card-header>
           <!-- <ion-card-content
@@ -92,12 +92,12 @@
           > -->
 
           <ion-card-content>
-            <img class="p_image" src="{{item.image_path}}" alt="" />
+            <img class="p_image" src="{{this.globals.baseAnnouncementURL}}{{item.picture[0]?.image}}" alt="" />
           </ion-card-content>
         </ion-card>
       </div>
     </ion-col>
-    <ion-col size="4.5" class="ion-no-padding">
+    <ion-col size="4.5" class="cart_column">
       <app-cart name="cart"></app-cart
     ></ion-col>
   </ion-row>
