@@ -2,19 +2,18 @@
   <ion-header>
     <ion-row
       ><ion-toolbar>
-        <ion-col size="3">
-          <ion-title size="large">Point Of Sale</ion-title>
-        </ion-col>
-        <ion-col size="9"
-          ><ion-segment value="pizza">
-            <ion-segment-button value="pizza">
-              <ion-label>Pizza</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="pizza">
-              <ion-label>Pizza</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="pasta">
-              <ion-label>Pasta</ion-label>
+        <ion-title size="large">Point Of Sale</ion-title>
+        <ion-col size="9" offset="3"
+          ><ion-segment
+            mode="ios"
+            [value]="this.data?.product_categories[0].id"
+            (ionChange)="cat_Changed($event)"
+          >
+            <ion-segment-button
+              [value]="item.id"
+              *ngFor="let item of data?.product_categories"
+            >
+              <ion-label>{{item.name}}</ion-label>
             </ion-segment-button>
           </ion-segment></ion-col
         >
@@ -24,77 +23,74 @@
 
   <ion-row class="products_row">
     <ion-col size="6.5" offset="1">
+      <ion-row>
+        <ion-col size="12">
+          <ion-segment
+            class="sub_cat"
+            [value]="data?.product_sub_categories[0].id"
+            (ionChange)="subCat_Changed($event)"
+          >
+            <ion-segment-button
+              [value]="item.id"
+              *ngFor="let item of subCategories()"
+            >
+              <ion-label>{{item.name}}</ion-label>
+            </ion-segment-button>
+          </ion-segment></ion-col
+        >
+      </ion-row>
       <ion-row
         style="text-align: center; align-items: center; font-size: 1.8rem"
       >
-        <ion-col size="6">
-          <ion-icon
+        <ion-col size="4">
+          <ion-label style="font-size: 20px; font-weight: bolder; color: green">
+            {{displayProduct()[0]?.sub_category_name}}
+            <span>({{displayProduct().length}})</span>
+          </ion-label>
+          <!-- <ion-icon
             style="vertical-align: middle; margin-right: 20px"
             name="add-circle-outline"
-          ></ion-icon>
-          <ion-label>Add </ion-label>
+          ></ion-icon> -->
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="8">
           <ion-searchbar
             placeholder="Filter Products"
             inputmode="decimal"
             type="decimal"
             [debounce]="250"
             showCancelButton="always"
+            [(ngModel)]="filterTerm"
+            animated="true"
           ></ion-searchbar>
         </ion-col>
       </ion-row>
-
-      <ion-segment class="sub_cat" value="pizza">
-        <ion-segment-button value="pizza">
-          <ion-label>Pizza</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="paseta">
-          <ion-label>Pasta</ion-label> </ion-segment-button
-        ><ion-segment-button value="paseta">
-          <ion-label>Pasta</ion-label> </ion-segment-button
-        ><ion-segment-button value="paseta">
-          <ion-label>Pasta</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="w">
-          <ion-label>Pasta</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="w">
-          <ion-label>Pasta</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="w">
-          <ion-label>Pasta</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="w">
-          <ion-label>Pasta</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="w">
-          <ion-label>Pasta</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="w">
-          <ion-label>Pasta</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="q">
-          <ion-label>Pasta</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-
-      <div class="products_container">
-        <ion-card *ngFor="let item of productArray" (click)="addToCart(item)" >
+      <div class="products_container" *ngIf="displayProduct() != ''">
+        <ion-card
+          *ngFor="let item of displayProduct() | filter:filterTerm"
+          (click)="addToCart(item)"
+        >
           <ion-card-header>
-          <ion-card-title color="primary">{{item.p_price}}</ion-card-title>
+            <ion-card-title color="primary"
+              >PKR: {{item.p_price}} /KG</ion-card-title
+            >
+
             <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
           </ion-card-header>
-          <!-- <ion-card-content
-            [style.background]="'url(' + item.image_path + ')'"
-            [style.width.px]="200"
-            [style.height.px]="150"
-          > -->
 
-          <ion-card-content>
-            <img class="p_image" src="{{this.globals.baseAnnouncementURL}}{{item.picture[0]?.image}}" alt="" />
-          </ion-card-content>
+          <!-- <ion-card-content>
+            <img
+              class="p_image"
+              src="{{this.globals.baseAnnouncementURL}}{{item.picture[0]?.image}}"
+              alt=""
+            />
+          </ion-card-content> -->
         </ion-card>
+      </div>
+      <div
+        *ngIf="displayProduct()==''"
+        style="display: flex; justify-content: center; padding-top: 28vh"
+      >
+        <img src="assets/icon/no_result.png" width="150px" alt="" />
       </div>
     </ion-col>
     <ion-col size="4.5" class="cart_column">

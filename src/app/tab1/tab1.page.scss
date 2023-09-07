@@ -37,9 +37,10 @@ ion-content {
 .products_row {
   ion-card {
     width: 15vw;
+    height: 15vh;
     text-align: center;
-    // margin: 10px;
     padding: 0px;
+    box-shadow: 5px 7px 10px gray;
     ion-card-title {
       font-size: 1.3rem;
     }
@@ -48,6 +49,8 @@ ion-content {
     }
   }
   .products_container {
+    height: 71vh;
+    overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
   }
@@ -70,5 +73,14 @@ ion-content {
   .cart_column {
     padding: 0;
     height: 92vh;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .products_row {
+    ion-card {
+      width: 14vw;
+      height: 18vh;
+    }
   }
 }

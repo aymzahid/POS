@@ -9,8 +9,12 @@ import { GlobalVariable } from 'src/global';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page {
-  loader: boolean = false;
+  data: any;
   productArray: any = [];
+  cat_id: any;
+  subcat_id: any;
+  filterTerm: any = '';
+  loader: boolean = false;
 
   constructor(
     private cartService: CartserviceService,
@@ -28,24 +32,35 @@ export class Tab1Page {
   }
 
   getProductsList() {
-    // this.globals.loader();
+    this.globals.loader();
     this.service.getProductsList().subscribe(
       (res) => {
-        // this.globals.dismiss();
-
-        this.loader = false;
+        // this.loader = false;
         console.log(res);
         if (res.status) {
           // this.announcementError = false;
           if (res.data.length != 0) {
-            // this.globals.presentToast('Result Fetched', '', 'success');
+            setTimeout(() => {
+              this.globals.dismiss();
+            }, 2000);
 
-            this.productArray = res.data.products;
+            let res_products = [];
 
-            this.productArray.forEach((element: any) => {
+            this.data = res.data;
+            console.log('res_data', this.data);
+            this.cat_id = this.data.product_categories[0].id;
+            this.subcat_id = this.data.product_sub_categories[0].id;
+
+            this.globals.presentToast('Result Fetched', '', 'success');
+
+            res_products = res.data.products;
+
+            res_products.forEach((element: any) => {
               let parsedImages = JSON.parse(element.picture);
               element.picture = parsedImages;
             });
+
+            this.productArray = res_products;
             console.log('productArray array', this.productArray);
           } else {
             // this.globals.presentToast('No data found', '', '');
@@ -53,16 +68,59 @@ export class Tab1Page {
         }
       },
       (err) => {
-        this.loader = false;
-        // this.globals.dismiss();
-        // this.globals.presentToast(
-        //   'Something went wrong, try again later',
-        //   '',
-        //   'danger'
-        // );
+        // this.loader = false;
+
+        setTimeout(() => {
+          this.globals.dismiss();
+        }, 2000);
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
 
         // this.announcementError = true;
       }
     );
+  }
+
+  cat_Changed(event: any) {
+    console.log('main_cat changed', event.detail.value);
+    this.cat_id = event.detail.value;
+    this.displayProduct();
+  }
+
+  subCat_Changed(event: any) {
+    console.log('subCat changed', event.detail.value);
+    this.subcat_id = event.detail.value;
+
+    this.displayProduct();
+  }
+  filterProduct(event: any) {
+    console.log('searchbar value', event.detail.value);
+  }
+  subCategories() {
+    let sub_categories: any = [];
+    this.data?.product_sub_categories.forEach((element: any) => {
+      if (element.category_id === this.cat_id) {
+        sub_categories.push(element);
+      }
+    });
+    return sub_categories;
+  }
+
+  displayProduct() {
+    let filtered_products: any = [];
+
+    this.productArray.forEach((element: any) => {
+      if (
+        element.category_id === this.cat_id &&
+        element.sub_category_id === this.subcat_id
+      ) {
+        filtered_products.push(element);
+      }
+    });
+
+    return filtered_products;
   }
 }

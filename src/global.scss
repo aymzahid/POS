@@ -16,7 +16,7 @@
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import '@ionic/angular/css/display.css';
+@import "@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -24,3 +24,88 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.alert-wrapper {
+  .alert-head {
+    background: var(--ion-color-primary);
+  }
+}
+
+.custom_loading {
+  .loading-wrapper {
+    background: url("../src/assets/icon/loader.svg");
+    background-repeat: no-repeat;
+    padding: 90px;
+    box-shadow: none;
+    position: absolute;
+    left: 25vw;
+    top: 50vh;
+  }
+  ion-spinner {
+    display: none !important;
+  }
+}
+
+.custom_select {
+  ion-item {
+    --background-focused: var(--ion-color-primary);
+    --background-activated: var(--ion-color-primary);
+    --background-focused-opacity: 0.8;
+    --color: black !important;
+    --color-focused: #fff;
+    --detail-icon-color: #989aa2;
+    --detail-icon-opacity: 1;
+    --background-hover: #f04141;
+    --background-hover-opacity: 0.6;
+
+    --highlight-color-valid: var(--ion-color-primary);
+  }
+}
+
+.action-sheet-wrapper {
+  // --background: red;
+  .action-sheet-button {
+    // background: red;
+  }
+}
+
+@font-face {
+  font-family: "Rubik-reg";
+  src: url("assets/fonts/Rubik/static/Rubik-Regular.ttf");
+}
+@font-face {
+  font-family: "Rubik-light";
+  src: url("assets/fonts/Rubik/static/Rubik-Light.ttf");
+}
+@font-face {
+  font-family: "Rubik-black";
+  src: url("assets/fonts/Rubik/static/Rubik-Black.ttf");
+}
+@font-face {
+  font-family: "Rubik-bold";
+  src: url("assets/fonts/Rubik/static/Rubik-Bold.ttf");
+}
+@font-face {
+  font-family: "Noto-reg";
+  src: url("assets/fonts/Noto_Sans/NotoSans-Regular.ttf");
+}
+@font-face {
+  font-family: "Noto-bold";
+  src: url("assets/fonts/Noto_Sans/NotoSans-Bold.ttf");
+}
+
+@font-face {
+  font-family: "dancing-reg";
+  src: url("assets/fonts/dancing/DancingScript-Regular.ttf");
+}
+@font-face {
+  font-family: "dancing-bold";
+  src: url("assets/fonts/dancing/DancingScript-Bold.ttf");
+}
+@font-face {
+  font-family: "dancing-medium";
+  src: url("assets/fonts/dancing/DancingScript-Medium.ttf");
+}
+:root {
+  --ion-font-family: "Rubik-reg";
+}

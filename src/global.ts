@@ -52,8 +52,6 @@ export class GlobalVariable {
     this.isLoading = true;
     return await this.loadingController
       .create({
-        message: '<img src="assets/icon/loader.svg" alt="loading...">',
-
         cssClass: 'custom_loading',
 
         backdropDismiss: false,
