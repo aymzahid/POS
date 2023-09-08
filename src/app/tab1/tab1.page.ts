@@ -36,7 +36,7 @@ export class Tab1Page {
     this.service.getProductsList().subscribe(
       (res) => {
         // this.loader = false;
-        console.log(res);
+        // console.log(res);
         if (res.status) {
           // this.announcementError = false;
           if (res.data.length != 0) {

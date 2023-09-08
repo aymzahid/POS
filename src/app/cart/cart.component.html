@@ -14,11 +14,13 @@
       <ion-row class="list_row" *ngFor="let item of cartItems; let i = index">
         <ion-col size="4">
           <ion-button
+            class="ion-activatable ripple-parent rectangle"
             (click)="removeItem(i)"
             fill="clear"
             size="small"
             color="danger"
           >
+            <ion-ripple-effect></ion-ripple-effect>
             <ion-icon name="trash-outline"></ion-icon> </ion-button
           >{{ item.name }}
         </ion-col>
@@ -36,6 +38,7 @@
             type="number"
             [(ngModel)]="item.s_price"
             [value]="item.s_price"
+            (keyup)="get_bill()"
           ></ion-input>
         </ion-col>
       </ion-row>
@@ -52,19 +55,36 @@
       <ion-col size="12">
         <ion-row>
           <ion-col size="6">Discount-(%)</ion-col>
-          <ion-col size="6">10%</ion-col> </ion-row
+          <ion-col size="5">
+            <ion-input
+              style="
+                background: #8080805e;
+                font-size: 1.6rem;
+                border-radius: 11px;
+                text-align: center;
+                color: black;
+              "
+              type="tel"
+              [(ngModel)]="discount"
+              placeholder="0"
+              maxlength="2"
+              (keyup)="get_bill()"
+            ></ion-input
+          ></ion-col>
+          <ion-col size="1" style="font-size: 1.7rem"> % </ion-col> </ion-row
         ><ion-row>
           <ion-col size="6"> Sub Total</ion-col
-          ><ion-col size="6">$300</ion-col> </ion-row
+          ><ion-col size="6">{{ calBill() }}</ion-col> </ion-row
         ><ion-row class="total">
-          <ion-col size="6">Total</ion-col> <ion-col size="6">$300</ion-col>
+          <ion-col size="6">Total</ion-col>
+          <ion-col size="6">{{ total_bill }}</ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="12">
         <ion-button expand="block" style="font-weight: bolder" (click)="pay()">
-          Pay ($300)
+          PAY ( <span> {{ total_bill }} </span>)
         </ion-button></ion-col
       >
     </ion-row>

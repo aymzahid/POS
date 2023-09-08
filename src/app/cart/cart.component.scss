@@ -30,6 +30,7 @@ ion-content {
 
 ion-row {
   text-align: center;
+  align-items: center;
 }
 
 .top_grid {
@@ -53,7 +54,12 @@ ion-icon {
   letter-spacing: 1px;
   text-transform: uppercase;
   border-bottom: 1px dotted black;
-
+  ion-input {
+    background: #8080805e;
+    border-radius: 11px;
+    text-align: center;
+    color: black;
+  }
   ion-col {
     display: flex;
     align-items: center;

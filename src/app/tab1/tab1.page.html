@@ -78,15 +78,16 @@
       </ion-row>
       <div class="products_container" *ngIf="displayProduct() != ''">
         <ion-card
+          class="ion-activatable ripple-parent rectangle"
           *ngFor="let item of displayProduct() | filter:filterTerm"
           (click)="addToCart(item)"
         >
+          <ion-ripple-effect></ion-ripple-effect>
           <ion-card-header>
+            <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
             <ion-card-title color="primary"
               >PKR: {{item.p_price}} /KG</ion-card-title
             >
-
-            <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
           </ion-card-header>
 
           <!-- <ion-card-content>
