@@ -2,6 +2,9 @@ ion-content {
   --background: #eaf9f4;
   --color: #3880ff;
   --overflow: hidden;
+  .toolbar_row {
+    width: 100vw;
+  }
 
   .main_cat {
     ion-segment-button {
