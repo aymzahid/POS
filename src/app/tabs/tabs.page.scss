@@ -3,30 +3,10 @@ ion-tabs {
     position: fixed;
     display: flex;
     flex-direction: column;
-
     width: 100px;
     height: 67vh;
     left: 0;
     top: 56px;
-    // background: #ff9f12;
-    // background: aliceblue;
   }
-  //   ion-tab-button {
-  //     background: transparent;
-  //     font-weight: 600;
-
-  //     color: var(--ion-color-dark);
-  //     ion-label {
-  //       font-size: 10px;
-  //     }
-  //   }
-  //   .tab-selected {
-
-  //     color: var(--ion-color-primary);
-  //     width: 70px;
-
-  //     ion-icon {
-  //       fill: outline;
-  //     }
-  //   }
 }
+

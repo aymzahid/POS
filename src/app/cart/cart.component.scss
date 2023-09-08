@@ -33,8 +33,8 @@ ion-row {
 }
 
 .top_grid {
-  height: 70vh;
-  overflow-y: scroll;
+  height: 60vh;
+  overflow-y: auto;
 }
 .head_row {
   background: #373434c4;
@@ -59,6 +59,7 @@ ion-icon {
     align-items: center;
     justify-content: center;
     font-weight: 700;
+    height: 8vh;
   }
 }
 
@@ -78,5 +79,22 @@ ion-icon {
   .total {
     background-image: radial-gradient(#08ff1f, #67cd85);
     font-size: 1.8rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  h3 {
+    // padding: 0 !important;
+    margin: 0px;
+    font-size: 1.4rem !important;
+  }
+  .total,
+  .list_row,
+  .payment_detail {
+    font-size: 1rem !important;
+  }
+  .list_row,
+  ion-icon {
+    font-size: 1.2rem;
   }
 }

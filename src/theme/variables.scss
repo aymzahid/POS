@@ -74,6 +74,18 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+  ion-toolbar {
+    --background: var(--ion-color-primary);
+    ion-title {
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+  }
+
+  ion-segment-button {
+    text-transform: uppercase;
+    font-weight: 700;
+  }
 }
 
 // @media (prefers-color-scheme: dark) {
@@ -189,7 +201,6 @@
 //     --ion-toolbar-background: var(--ion-color-step-150);
 //     --ion-toolbar-border-color: var(--ion-color-step-250);
 //   }
-
 
 //   /*
 //    * Material Design Dark Theme
