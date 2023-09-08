@@ -55,6 +55,7 @@ ion-icon {
   text-transform: uppercase;
   border-bottom: 1px dotted black;
   ion-input {
+    min-height: 30px;
     background: #8080805e;
     border-radius: 11px;
     text-align: center;
@@ -75,9 +76,9 @@ ion-icon {
   font-size: 1rem;
   font-weight: 600;
   position: absolute;
-  // height: 48%;
   width: 100%;
   bottom: 0vh;
+  padding-top: 0;
 
   ion-row {
     text-align: end;
@@ -98,6 +99,7 @@ ion-icon {
   .list_row,
   .payment_detail {
     font-size: 1rem !important;
+    padding-top: 0 !important;
   }
   .list_row,
   ion-icon {

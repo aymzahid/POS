@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartserviceService, private router: Router) {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items;
-      this.calBill();
+      this.get_bill();
     });
   }
 
