@@ -87,6 +87,7 @@ export class Tab1Page {
   cat_Changed(event: any) {
     console.log('main_cat changed', event.detail.value);
     this.cat_id = event.detail.value;
+    this.subcat_id = this.subCategories()[0].id;
     this.displayProduct();
   }
 
@@ -106,6 +107,7 @@ export class Tab1Page {
         sub_categories.push(element);
       }
     });
+
     return sub_categories;
   }
 
