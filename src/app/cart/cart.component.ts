@@ -33,29 +33,41 @@ export class CartComponent implements OnInit {
   }
 
   inc_quantity(item: any) {
-    // console.log('inc', item);
+    item.quantity = item.quantity + 1;
+    this.validateStockLimit(item);
+  }
 
+  dec_quantity(item: any) {
+    if (item.quantity == 1) {
+    } else {
+      item.quantity = item.quantity - 1;
+      this.get_bill();
+    }
+  }
+
+  validateStockLimit(item: any) {
     if (this.globals.product_list != null || undefined) {
       let product = this.globals.product_list.find(
         (element: any) => element.id == item.product_id
       );
 
-      if (item.quantity < Number(product.quantity_in_stock)) {
-        item.quantity = item.quantity + 1;
-      } else {
+      if (item.quantity > Number(product.quantity_in_stock)) {
         this.globals.presentToast('Stock Limit Exceeded', '', 'danger');
+        item.quantity = Number(product.quantity_in_stock);
+      } else if (item.quantity == 0 || item.quantity == null) {
+        setTimeout(() => {
+          item.quantity = 1;
+        }, 1000);
+
+        this.globals.presentToast(
+          'Quantity Can not be 0 or Null',
+          '',
+          'danger'
+        );
+      } else {
       }
     }
-  }
-
-  dec_quantity(item: any) {
-    // console.log('dec', item);
-
-    if (item.quantity == 1) {
-      this.globals.presentToast('Quantity Can not be 0', '', 'danger');
-    } else {
-      item.quantity = item.quantity - 1;
-    }
+    this.get_bill();
   }
 
   goToCart() {
@@ -101,7 +113,7 @@ export class CartComponent implements OnInit {
         2
       );
 
-      sub_bill += Number(element.total_price * element.quantity);
+      sub_bill += Number(element.total_price);
     });
 
     return Number(sub_bill);

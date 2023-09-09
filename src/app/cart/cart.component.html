@@ -8,7 +8,7 @@
       <ion-row class="head_row">
         <ion-col size="4"> Name </ion-col>
         <ion-col size="5"> QTY </ion-col>
-        <ion-col size="3"> Price </ion-col>
+        <ion-col size="3"> Price/Unit </ion-col>
       </ion-row>
 
       <ion-row class="list_row" *ngFor="let item of cartItems; let i = index">
@@ -32,7 +32,7 @@
             type="number"
             [(ngModel)]="item.quantity"
             [value]="item.quantity"
-            (keyup)="get_bill()"
+            (ngModelChange)="validateStockLimit(item)"
           ></ion-input>
           <ion-button fill="clear" size="small" (click)="inc_quantity(item)">
             <ion-icon name="add-circle-outline"></ion-icon>
@@ -41,8 +41,8 @@
         <ion-col size="3">
           <ion-input
             type="number"
-            [(ngModel)]="item.total_price"
-            [value]="item.total_price"
+            [(ngModel)]="item.s_price"
+            [value]="item.s_price"
             (keyup)="get_bill()"
           ></ion-input>
         </ion-col>
