@@ -11,6 +11,7 @@ export class GlobalVariable {
     'https://theplannercrb.com/portal/public/images/announcement/';
   baseImageURL: any = 'https://theplannercrb.com/portal/public/images/product/';
   isLoading: boolean = false;
+  product_list: any = [];
   constructor(
     private toastController: ToastController,
     private loadingController: LoadingController

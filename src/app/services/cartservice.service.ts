@@ -12,9 +12,18 @@ export class CartserviceService {
 
   constructor() {}
 
-  addToCart(product: any) {
+  addToCart(product: any, quantity: any) {
+    let cart_array: any = [];
+
+    let item = {
+      product_id: product.id,
+      name: product.name,
+      s_price: product.s_price,
+      quantity: quantity,
+      total_price: product.s_price,
+    };
     const currentCartItems = this.cartItemsSubject.value;
-    currentCartItems.push(product);
+    currentCartItems.push(item);
     this.cartItemsSubject.next(currentCartItems);
   }
 }

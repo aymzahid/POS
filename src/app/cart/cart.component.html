@@ -7,8 +7,8 @@
     <ion-grid class="top_grid">
       <ion-row class="head_row">
         <ion-col size="4"> Name </ion-col>
-        <ion-col size="6"> QTY </ion-col>
-        <ion-col size="2"> Price </ion-col>
+        <ion-col size="5"> QTY </ion-col>
+        <ion-col size="3"> Price </ion-col>
       </ion-row>
 
       <ion-row class="list_row" *ngFor="let item of cartItems; let i = index">
@@ -24,20 +24,25 @@
             <ion-icon name="trash-outline"></ion-icon> </ion-button
           >{{ item.name }}
         </ion-col>
-        <ion-col size="6" style="justify-content: center" class="qty">
-          <ion-button fill="clear" size="small">
+        <ion-col size="5" style="justify-content: center" class="qty">
+          <ion-button fill="clear" size="small" (click)="dec_quantity(item)">
             <ion-icon name="remove-circle-outline"></ion-icon>
           </ion-button>
-          1
-          <ion-button fill="clear" size="small">
+          <ion-input
+            type="number"
+            [(ngModel)]="item.quantity"
+            [value]="item.quantity"
+            (keyup)="get_bill()"
+          ></ion-input>
+          <ion-button fill="clear" size="small" (click)="inc_quantity(item)">
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </ion-col>
-        <ion-col size="2">
+        <ion-col size="3">
           <ion-input
             type="number"
-            [(ngModel)]="item.s_price"
-            [value]="item.s_price"
+            [(ngModel)]="item.total_price"
+            [value]="item.total_price"
             (keyup)="get_bill()"
           ></ion-input>
         </ion-col>

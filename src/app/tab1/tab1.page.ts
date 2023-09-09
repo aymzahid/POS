@@ -11,6 +11,7 @@ import { GlobalVariable } from 'src/global';
 export class Tab1Page {
   data: any;
   productArray: any = [];
+  selected_products: any = [];
   cat_id: any;
   subcat_id: any;
   filterTerm: any = '';
@@ -25,10 +26,25 @@ export class Tab1Page {
   }
   ionViewWillEnter() {}
 
-  addToCart(product: any) {
+  addToCart(product: any, quantity: any) {
     console.log('product', product);
+    // let cart_array: any = [];
 
-    this.cartService.addToCart(product);
+    // let item = {
+    //   product_id: product.id,
+    //   name: product.name,
+    //   price: product.s_price,
+    //   unit: unit,
+    // };
+
+    // this.selected_products.push(item);
+
+    // console.log('cart', this.selected_products);
+    // cart_array.items = this.selected_products;
+
+    // console.log('cart items final', cart_array);
+
+    this.cartService.addToCart(product, quantity);
   }
 
   getProductsList() {
@@ -60,11 +76,14 @@ export class Tab1Page {
               element.picture = parsedImages;
             });
 
+            // localStorage.setItem('product_list', JSON.stringify(res_products));
+            this.globals.product_list = res_products;
             this.productArray = res_products;
             console.log('productArray array', this.productArray);
           } else {
             // this.globals.presentToast('No data found', '', '');
           }
+          JSON;
         }
       },
       (err) => {
