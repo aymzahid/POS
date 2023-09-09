@@ -22,7 +22,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'tabs',
     pathMatch: 'full',
+  },  {
+    path: 'search-user',
+    loadChildren: () => import('./pages/search-user/search-user.module').then( m => m.SearchUserPageModule)
   },
+
 ];
 @NgModule({
   imports: [

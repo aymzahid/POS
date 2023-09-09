@@ -139,4 +139,8 @@ export class CartComponent implements OnInit {
   //   discounts: [{ name: 'Coupon 10OFF', amount: 3.0 }],
   //   taxes: [{ name: 'Sales Tax', rate: 0.07, amount: 2.1 }],
   // };
+
+  searchUser(){
+    this.globals.openModal();
+  };
 }

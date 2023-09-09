@@ -1,7 +1,16 @@
-<ion-content
-  ><h3 class="ion-text-center" (click)="goToCart()" style="font-weight: bold">
-    Check Out
-  </h3>
+<ion-content>
+  <ion-row class="title_row">
+    <ion-col
+      size="3"
+      class="ion-activatable ripple-parent rectangle"
+      (click)="searchUser()"
+      ><img class="search_icon" src="assets/icon/search_customer.jpg" alt="" />
+      <ion-ripple-effect></ion-ripple-effect
+    ></ion-col>
+    <ion-col size="6">
+      <p (click)="goToCart()">Check Out</p>
+    </ion-col>
+  </ion-row>
 
   <div *ngIf="cartItems != ''">
     <ion-grid class="top_grid">

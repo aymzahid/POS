@@ -2,11 +2,25 @@ ion-content {
   // --background: white;
   --background: #ecf0f6;
   --color: #3880ff;
-  h3 {
-    font-weight: bold;
-    font-size: 2rem;
-    color: white;
+
+  .title_row {
     background: radial-gradient(#1a1818, transparent);
+
+    img {
+      width: 40px;
+      vertical-align: middle;
+    }
+    .search_icon:hover {
+      opacity: 0.8;
+      zoom: 1.2;
+    }
+
+    p {
+      text-align: center;
+      font-weight: bold;
+      // font-size: 2rem;
+      color: white;
+    }
   }
 
   .empty_cart {

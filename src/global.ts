@@ -1,7 +1,8 @@
+import { SearchUserPage } from './app/pages/search-user/search-user.page';
 import { Injectable } from '@angular/core';
 
 import { readBlobAsBase64 } from '@capacitor/core/types/core-plugins';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 
 @Injectable()
@@ -14,7 +15,8 @@ export class GlobalVariable {
   product_list: any = [];
   constructor(
     private toastController: ToastController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private modalCtrl: ModalController
   ) {}
 
   async presentToast(msg?: any, position?: any, color?: any) {
@@ -72,6 +74,19 @@ export class GlobalVariable {
     return await this.loadingController
       .dismiss()
       .then(() => console.log('dismissed'));
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: SearchUserPage,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      // this.message = `Hello, ${data}!`;
+    }
   }
 
   // async selectImage(name: any) {
