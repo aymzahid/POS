@@ -57,7 +57,7 @@
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
   --ion-color-dark-shade: #1e2023;
-   --ion-color-dark-tint: #383a3e;
+  --ion-color-dark-tint: #383a3e;
 
   /** medium **/
   --ion-color-medium: #92949c;
@@ -87,6 +87,12 @@
     font-weight: 700;
   }
 }
+
+// ion-searchbar {
+//   .searchbar-search-icon {
+//     background-image: url("../assets/icon/search_bar_icon.png") !important;
+//   }
+// }
 
 // @media (prefers-color-scheme: dark) {
 //   /*

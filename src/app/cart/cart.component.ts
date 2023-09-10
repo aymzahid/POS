@@ -140,7 +140,13 @@ export class CartComponent implements OnInit {
   //   taxes: [{ name: 'Sales Tax', rate: 0.07, amount: 2.1 }],
   // };
 
-  searchUser(){
-    this.globals.openModal();
-  };
+  searchUser() {
+    this.globals.openModal(this.globals.global_array.customers).then((res) => {
+      if (!res) {
+        console.log('guest');
+      } else {
+        console.log(res);
+      }
+    });
+  }
 }

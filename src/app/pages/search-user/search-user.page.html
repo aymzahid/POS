@@ -1,6 +1,11 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>search-user</ion-title>
+<ion-header>
+  <ion-toolbar class="ion-text-center">
+    <ion-buttons slot="end">
+      <ion-button expand="block" color="dark" (click)="close()">
+        <ion-icon slot="start" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Search User </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +15,41 @@
       <ion-title size="large">search-user</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-row class="header_row">
+    <ion-col size="10" offset="1">
+      <ion-searchbar
+        mode="ios"
+        animated="true"
+        placeholder="Filter User"
+        inputmode="decimal"
+        type="decimal"
+        [debounce]="250"
+        [(ngModel)]="filterTerm"
+        showCancelButton="always"
+      ></ion-searchbar>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12" style="text-align: center"
+      ><ion-card
+        *ngFor="let item of data | filter :filterTerm"
+        class="result_card"
+        class="ion-activatable ripple-parent rectangle"
+      >
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-card-header>
+          <ion-card-subtitle color="primary"
+            >Name : {{item.name}}</ion-card-subtitle
+          >
+          <ion-card-title>Phone : {{item.phone}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-button (click)="close(item)"> Select</ion-button>
+        </ion-card-content>
+      </ion-card></ion-col
+    >
+  </ion-row>
 </ion-content>

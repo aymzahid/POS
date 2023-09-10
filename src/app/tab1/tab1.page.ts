@@ -63,6 +63,7 @@ export class Tab1Page {
             let res_products = [];
 
             this.data = res.data;
+            this.globals.global_array = res.data;
             console.log('res_data', this.data);
             this.cat_id = this.data.product_categories[0].id;
             this.subcat_id = this.data.product_sub_categories[0].id;

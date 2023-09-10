@@ -1,0 +1,18 @@
+ion-content {
+  --background: #eaf9f4;
+  ion-icon {
+    font-size: 1rem;
+  }
+
+  .result_card {
+    box-shadow: 1px 1px 10px;
+    border-radius: 21px;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+  }
+  ion-card-subtitle {
+    font-size: 1.5rem;
+  }
+}

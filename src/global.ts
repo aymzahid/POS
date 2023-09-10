@@ -12,6 +12,7 @@ export class GlobalVariable {
     'https://theplannercrb.com/portal/public/images/announcement/';
   baseImageURL: any = 'https://theplannercrb.com/portal/public/images/product/';
   isLoading: boolean = false;
+  global_array: any = [];
   product_list: any = [];
   constructor(
     private toastController: ToastController,
@@ -76,17 +77,26 @@ export class GlobalVariable {
       .then(() => console.log('dismissed'));
   }
 
-  async openModal() {
-    const modal = await this.modalCtrl.create({
-      component: SearchUserPage,
+  async openModal(data: any): Promise<any> {
+    return new Promise(async (resolve) => {
+      const modal = await this.modalCtrl.create({
+        component: SearchUserPage,
+        cssClass: 'keypad_modal',
+        id: 'keypad_modal',
+        componentProps: { modal_data: data },
+      });
+      await modal.present();
+
+      modal.onDidDismiss().then((data) => {
+        console.log('modal dismissed with', data.data);
+
+        if (data.data != undefined) {
+          resolve(data.data);
+        } else {
+          resolve(false);
+        }
+      });
     });
-    modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-
-    if (role === 'confirm') {
-      // this.message = `Hello, ${data}!`;
-    }
   }
 
   // async selectImage(name: any) {
