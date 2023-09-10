@@ -7,8 +7,20 @@
       ><img class="search_icon" src="assets/icon/search_customer.jpg" alt="" />
       <ion-ripple-effect></ion-ripple-effect
     ></ion-col>
-    <ion-col size="6">
-      <p (click)="goToCart()">Check Out</p>
+    <ion-col size="8" class="customer_search">
+      <ion-input type="text" [(ngModel)]="customer"> </ion-input>
+      <span class="ion-activatable ripple-parent circle">
+        <ion-ripple-effect></ion-ripple-effect>
+
+        <ion-icon
+          slot="start"
+          (click)="customer = 'Guest'"
+          (click)="customer_phone = ''"
+          name="close-circle"
+        ></ion-icon
+      ></span>
+
+      <!-- <p (click)="goToCart()">Check Out</p> -->
     </ion-col>
   </ion-row>
 

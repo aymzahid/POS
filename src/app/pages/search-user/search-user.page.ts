@@ -15,7 +15,7 @@ export class SearchUserPage implements OnInit {
 
   ngOnInit() {}
 
-  close(item: any) {
+  close(item?: any) {
     this.modalCtrl.dismiss(item);
   }
 }

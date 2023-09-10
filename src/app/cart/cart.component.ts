@@ -12,6 +12,8 @@ export class CartComponent implements OnInit {
   cartItems: any = [];
   discount: any;
   total_bill: any = 0;
+  customer = 'Guest';
+  customer_phone: any = '';
   constructor(
     private cartService: CartserviceService,
     private router: Router,
@@ -74,11 +76,6 @@ export class CartComponent implements OnInit {
     this.router.navigateByUrl('/cart');
   }
 
-  pay() {
-    console.log('cart item', this.cartItems);
-    // window.print()
-  }
-
   get_bill() {
     let total_discount: number = 0;
     if (this.discount != 0) {
@@ -119,34 +116,35 @@ export class CartComponent implements OnInit {
     return Number(sub_bill);
   }
 
-  // sale = {
-  //   saleId: '12345',
-  //   items: [
-  //     { name: 'Product A', quantity: 2, price: 10.99 },
-  //     { name: 'Product B', quantity: 1, price: 7.99 },
-  //   ],
-  //   totalAmount: 29.97,
-  //   paymentMethod: 'Credit Card',
-  //   paymentAmount: 30.0,
-  //   changeDue: 0.03,
-  //   customer: {
-  //     name: 'John Doe',
-  //     email: 'johndoe@example.com',
-  //   },
-  //   employeeId: 'EMP001',
-  //   timestamp: '2023-09-09 14:30:00',
-  //   receiptNumber: 'R123456',
-  //   discounts: [{ name: 'Coupon 10OFF', amount: 3.0 }],
-  //   taxes: [{ name: 'Sales Tax', rate: 0.07, amount: 2.1 }],
-  // };
-
   searchUser() {
     this.globals.openModal(this.globals.global_array.customers).then((res) => {
       if (!res) {
         console.log('guest');
       } else {
         console.log(res);
+        this.customer = res.name;
+        this.customer_phone = res.phone;
       }
     });
+  }
+
+  pay() {
+    console.log('cart item', this.cartItems);
+
+    const currentDate = new Date().toLocaleString('en-US');
+
+    let sale = {
+      items: this.cartItems,
+      totalAmount: this.calBill(),
+      paymentAmount: this.total_bill,
+      customer: {
+        name: this.customer,
+        phone: this.customer_phone,
+      },
+      timestamp: currentDate,
+      discounts: [{ name: 'Percentage', value: this.discount }],
+    };
+
+    console.log('sale payload', sale);
   }
 }
