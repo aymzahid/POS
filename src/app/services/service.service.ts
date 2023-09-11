@@ -61,6 +61,15 @@ export class ServiceService {
 
   //POST
 
+  addSale(data: any) {
+    // for (var pair of data.entries()) {
+    //   console.log(pair[0] + ', ' + pair[1]);
+    // }
+    let path = this.globals.baseURL + 'add-sales';
+
+    return this.http.post<any>(path, data);
+  }
+
   submitOrder(data: any) {
     for (var pair of data.entries()) {
       console.log(pair[0] + ', ' + pair[1]);

@@ -12,6 +12,9 @@ ion-content {
     display: flex;
     justify-content: center;
   }
+  ion-card-header {
+    flex-direction: column;
+  }
   ion-card-subtitle {
     font-size: 1.5rem;
   }

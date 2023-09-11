@@ -33,8 +33,14 @@ ion-content {
       font-size: 1.4rem;
     }
   }
+
+  ion-card:hover {
+    outline: var(--b) solid var(--c);
+    outline-offset: var(--g);
+  }
   .products_container {
-    height: 71vh;
+    // height: 71vh;
+    height: auto;
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
@@ -86,7 +92,7 @@ ion-content {
     }
 
     .products_container {
-      height: 62vh;
+      // height: 62vh;
     }
   }
 }

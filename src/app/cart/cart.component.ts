@@ -1,3 +1,4 @@
+import { ServiceService } from './../services/service.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVariable } from 'src/global';
@@ -17,7 +18,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartserviceService,
     private router: Router,
-    private globals: GlobalVariable
+    private globals: GlobalVariable,
+    private service: ServiceService
   ) {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items;
@@ -132,11 +134,11 @@ export class CartComponent implements OnInit {
     console.log('cart item', this.cartItems);
 
     const currentDate = new Date().toLocaleString('en-US');
-
-    let sale = {
+    // let fd = new FormData();
+    let data = {
       items: this.cartItems,
       totalAmount: this.calBill(),
-      paymentAmount: this.total_bill,
+      paymentAmount: Number(this.total_bill),
       customer: {
         name: this.customer,
         phone: this.customer_phone,
@@ -145,6 +147,31 @@ export class CartComponent implements OnInit {
       discounts: [{ name: 'Percentage', value: this.discount }],
     };
 
-    console.log('sale payload', sale);
+    console.log('sale payload', data);
+    this.service.addSale(data).subscribe(
+      (res) => {
+        console.log(res);
+        this.resetCart();
+      },
+      (err) => {
+        // setTimeout(() => {
+        //   this.globals.dismiss();
+        // }, 2000);
+        this.resetCart();
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
+      }
+    );
+  }
+
+  resetCart() {
+    this.cartItems = [];
+    this.discount = 0;
+    this.total_bill = 0;
+    this.customer = 'Guest';
+    this.customer_phone = '';
   }
 }
