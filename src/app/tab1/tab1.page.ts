@@ -28,21 +28,6 @@ export class Tab1Page {
 
   addToCart(product: any, quantity: any) {
     console.log('product', product);
-    // let cart_array: any = [];
-
-    // let item = {
-    //   product_id: product.id,
-    //   name: product.name,
-    //   price: product.s_price,
-    //   unit: unit,
-    // };
-
-    // this.selected_products.push(item);
-
-    // console.log('cart', this.selected_products);
-    // cart_array.items = this.selected_products;
-
-    // console.log('cart items final', cart_array);
 
     this.cartService.addToCart(product, quantity);
   }
@@ -62,24 +47,26 @@ export class Tab1Page {
 
             let res_products = [];
 
-            this.data = res.data;
             this.globals.global_array = res.data;
-            console.log('res_data', this.data);
-            this.cat_id = this.data.product_categories[0].id;
-            this.subcat_id = this.data.product_sub_categories[0].id;
+            this.data = this.globals.global_array;
+            console.log('Global Array -->', this.globals.global_array);
+
+            this.cat_id = this.globals.global_array.product_categories[0].id;
+            this.subcat_id =
+              this.globals.global_array.product_sub_categories[0].id;
 
             this.globals.presentToast('Result Fetched', '', 'success');
 
-            res_products = res.data.products;
+            // res_products = this.globals.global_array.products;
 
-            res_products.forEach((element: any) => {
+            this.data.products.forEach((element: any) => {
               let parsedImages = JSON.parse(element.picture);
               element.picture = parsedImages;
             });
 
-            // localStorage.setItem('product_list', JSON.stringify(res_products));
-            this.globals.product_list = res_products;
-            this.productArray = res_products;
+            // After images url being parsed
+            this.globals.product_list = this.data.products;
+            this.productArray = this.data.products;
             console.log('productArray array', this.productArray);
           } else {
             // this.globals.presentToast('No data found', '', '');

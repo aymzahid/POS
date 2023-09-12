@@ -7,15 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SearchUserPageRoutingModule } from './search-user-routing.module';
 
 import { SearchUserPage } from './search-user.page';
-import { CustomFilterPipe } from 'src/app/custom-filter-pipe.pipe';
-
+import { SharedModuleModule } from 'src/app/shared-module/shared-module.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     SearchUserPageRoutingModule,
+    SharedModuleModule,
   ],
-  declarations: [SearchUserPage, CustomFilterPipe],
+  declarations: [SearchUserPage],
 })
 export class SearchUserPageModule {}

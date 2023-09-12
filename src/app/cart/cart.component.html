@@ -1,7 +1,7 @@
 <ion-content>
   <ion-row class="title_row">
     <ion-col
-      size="3"
+      size="2"
       class="ion-activatable ripple-parent rectangle"
       (click)="searchUser()"
       ><img class="search_icon" src="assets/icon/search_customer.jpg" alt="" />
@@ -21,6 +21,12 @@
       ></span>
 
       <!-- <p (click)="goToCart()">Check Out</p> -->
+    </ion-col>
+    <ion-col size="2" class="cart_section">
+      <ion-fab-button class="cart_button" (click)="goToCart()">
+        <ion-icon name="cart"></ion-icon
+        ><span class="badge bounce" #badge>{{ cartItems.length }}</span>
+      </ion-fab-button>
     </ion-col>
   </ion-row>
 

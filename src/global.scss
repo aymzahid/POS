@@ -24,6 +24,12 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "~animate.css/animate.min.css";
+
+.bounce {
+  animation: bounce;
+  animation-duration: 1.8s;
+}
 
 .alert-wrapper {
   .alert-head {

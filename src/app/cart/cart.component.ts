@@ -1,8 +1,9 @@
 import { ServiceService } from './../services/service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVariable } from 'src/global';
 import { CartserviceService } from '../services/cartservice.service';
+import { animate } from '@angular/animations';
 
 @Component({
   selector: 'app-cart',
@@ -10,6 +11,7 @@ import { CartserviceService } from '../services/cartservice.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  @ViewChild('badge') badge: any = ElementRef;
   cartItems: any = [];
   discount: any;
   total_bill: any = 0;
@@ -24,6 +26,7 @@ export class CartComponent implements OnInit {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items;
       this.get_bill();
+      this.animateCss();
     });
   }
 
@@ -143,6 +146,7 @@ export class CartComponent implements OnInit {
         name: this.customer,
         phone: this.customer_phone,
       },
+      saleId: this.globals.global_array.saleId,
       timestamp: currentDate,
       discounts: [{ name: 'Percentage', value: this.discount }],
     };
@@ -173,5 +177,13 @@ export class CartComponent implements OnInit {
     this.total_bill = 0;
     this.customer = 'Guest';
     this.customer_phone = '';
+  }
+
+  animateCss() {
+    this.badge.nativeElement.classList.remove('animated', 'bounce');
+
+    setTimeout(() => {
+      this.badge.nativeElement.classList.add('animated', 'bounce');
+    }, 100);
   }
 }

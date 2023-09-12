@@ -1,6 +1,7 @@
 import { ModalController, NavParams } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-search-user',
   templateUrl: './search-user.page.html',

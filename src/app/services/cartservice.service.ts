@@ -8,6 +8,9 @@ export class CartserviceService {
   private cartItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
   );
+
+ 
+
   cartItems$ = this.cartItemsSubject.asObservable();
 
   constructor() {}
