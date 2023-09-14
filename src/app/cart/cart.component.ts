@@ -13,10 +13,10 @@ import { animate } from '@angular/animations';
 export class CartComponent implements OnInit {
   @ViewChild('badge') badge: any = ElementRef;
   cartItems: any = [];
-  discount: any;
+  discount: any = 0;
   total_bill: any = 0;
   customer = 'Guest';
-  customer_phone: any = '';
+  customer_phone: any = '-';
   constructor(
     private cartService: CartserviceService,
     private router: Router,
@@ -27,6 +27,7 @@ export class CartComponent implements OnInit {
       this.cartItems = items;
       this.get_bill();
       this.animateCss();
+      console.log('total cart items', this.cartItems);
     });
   }
 
@@ -108,8 +109,6 @@ export class CartComponent implements OnInit {
   calBill() {
     let sub_bill: number = 0;
 
-    console.log('total cart items', this.cartItems);
-
     this.cartItems.forEach((element: any) => {
       element.total_price = Number(element.s_price * element.quantity).toFixed(
         2
@@ -154,8 +153,12 @@ export class CartComponent implements OnInit {
     console.log('sale payload', data);
     this.service.addSale(data).subscribe(
       (res) => {
-        console.log(res);
         this.resetCart();
+        this.refreshAPI();
+
+
+        console.log('global array refreshed', this.globals.global_array);
+
       },
       (err) => {
         // setTimeout(() => {
@@ -176,14 +179,40 @@ export class CartComponent implements OnInit {
     this.discount = 0;
     this.total_bill = 0;
     this.customer = 'Guest';
-    this.customer_phone = '';
+    this.customer_phone = '-';
+    this.cartService.resetCart();
   }
 
   animateCss() {
-    this.badge.nativeElement.classList.remove('animated', 'bounce');
-
     setTimeout(() => {
-      this.badge.nativeElement.classList.add('animated', 'bounce');
+      this.badge.nativeElement.classList.remove('animated', 'bounce');
+
+      setTimeout(() => {
+        this.badge.nativeElement.classList.add('animated', 'bounce');
+      }, 100);
     }, 100);
+  }
+
+  refreshAPI() {
+    this.service.getProductsList().subscribe(
+      (res: any) => {
+        if (res.status) {
+          if (res.data.length != 0) {
+            // setTimeout(() => {
+            //   this.globals.dismiss();
+            // }, 2000);
+
+            this.globals.global_array = res.data;
+          }
+        }
+      },
+      (err: any) => {
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
+      }
+    );
   }
 }

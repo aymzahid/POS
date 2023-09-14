@@ -9,8 +9,6 @@ export class CartserviceService {
     []
   );
 
- 
-
   cartItems$ = this.cartItemsSubject.asObservable();
 
   constructor() {}
@@ -29,4 +27,14 @@ export class CartserviceService {
     currentCartItems.push(item);
     this.cartItemsSubject.next(currentCartItems);
   }
+
+  resetCart() {
+    const currentCartItems = this.cartItemsSubject.value;
+    this.cartItemsSubject.value.length = 0;
+    this.cartItemsSubject.next(currentCartItems);
+    console.log('reseting cart ', this.cartItems$);
+  }
+
+
+
 }

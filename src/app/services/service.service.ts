@@ -66,6 +66,7 @@ export class ServiceService {
     //   console.log(pair[0] + ', ' + pair[1]);
     // }
     let path = this.globals.baseURL + 'add-sales';
+    console.log('data', JSON.stringify(data));
 
     return this.http.post<any>(path, data);
   }
