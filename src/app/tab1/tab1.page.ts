@@ -10,7 +10,7 @@ import { GlobalVariable } from 'src/global';
 })
 export class Tab1Page {
   data: any;
-  productArray: any = [];
+  cartItems: any = [];
   selected_products: any = [];
   cat_id: any;
   subcat_id: any;
@@ -22,14 +22,31 @@ export class Tab1Page {
     public service: ServiceService,
     public globals: GlobalVariable
   ) {
+    console.log('constructor');
+    this.cartService.cartItems$.subscribe((items) => {
+      this.cartItems = items;
+    });
+
     this.getProductsList();
   }
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+    console.log('will enter');
+
+    this.getProductsList();
+  }
 
   addToCart(product: any, quantity: any) {
-    console.log('product', product);
+    if (product.quantity_in_stock < 1) {
+      this.globals.presentToast(
+        'Product Can not add Out Of Stock Product',
+        '',
+        'danger'
+      );
+    } else {
+      console.log('product', product, 'quantity--->', quantity);
 
-    this.cartService.addToCart(product, quantity);
+      this.cartService.addToCart(product, quantity);
+    }
   }
 
   getProductsList() {
@@ -57,8 +74,6 @@ export class Tab1Page {
 
             this.globals.presentToast('Result Fetched', '', 'success');
 
-            // res_products = this.globals.global_array.products;
-
             this.data.products.forEach((element: any) => {
               let parsedImages = JSON.parse(element.picture);
               element.picture = parsedImages;
@@ -66,8 +81,7 @@ export class Tab1Page {
 
             // After images url being parsed
             this.globals.product_list = this.data.products;
-            this.productArray = this.data.products;
-            console.log('productArray array', this.productArray);
+            console.log('Global Product list', this.globals.product_list);
           } else {
             // this.globals.presentToast('No data found', '', '');
           }
@@ -85,8 +99,6 @@ export class Tab1Page {
           '',
           'danger'
         );
-
-        // this.announcementError = true;
       }
     );
   }
@@ -121,7 +133,7 @@ export class Tab1Page {
   displayProduct() {
     let filtered_products: any = [];
 
-    this.productArray.forEach((element: any) => {
+    this.globals.product_list.forEach((element: any) => {
       if (
         element.category_id === this.cat_id &&
         element.sub_category_id === this.subcat_id

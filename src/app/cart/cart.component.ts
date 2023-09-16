@@ -3,7 +3,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVariable } from 'src/global';
 import { CartserviceService } from '../services/cartservice.service';
-import { animate } from '@angular/animations';
 
 @Component({
   selector: 'app-cart',
@@ -61,11 +60,14 @@ export class CartComponent implements OnInit {
 
       if (item.quantity > Number(product.quantity_in_stock)) {
         this.globals.presentToast('Stock Limit Exceeded', '', 'danger');
-        item.quantity = Number(product.quantity_in_stock);
+
+        setTimeout(() => {
+          item.quantity = Number(product.quantity_in_stock);
+        }, 50);
       } else if (item.quantity == 0 || item.quantity == null) {
         setTimeout(() => {
           item.quantity = 1;
-        }, 1000);
+        }, 500);
 
         this.globals.presentToast(
           'Quantity Can not be 0 or Null',
@@ -75,7 +77,9 @@ export class CartComponent implements OnInit {
       } else {
       }
     }
-    this.get_bill();
+    setTimeout(() => {
+      this.get_bill();
+    }, 100);
   }
 
   goToCart() {
@@ -155,10 +159,6 @@ export class CartComponent implements OnInit {
       (res) => {
         this.resetCart();
         this.refreshAPI();
-
-
-        console.log('global array refreshed', this.globals.global_array);
-
       },
       (err) => {
         // setTimeout(() => {
@@ -197,13 +197,14 @@ export class CartComponent implements OnInit {
     this.service.getProductsList().subscribe(
       (res: any) => {
         if (res.status) {
-          if (res.data.length != 0) {
-            // setTimeout(() => {
-            //   this.globals.dismiss();
-            // }, 2000);
+          // setTimeout(() => {
+          //   this.globals.dismiss();
+          // }, 2000);
 
-            this.globals.global_array = res.data;
-          }
+          this.globals.global_array = res.data;
+
+          console.log('API refreshed', this.globals.global_array);
+          this.globals.product_list = this.globals.global_array.products;
         }
       },
       (err: any) => {

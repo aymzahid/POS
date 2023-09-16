@@ -1,3 +1,4 @@
+import { GlobalVariable } from './../../global';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -11,10 +12,10 @@ export class CartserviceService {
 
   cartItems$ = this.cartItemsSubject.asObservable();
 
-  constructor() {}
+  constructor(private globals: GlobalVariable) {}
 
   addToCart(product: any, quantity: any) {
-    let cart_array: any = [];
+    let duplicate_product: boolean = false;
 
     let item = {
       product_id: product.id,
@@ -23,8 +24,28 @@ export class CartserviceService {
       quantity: quantity,
       total_price: product.s_price,
     };
+
     const currentCartItems = this.cartItemsSubject.value;
-    currentCartItems.push(item);
+    if (currentCartItems.length != 0) {
+      for (let item of currentCartItems) {
+        if (item.product_id == product.id) {
+          duplicate_product = true;
+          if (item.quantity < Number(product.quantity_in_stock)) {
+            item.quantity = item.quantity + 1;
+          } else {
+            this.globals.presentToast('Stock Limit Reached', '', 'danger');
+          }
+          break;
+        }
+      }
+
+      if (!duplicate_product) {
+        currentCartItems.push(item);
+      }
+    } else {
+      currentCartItems.push(item);
+    }
+
     this.cartItemsSubject.next(currentCartItems);
   }
 
@@ -34,7 +55,4 @@ export class CartserviceService {
     this.cartItemsSubject.next(currentCartItems);
     console.log('reseting cart ', this.cartItems$);
   }
-
-
-
 }

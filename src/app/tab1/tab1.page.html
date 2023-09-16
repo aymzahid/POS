@@ -77,30 +77,40 @@
         </ion-col>
       </ion-row>
       <div class="products_container" *ngIf="displayProduct() != ''">
-        <ion-card
-          class="ion-activatable ripple-parent rectangle"
-          *ngFor="let item of displayProduct() | filter:filterTerm"
-          (click)="addToCart(item,1)"
-        >
-          <ion-ripple-effect></ion-ripple-effect>
-          <ion-card-header>
-            <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
-            <ion-card-title color="primary"
-              >PKR: {{item.s_price}}
-              <span style="color: var(--ion-color-dark); font-size: 0.9rem">
-                / Unit</span
-              >
-            </ion-card-title>
-          </ion-card-header>
-
-          <!-- <ion-card-content>
-            <img
-              class="p_image"
-              src="{{this.globals.baseAnnouncementURL}}{{item.picture[0]?.image}}"
-              alt=""
-            />
-          </ion-card-content> -->
-        </ion-card>
+        <div *ngFor="let item of displayProduct() | filter:filterTerm">
+          <ion-card
+            class="ion-activatable ripple-parent rectangle"
+            *ngIf="item.quantity_in_stock>0"
+            (click)="addToCart(item,1)"
+          >
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-card-header>
+              <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
+              <ion-card-title color="primary"
+                >PKR: {{item.s_price}}
+                <span style="color: var(--ion-color-dark); font-size: 0.9rem">
+                  / Unit</span
+                >
+              </ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          <ion-card
+            class="ion-activatable ripple-parent rectangle no_stock_card"
+            *ngIf="item.quantity_in_stock<1"
+            (click)="this.globals.presentToast('Out Of Stock Product','','danger');"
+          >
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-card-header>
+              <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
+              <ion-card-title color="primary"
+                >PKR: {{item.s_price}}
+                <span style="color: var(--ion-color-dark); font-size: 0.9rem">
+                  / Unit</span
+                >
+              </ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </div>
       </div>
       <div
         *ngIf="displayProduct()==''"

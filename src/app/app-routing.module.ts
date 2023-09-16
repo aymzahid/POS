@@ -8,11 +8,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginPageModule),
   },
-  {
-    path: 'tabs',
-    loadChildren: () =>
-      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
-  },
+
   {
     path: 'cart',
     component: CartComponent,
@@ -22,9 +18,21 @@ const routes: Routes = [
     path: '',
     redirectTo: 'tabs',
     pathMatch: 'full',
-  },  {
+  },
+  {
     path: 'search-user',
-    loadChildren: () => import('./pages/search-user/search-user.module').then( m => m.SearchUserPageModule)
+    loadChildren: () =>
+      import('./pages/search-user/search-user.module').then(
+        (m) => m.SearchUserPageModule
+      ),
+  },
+  {
+    path: 'tabs',
+    loadChildren: () =>
+      import('./tabs/tabs.module').then((m) => m.TabsPageModule),
+  },  {
+    path: 'bill',
+    loadChildren: () => import('./pages/bill/bill.module').then( m => m.BillPageModule)
   },
 
 ];
