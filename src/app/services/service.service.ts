@@ -71,6 +71,11 @@ export class ServiceService {
     return this.http.post<any>(path, data);
   }
 
+  addUser(data: any) {
+    let path = this.globals.baseURL + 'add-user';
+    return this.http.post<any>(path, data);
+  }
+
   submitOrder(data: any) {
     for (var pair of data.entries()) {
       console.log(pair[0] + ', ' + pair[1]);

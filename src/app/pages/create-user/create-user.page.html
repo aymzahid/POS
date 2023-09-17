@@ -19,33 +19,123 @@
         <ion-card-content>
           <ion-row class="form_row">
             <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
-              <ion-col size="12"
-                ><ion-item>
+              <ion-col size="12">
+                <ion-item
+                  [style]="name.invalid && (name.dirty || name.touched) ? ' border: 2px solid var(--ion-color-danger);' : ''"
+                >
                   <ion-label position="floating">Enter Name</ion-label>
                   <ion-input
                     type="text"
                     name="name"
-                    #name
+                    #name="ngModel"
+                    minlength="4"
                     ngModel
                     required
-                  ></ion-input> </ion-item
-              ></ion-col>
-              <ion-col size="12">
-                <ion-item>
-                  <ion-label position="floating">Enter Phone Number</ion-label>
-                  <ion-input
-                    name="phone"
-                    id="phone"
-                    ngModel
-                    type="tel"
-
-
                   ></ion-input>
                 </ion-item>
+                <div
+                  *ngIf="name.invalid && (name.dirty || name.touched)"
+                  class="alert"
+                >
+                  <div *ngIf="name.errors?.['required']">Name is required.</div>
+                  <div *ngIf="name.errors?.['minlength']">
+                    Name must be at least 4 characters long.
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="12" *ngIf="this.user_type==='Vendor'">
+                <ion-item
+                  [style]="email.invalid && (email.dirty || email.touched) ? ' border: 2px solid var(--ion-color-danger);' : ''"
+                >
+                  <ion-label position="floating">Enter Your Email</ion-label>
+                  <ion-input
+                    type="email"
+                    name="email"
+                    #email="ngModel"
+                    minlength="4"
+                    ngModel
+                    required
+                    required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                  ></ion-input>
+                </ion-item>
+                <div
+                  *ngIf="email.invalid && (email.dirty || email.touched)"
+                  class="alert"
+                >
+                  <div *ngIf="name.errors?.['required']">
+                    Email is required.
+                  </div>
+                </div>
               </ion-col>
 
               <ion-col size="12">
-                <ion-button type="submit" expand="block" shape="round">
+                <ion-item
+                  [style]="phone.invalid && (phone.dirty || phone.touched) ? ' border: 2px solid var(--ion-color-danger);' : ''"
+                >
+                  <ion-label position="floating">Enter Phone Number</ion-label>
+                  <ion-input
+                    type="number"
+                    name="phone"
+                    ngModel
+                    #phone="ngModel"
+                    required
+                    pattern="^\d{10}$"
+                  ></ion-input>
+                </ion-item>
+                <div
+                  *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                  class="alert"
+                >
+                  <div *ngIf="phone.errors?.['required']">
+                    Phone Number is required.
+                  </div>
+                  <div *ngIf="phone.errors?.['pattern']">
+                    Phone Number must be at 10 Digits long.
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="12" *ngIf="this.user_type==='Vendor'">
+                <ion-item
+                  [style]="address.invalid && (name.dirty || name.touched) ? ' border: 2px solid var(--ion-color-danger);' : ''"
+                >
+                  <ion-label position="floating">Enter Address</ion-label>
+                  <ion-input
+                    type="text"
+                    name="address"
+                    #address="ngModel"
+                    ngModel
+                    required
+                  ></ion-input>
+                </ion-item>
+                <div
+                  *ngIf="address.invalid && (address.dirty || address.touched)"
+                  class="alert"
+                >
+                  <div *ngIf="address.errors?.['required']">
+                    Address is required.
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-button
+                  *ngIf="userForm.invalid"
+                  style="opacity: 0.7"
+                  expand="block"
+                  shape="round"
+                >
+                  Create
+                </ion-button>
+
+                <ion-button
+                  *ngIf="!userForm.invalid"
+                  type="submit"
+                  expand="block"
+                  shape="round"
+                >
                   Create
                 </ion-button>
               </ion-col>
