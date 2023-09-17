@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 // import { Printer, PrintOptions } from '@awesome-cordova-plugins/printer/ngx';
 
@@ -9,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice.page.scss'],
 })
 export class InvoicePage implements OnInit {
+  data: any = [];
   modalCheck = true;
-  constructor(private modalCtrl: ModalController, private router: Router) {}
+  constructor(
+    private modalCtrl: ModalController,
+    private router: Router,
+    // private navParams: NavParams
+  ) {
+    // this.data = this.navParams.get('modal_data');
+    this.data = JSON.parse(localStorage.getItem('bill_data') || '{}');
+
+    console.log(this.data);
+  }
 
   ngOnInit() {}
 

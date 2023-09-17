@@ -142,7 +142,7 @@ export class CartComponent implements OnInit {
     console.log('cart item', this.cartItems);
 
     const currentDate = new Date().toLocaleString('en-US');
-    // let fd = new FormData();
+
     let data = {
       items: this.cartItems,
       totalAmount: this.calBill(),
@@ -156,12 +156,19 @@ export class CartComponent implements OnInit {
       discounts: [{ name: 'Percentage', value: this.discount }],
     };
 
+    localStorage.setItem('bill_data', JSON.stringify(data));
+
     console.log('sale payload', data);
     this.service.addSale(data).subscribe(
       (res) => {
-        this.printInvoice();
-        this.resetCart();
+        if (localStorage.getItem('bill_data') != null) {
+          this.printInvoice(
+            JSON.parse(localStorage.getItem('bill_data') || '{}')
+          );
+        }
+
         this.refreshAPI();
+        this.resetCart();
       },
       (err) => {
         // setTimeout(() => {
@@ -177,14 +184,12 @@ export class CartComponent implements OnInit {
     );
   }
 
-  printInvoice() {
-    this.globals
-      .invoiceModal(this.globals.global_array.customers)
-      .then((res) => {
-        if (!res) {
-        } else {
-        }
-      });
+  printInvoice(data: any) {
+    this.globals.invoiceModal(data).then((res) => {
+      if (!res) {
+      } else {
+      }
+    });
   }
 
   resetCart() {

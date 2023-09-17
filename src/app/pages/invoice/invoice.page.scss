@@ -8,6 +8,9 @@
   }
 }
 
+ion-label {
+  padding: 0px 10px;
+}
 .invoice-card {
   margin: 16px;
   border: 1px solid #ddd;
@@ -45,6 +48,17 @@
   font-weight: bold;
 }
 
+.date-time {
+  padding: 16px 9px;
+
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  .invoice-number {
+    font-weight: bold;
+  }
+}
+
 .customer-details {
   margin-top: 16px;
   // padding: 0 16px;
@@ -60,8 +74,10 @@
   border-collapse: collapse;
 
   .list-header {
-    background-color: #f0f0f0;
+    // background-color: #f0f0f0;
+
     border-bottom: 1px solid #ddd;
+    text-align: center;
 
     ion-label {
       font-weight: bold;
@@ -80,11 +96,19 @@
 }
 
 .totals {
+  ion-label {
+    padding: 0px 3px;
+  }
   margin-top: 16px;
   padding: 0 16px;
-  text-align: end;
+  // text-align: end;
   .label {
     font-weight: bold;
+    // font-size: 1.1rem;
+  }
+
+  .value {
+    // font-weight: 800;
   }
 }
 
@@ -94,17 +118,6 @@
   border-left: 2px solid #007bff;
 
   .label {
-    font-weight: bold;
-  }
-}
-
-.date-time {
-  padding: 16px 0px;
-
-  font-size: 14px;
-  font-weight: bold;
-  display: block;
-  .invoice-number {
     font-weight: bold;
   }
 }
