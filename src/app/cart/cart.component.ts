@@ -139,49 +139,53 @@ export class CartComponent implements OnInit {
   }
 
   pay() {
-    console.log('cart item', this.cartItems);
+    if (this.cartItems.length != 0) {
+      console.log('cart item', this.cartItems);
 
-    const currentDate = new Date().toLocaleString('en-US');
+      const currentDate = new Date().toLocaleString('en-US');
 
-    let data = {
-      items: this.cartItems,
-      totalAmount: this.calBill(),
-      paymentAmount: Number(this.total_bill),
-      customer: {
-        name: this.customer,
-        phone: this.customer_phone,
-      },
-      saleId: this.globals.global_array.saleId,
-      timestamp: currentDate,
-      discounts: [{ name: 'Percentage', value: this.discount }],
-    };
+      let data = {
+        items: this.cartItems,
+        totalAmount: this.calBill(),
+        paymentAmount: Number(this.total_bill),
+        customer: {
+          name: this.customer,
+          phone: this.customer_phone,
+        },
+        saleId: this.globals.global_array.saleId,
+        timestamp: currentDate,
+        discounts: [{ name: 'Percentage', value: this.discount }],
+      };
 
-    localStorage.setItem('bill_data', JSON.stringify(data));
+      localStorage.setItem('bill_data', JSON.stringify(data));
 
-    console.log('sale payload', data);
-    this.service.addSale(data).subscribe(
-      (res) => {
-        if (localStorage.getItem('bill_data') != null) {
-          this.printInvoice(
-            JSON.parse(localStorage.getItem('bill_data') || '{}')
+      console.log('sale payload', data);
+      this.service.addSale(data).subscribe(
+        (res) => {
+          if (localStorage.getItem('bill_data') != null) {
+            this.printInvoice(
+              JSON.parse(localStorage.getItem('bill_data') || '{}')
+            );
+          }
+
+          this.refreshAPI();
+          this.resetCart();
+        },
+        (err) => {
+          // setTimeout(() => {
+          //   this.globals.dismiss();
+          // }, 2000);
+          this.resetCart();
+          this.globals.presentToast(
+            'Something went wrong, try again later',
+            '',
+            'danger'
           );
         }
-
-        this.refreshAPI();
-        this.resetCart();
-      },
-      (err) => {
-        // setTimeout(() => {
-        //   this.globals.dismiss();
-        // }, 2000);
-        this.resetCart();
-        this.globals.presentToast(
-          'Something went wrong, try again later',
-          '',
-          'danger'
-        );
-      }
-    );
+      );
+    } else {
+      this.globals.presentToast('Cart is Empty', '', 'warning');
+    }
   }
 
   printInvoice(data: any) {

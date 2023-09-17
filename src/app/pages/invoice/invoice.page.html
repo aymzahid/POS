@@ -53,7 +53,7 @@
 
         <ion-list class="item-list">
           <ion-list-header class="list-header">
-            <ion-label>Item List</ion-label>
+            <ion-label lines="none">Item List</ion-label>
           </ion-list-header>
           <ion-item lines="none" class="item">
             <ion-label class="serial">Item No#</ion-label>
@@ -73,7 +73,7 @@
             <ion-label class="quantity">{{item.quantity}} kg</ion-label>
             <ion-label class="price-unit">{{item.s_price}}/kg</ion-label>
 
-            <ion-label class="amount">{{440.00}}</ion-label>
+            <ion-label class="amount">{{item.total_price}}</ion-label>
           </ion-item>
         </ion-list>
 
@@ -90,8 +90,8 @@
               >{{discount?.value}} <span> % </span></ion-label
             >
           </ion-col>
-          <ion-col size="5">
-            <ion-label class="label">Total Amount:</ion-label>
+          <ion-col size="5" class="ion-text-center">
+            <ion-label class="label">Total amount:</ion-label>
             <ion-label class="value"
               >{{data?.paymentAmount.toFixed(2) }}</ion-label
             >
@@ -103,7 +103,7 @@
     <ion-card class="notes">
       <ion-card-content>
         <ion-label class="label">Notes:</ion-label>
-        <p>This is a sample invoice. Payment is due within 30 days.</p>
+        <p></p>
         <!-- <button
           class="print_button"
           printSectionId="print-section"
