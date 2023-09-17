@@ -9,14 +9,14 @@ import { GlobalVariable } from 'src/global';
   styleUrls: ['./create-user.page.scss'],
 })
 export class CreateUserPage implements OnInit {
-  name: any;
-  phone: any;
+  // name: any;
+  // phone: any;
   user_type: any;
 
-  formData = {
-    name: '',
-    phone: '',
-  };
+  // formData = {
+  //   name: '',
+  //   phone: '',
+  // };
   constructor(
     private modalCtrl: ModalController,
     private navParams: NavParams,
