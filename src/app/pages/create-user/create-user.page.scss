@@ -1,0 +1,21 @@
+.form_row {
+  form {
+    width: 100%;
+  }
+}
+
+ion-card {
+  background-color: #eaf9f4;
+  ion-card-header {
+    text-align: center;
+    background-color: wheat;
+    ion-card-subtitle {
+      font-size: 1.2rem;
+    }
+  }
+  ion-item {
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 15px;
+  }
+}

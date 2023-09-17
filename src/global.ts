@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { readBlobAsBase64 } from '@capacitor/core/types/core-plugins';
 import { ModalController, ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { InvoicePage } from './app/pages/invoice/invoice.page';
+import { CreateUserPage } from './app/pages/create-user/create-user.page';
 
 @Injectable()
 export class GlobalVariable {
@@ -77,13 +79,58 @@ export class GlobalVariable {
       .then(() => console.log('dismissed'));
   }
 
-  async openModal(data: any): Promise<any> {
+  async searchUserModal(data: any): Promise<any> {
     return new Promise(async (resolve) => {
       const modal = await this.modalCtrl.create({
         component: SearchUserPage,
-        cssClass: 'keypad_modal',
-        id: 'keypad_modal',
+        cssClass: 'search_user_modal',
+        id: 'search_user_modal',
         componentProps: { modal_data: data },
+      });
+      await modal.present();
+
+      modal.onDidDismiss().then((data) => {
+        console.log('modal dismissed with', data.data);
+
+        if (data.data != undefined) {
+          resolve(data.data);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
+  async createUser(data: any): Promise<any> {
+    return new Promise(async (resolve) => {
+      const modal = await this.modalCtrl.create({
+        component:CreateUserPage,
+        cssClass: 'create_user_modal',
+        id: 'create_user_modal',
+        componentProps: { modal_data: data },
+      });
+      await modal.present();
+
+      modal.onDidDismiss().then((data) => {
+        console.log('modal dismissed with', data.data);
+
+        if (data.data != undefined) {
+          resolve(data.data);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
+  async invoiceModal(data: any): Promise<any> {
+    return new Promise(async (resolve) => {
+      const modal = await this.modalCtrl.create({
+        component: InvoicePage,
+        cssClass: 'invoice_modal',
+        id: 'invoice_modal',
+        componentProps: { modal_data: data },
+        backdropDismiss: false,
       });
       await modal.present();
 

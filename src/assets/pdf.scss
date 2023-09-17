@@ -1,0 +1,118 @@
+#print-section {
+  height: 100%;
+}
+
+.title {
+  text-align: center;
+}
+
+.invoice-card {
+  margin: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.invoice-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.company-header {
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.company-logo {
+  max-width: 110px;
+  margin-right: 16px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.company-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.invoice-id {
+  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.customer-details {
+  margin-top: 16px;
+  // padding: 0 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.item-list {
+  margin-top: 16px;
+  border-collapse: collapse;
+
+  .list-header {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+
+    ion-label {
+      font-weight: bold;
+    }
+  }
+
+  .item {
+    border-bottom: 1px solid #ddd;
+
+    ion-label {
+      text-align: center;
+      padding: 8px;
+      display: block;
+    }
+  }
+}
+
+.totals {
+  margin-top: 16px;
+  padding: 0 16px;
+  text-align: end;
+  .label {
+    font-weight: bold;
+  }
+}
+
+.notes {
+  margin: 16px;
+  padding: 16px;
+  border-left: 2px solid #007bff;
+
+  .label {
+    font-weight: bold;
+  }
+}
+
+.date-time {
+  padding: 16px 0px;
+
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  .invoice-number {
+    font-weight: bold;
+  }
+}
+
+.print_button {
+  background: none;
+  color: black;
+  position: absolute;
+  right: 18px;
+  font-size: 4rem;
+  top: 0;
+  bottom: 0;
+}

@@ -1,0 +1,58 @@
+<ion-toolbar>
+  <ion-buttons slot="end">
+    <ion-button expand="block" color="dark" (click)="close()">
+      <ion-icon slot="start" name="close-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title class="ion-text-center" color="light"
+    >Create {{this.user_type}}
+  </ion-title>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Add New {{this.user_type}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row class="form_row">
+            <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+              <ion-col size="12"
+                ><ion-item>
+                  <ion-label position="floating">Enter Name</ion-label>
+                  <ion-input
+                    type="text"
+                    name="name"
+                    #name
+                    ngModel
+                    required
+                  ></ion-input> </ion-item
+              ></ion-col>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="floating">Enter Phone Number</ion-label>
+                  <ion-input
+                    name="phone"
+                    id="phone"
+                    ngModel
+                    type="tel"
+
+
+                  ></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col size="12">
+                <ion-button type="submit" expand="block" shape="round">
+                  Create
+                </ion-button>
+              </ion-col>
+            </form>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

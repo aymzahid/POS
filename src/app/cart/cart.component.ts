@@ -125,7 +125,7 @@ export class CartComponent implements OnInit {
   }
 
   searchUser() {
-    this.globals.openModal(this.globals.global_array.customers).then((res) => {
+    this.globals.searchUserModal(this.globals.global_array.customers).then((res) => {
       if (!res) {
         console.log('guest');
       } else {
@@ -157,6 +157,8 @@ export class CartComponent implements OnInit {
     console.log('sale payload', data);
     this.service.addSale(data).subscribe(
       (res) => {
+        this.printInvoice();
+        // this.router.navigateByUrl('/invoice');
         this.resetCart();
         this.refreshAPI();
       },
@@ -172,6 +174,20 @@ export class CartComponent implements OnInit {
         );
       }
     );
+  }
+
+  printInvoice() {
+    this.globals
+      .invoiceModal(this.globals.global_array.customers)
+      .then((res) => {
+        if (!res) {
+          console.log('guest');
+        } else {
+          console.log(res);
+          this.customer = res.name;
+          this.customer_phone = res.phone;
+        }
+      });
   }
 
   resetCart() {

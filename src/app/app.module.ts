@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPrintModule } from 'ngx-print';
+
 @NgModule({
   declarations: [AppComponent],
 
@@ -19,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
+    NgxPrintModule,
+
   ],
 
   providers: [

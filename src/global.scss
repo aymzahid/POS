@@ -68,6 +68,34 @@
   }
 }
 
+.create_user_modal {
+  --width: 85vw;
+  backdrop-filter: brightness(0.5);
+  --height: 95vh;
+
+  .modal-wrapper {
+    background: none;
+  }
+}
+.search_user_modal {
+  --width: 85vw;
+  backdrop-filter: brightness(0.5);
+  --height: 95vh;
+
+  .modal-wrapper {
+    background: none;
+  }
+}
+.invoice_modal {
+  // background: none;
+  --width: 80vw;
+  backdrop-filter: brightness(0.5);
+  --height: 98vh;
+
+  .modal-wrapper {
+    background: none;
+  }
+}
 .action-sheet-wrapper {
   // --background: red;
   .action-sheet-button {

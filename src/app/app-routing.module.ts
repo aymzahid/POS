@@ -30,9 +30,15 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
+  },
+
+  {
+    path: 'invoice',
+    loadChildren: () =>
+      import('./pages/invoice/invoice.module').then((m) => m.InvoicePageModule),
   },  {
-    path: 'bill',
-    loadChildren: () => import('./pages/bill/bill.module').then( m => m.BillPageModule)
+    path: 'create-user',
+    loadChildren: () => import('./pages/create-user/create-user.module').then( m => m.CreateUserPageModule)
   },
 
 ];

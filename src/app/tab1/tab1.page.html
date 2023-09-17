@@ -76,6 +76,7 @@
           ></ion-searchbar>
         </ion-col>
       </ion-row>
+
       <div class="products_container" *ngIf="displayProduct() != ''">
         <div *ngFor="let item of displayProduct() | filter:filterTerm">
           <ion-card

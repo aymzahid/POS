@@ -65,6 +65,7 @@ export class Tab1Page {
             let res_products = [];
 
             this.globals.global_array = res.data;
+
             this.data = this.globals.global_array;
             console.log('Global Array -->', this.globals.global_array);
 
