@@ -125,15 +125,17 @@ export class CartComponent implements OnInit {
   }
 
   searchUser() {
-    this.globals.searchUserModal(this.globals.global_array.customers).then((res) => {
-      if (!res) {
-        console.log('guest');
-      } else {
-        console.log(res);
-        this.customer = res.name;
-        this.customer_phone = res.phone;
-      }
-    });
+    this.globals
+      .searchUserModal(this.globals.global_array.customers)
+      .then((res) => {
+        if (!res) {
+          console.log('guest');
+        } else {
+          console.log(res);
+          this.customer = res.name;
+          this.customer_phone = res.phone;
+        }
+      });
   }
 
   pay() {
@@ -158,7 +160,6 @@ export class CartComponent implements OnInit {
     this.service.addSale(data).subscribe(
       (res) => {
         this.printInvoice();
-        // this.router.navigateByUrl('/invoice');
         this.resetCart();
         this.refreshAPI();
       },
@@ -181,11 +182,7 @@ export class CartComponent implements OnInit {
       .invoiceModal(this.globals.global_array.customers)
       .then((res) => {
         if (!res) {
-          console.log('guest');
         } else {
-          console.log(res);
-          this.customer = res.name;
-          this.customer_phone = res.phone;
         }
       });
   }

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 // import { Printer, PrintOptions } from '@awesome-cordova-plugins/printer/ngx';
 
@@ -7,25 +9,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice.page.scss'],
 })
 export class InvoicePage implements OnInit {
-  constructor() {}
+  modalCheck = true;
+  constructor(private modalCtrl: ModalController, private router: Router) {}
 
   ngOnInit() {}
 
+  close(item?: any) {
+    this.modalCtrl.dismiss(item);
+  }
   print() {
     window.print();
-    //   let options: PrintOptions = {
-    //     name: 'MyDocument',
-    //     duplex: true,
-    //     orientation: 'landscape',
-    //     monochrome: true,
-    //   };
-    //   this.printer
-    //     .print('Hello, this is a test document', options)
-    //     .then(() => {
-    //       console.log('Print successful');
-    //     })
-    //     .catch((error) => {
-    //       console.error('Print error', error);
-    //     });
+
+    this.close();
+
+    //
+    //
+    //lengthprocess but works
+    // console.log(this.router.navigateByUrl('/invoice'));
+    // this.router.navigateByUrl('/invoice').then((res) => {
+    // if (res) {
+    // this.close();
+    // setTimeout(() => {
+    // window.print();
+    // this.router.navigateByUrl('/tabs/tabs/tab1');
+    // }, 1000);
+    // }
+    // });
   }
 }

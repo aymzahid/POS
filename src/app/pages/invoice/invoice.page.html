@@ -1,14 +1,19 @@
 <div id="print-section">
-  <!-- <ion-header>
+  <ion-header>
     <ion-toolbar>
+      <ion-buttons class="close_button" slot="end" >
+        <ion-button expand="block" color="dark" (click)="close()">
+          <ion-icon slot="start" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
       <ion-title class="invoice-title">Invoice</ion-title>
     </ion-toolbar>
-  </ion-header> -->
-  <div class="header">
+  </ion-header>
+  <!-- <div class="header">
     <div class="toolbar_container">
       <h2 class="title">Invoice</h2>
     </div>
-  </div>
+  </div> -->
 
   <ion-content class="ion-padding">
     <ion-card class="invoice-card">
@@ -92,12 +97,16 @@
       <ion-card-content>
         <ion-label class="label">Notes:</ion-label>
         <p>This is a sample invoice. Payment is due within 30 days.</p>
-        <button
+        <!-- <button
           class="print_button"
           printSectionId="print-section"
           styleSheetFile="assets/pdf.css"
           ngxPrint
         >
+          <ion-icon name="print-outline"></ion-icon>
+        </button> -->
+
+        <button class="print_button" (click)="print()">
           <ion-icon name="print-outline"></ion-icon>
         </button>
       </ion-card-content>

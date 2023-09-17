@@ -34,8 +34,8 @@ export class CreateUserPage implements OnInit {
   }
   onSubmit(form: NgForm) {
     let data = {};
-    console.log('Create', form.value);
-    if (this.user_type === 'Vendor') {
+    console.log('form values', form.value);
+    if (this.user_type === 'vendor') {
       data = {
         name: form.value.name,
         email: form.value.email,
@@ -51,15 +51,44 @@ export class CreateUserPage implements OnInit {
       };
     }
 
-    this.service.addSale(data).subscribe(
+    this.service.addUser(data).subscribe(
       (res) => {
-        this.close();
-        this.globals.presentToast('User Created', '', 'success');
+        if (res.status) {
+          this.globals.presentToast('User Created', '', 'success');
+          this.refreshAPI();
+        } else {
+          this.globals.presentToast(res.data, '', 'warning');
+        }
       },
       (err) => {
         // setTimeout(() => {
         //   this.globals.dismiss();
         // }, 2000);
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
+      }
+    );
+  }
+
+  refreshAPI() {
+    this.service.getProductsList().subscribe(
+      (res: any) => {
+        if (res.status) {
+          // setTimeout(() => {
+          //   this.globals.dismiss();
+          // }, 2000);
+
+          this.globals.global_array = res.data;
+
+          console.log('API refreshed', this.globals.global_array);
+          this.globals.product_list = this.globals.global_array.products;
+          this.close(this.globals.global_array.customers);
+        }
+      },
+      (err: any) => {
         this.globals.presentToast(
           'Something went wrong, try again later',
           '',
