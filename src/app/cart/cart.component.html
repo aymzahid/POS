@@ -65,11 +65,19 @@
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="3" *ngIf="!purchaseCheck">
           <ion-input
             type="number"
             [(ngModel)]="item.s_price"
             [value]="item.s_price"
+            (keyup)="get_bill()"
+          ></ion-input>
+        </ion-col>
+        <ion-col size="3" *ngIf="purchaseCheck">
+          <ion-input
+            type="number"
+            [(ngModel)]="item.p_price"
+            [value]="item.p_price"
             (keyup)="get_bill()"
           ></ion-input>
         </ion-col>
