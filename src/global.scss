@@ -108,10 +108,14 @@
     background: none;
   }
 }
-.action-sheet-wrapper {
-  // --background: red;
-  .action-sheet-button {
-    // background: red;
+
+.product_modal {
+  --width: 90vw;
+  backdrop-filter: brightness(0.5);
+  --height: 90vh;
+
+  .modal-wrapper {
+    background: none;
   }
 }
 

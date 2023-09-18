@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button expand="block" color="dark" (click)="close()">
+        <ion-icon slot="start" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light">Product Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid class="top_grid">
+    <ion-row class="head_row">
+      <ion-col size="4"> Name </ion-col>
+      <ion-col size="5"> QTY </ion-col>
+      <ion-col size="3"> Price/Unit </ion-col>
+    </ion-row>
+
+    <ion-row class="list_row">
+      <ion-col size="4">
+        <ion-button
+          class="ion-activatable ripple-parent rectangle"
+          fill="clear"
+          size="small"
+          color="danger"
+        >
+          <ion-ripple-effect></ion-ripple-effect>
+          <ion-icon name="trash-outline"></ion-icon> </ion-button
+        >Name
+      </ion-col>
+      <ion-col size="5" style="justify-content: center" class="qty">
+        <ion-button fill="clear" size="small">
+          <ion-icon name="remove-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-input type="number"></ion-input>
+        <ion-button fill="clear" size="small">
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <!-- <ion-col size="3" *ngIf="!purchaseCheck">
+        <ion-input
+          type="number"
+          [(ngModel)]="item.s_price"
+          [value]="item.s_price"
+        ></ion-input>
+      </ion-col> -->
+      <ion-col size="3">
+        <ion-input type="number"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

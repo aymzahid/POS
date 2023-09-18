@@ -1,0 +1,36 @@
+.top_grid {
+  height: 60vh;
+  overflow-y: auto;
+}
+.head_row {
+  background: #373434c4;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+}
+
+ion-icon {
+  font-size: 1.8rem;
+  vertical-align: middle;
+  padding: 0px 5px;
+}
+.list_row {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px dotted black;
+  ion-input {
+    min-height: 30px;
+    background: #8080805e;
+    border-radius: 11px;
+    text-align: center;
+    color: black;
+  }
+  ion-col {
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    font-weight: 700;
+    height: 8vh;
+  }
+}

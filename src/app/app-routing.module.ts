@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'create-user',
     loadChildren: () => import('./pages/create-user/create-user.module').then( m => m.CreateUserPageModule)
   },
+  {
+    path: 'product-modal',
+    loadChildren: () => import('./pages/product-modal/product-modal.module').then( m => m.ProductModalPageModule)
+  },
 
 ];
 @NgModule({

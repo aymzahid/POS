@@ -80,7 +80,7 @@
           <ion-card
             class="ion-activatable ripple-parent rectangle"
             *ngIf="item.quantity_in_stock>0"
-            (click)="addToCart(item,1)"
+            (click)="openProductModal(item)"
           >
             <ion-ripple-effect></ion-ripple-effect>
             <ion-card-header>

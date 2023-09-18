@@ -6,6 +6,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { InvoicePage } from './app/pages/invoice/invoice.page';
 import { CreateUserPage } from './app/pages/create-user/create-user.page';
+import { ProductModalPage } from './app/pages/product-modal/product-modal.page';
 
 @Injectable()
 export class GlobalVariable {
@@ -148,6 +149,29 @@ export class GlobalVariable {
         component: InvoicePage,
         cssClass: 'invoice_modal',
         id: 'invoice_modal',
+        componentProps: { modal_data: data },
+        backdropDismiss: false,
+      });
+      await modal.present();
+
+      modal.onDidDismiss().then((data) => {
+        console.log('modal dismissed with', data.data);
+
+        if (data.data != undefined) {
+          resolve(data.data);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
+  async productModal(data: any): Promise<any> {
+    return new Promise(async (resolve) => {
+      const modal = await this.modalCtrl.create({
+        component: ProductModalPage,
+        cssClass: 'product_modal',
+        id: 'product_modal',
         componentProps: { modal_data: data },
         backdropDismiss: false,
       });

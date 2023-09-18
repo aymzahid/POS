@@ -138,4 +138,10 @@ export class Tab3Page {
 
     return filtered_products;
   }
+
+  openProductModal(product: any) {
+    this.globals.productModal(product).then((res) => {
+      console.log('res product modal', res);
+    });
+  }
 }
