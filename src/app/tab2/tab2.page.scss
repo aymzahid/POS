@@ -1,0 +1,41 @@
+ion-content {
+  --background: #eaf9f4;
+  position: relative;
+
+  ion-icon {
+    font-size: 1rem;
+  }
+
+  .card_colum {
+    height: auto;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .result_card {
+    box-shadow: 1px 1px 10px;
+    border-radius: 21px;
+    text-align: center;
+    width: 30%;
+    height: 225px;
+
+    // display: flex;
+    justify-content: center;
+
+    ion-button {
+      width: 50%;
+    }
+  }
+  ion-card-header {
+    flex-direction: column;
+  }
+  ion-card-subtitle {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.2rem;
+  }
+  ion-card-title {
+    font-size: 1.3rem;
+  }
+}

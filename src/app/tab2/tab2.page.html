@@ -1,9 +1,45 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title> Tab 2 </ion-title>
+    <ion-title class="ion-text-center" color="light">Sales </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content [fullscreen]="true">
+  <ion-row class="header_row">
+    <ion-col size="10" offset="1">
+      <ion-searchbar
+        mode="ios"
+        animated="true"
+        placeholder="Search Transaction"
+        inputmode="decimal"
+        type="decimal"
+        [debounce]="250"
+        [(ngModel)]="filterTerm"
+        showCancelButton="always"
+      ></ion-searchbar>
+    </ion-col>
+  </ion-row>
 
-<ion-content [fullscreen]="true"> </ion-content>
+  <ion-row>
+    <ion-col size="11" offset="1" class="card_colum"
+      ><ion-card
+        *ngFor="let item of data | filter :filterTerm"
+        class="result_card"
+      >
+        <ion-card-header>
+          <ion-card-subtitle color="primary"
+            >Sale ID : {{item.sale_id}}</ion-card-subtitle
+          >
+          <ion-card-title> {{item.customer.name }}</ion-card-title>
+          <ion-card-title color="success"
+            >Amount: {{item.payment_amount }}</ion-card-title
+          >
+          <ion-card-title>Date: {{item.date }}</ion-card-title>
+        </ion-card-header>
 
-<p>tab 2</p>
+        <ion-card-content>
+          <ion-button (click)="printInvoice(item)"> Print</ion-button>
+        </ion-card-content>
+      </ion-card></ion-col
+    >
+  </ion-row>
+</ion-content>

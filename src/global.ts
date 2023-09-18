@@ -54,6 +54,24 @@ export class GlobalVariable {
     toast.present();
   }
 
+  async p_loader() {
+    this.isLoading = true;
+    return await this.loadingController
+      .create({
+        cssClass: 'custom_loading_p',
+
+        backdropDismiss: false,
+      })
+      .then((a) => {
+        a.present().then(() => {
+          console.log('presented');
+          if (!this.isLoading) {
+            a.dismiss().then(() => console.log('abort presenting'));
+          }
+        });
+      });
+  }
+
   async loader() {
     this.isLoading = true;
     return await this.loadingController
@@ -104,7 +122,7 @@ export class GlobalVariable {
   async createUser(data: any): Promise<any> {
     return new Promise(async (resolve) => {
       const modal = await this.modalCtrl.create({
-        component:CreateUserPage,
+        component: CreateUserPage,
         cssClass: 'create_user_modal',
         id: 'create_user_modal',
         componentProps: { modal_data: data },

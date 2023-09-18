@@ -3,6 +3,7 @@ import { CartserviceService } from '../services/cartservice.service';
 import { Component } from '@angular/core';
 import { GlobalVariable } from 'src/global';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -50,7 +51,7 @@ export class Tab1Page {
   }
 
   getProductsList() {
-    this.globals.loader();
+    this.globals.p_loader();
     this.service.getProductsList().subscribe(
       (res) => {
         // this.loader = false;
@@ -86,7 +87,6 @@ export class Tab1Page {
           } else {
             // this.globals.presentToast('No data found', '', '');
           }
-          JSON;
         }
       },
       (err) => {

@@ -37,7 +37,7 @@
   }
 }
 
-.custom_loading {
+.custom_loading_p {
   .loading-wrapper {
     background: url("../src/assets/icon/loader.svg");
     background-repeat: no-repeat;
@@ -46,6 +46,18 @@
     position: absolute;
     left: 25vw;
     top: 50vh;
+  }
+  ion-spinner {
+    display: none !important;
+  }
+}
+
+.custom_loading {
+  .loading-wrapper {
+    background: url("../src/assets/icon/loader.svg");
+    background-repeat: no-repeat;
+    padding: 90px;
+    box-shadow: none;
   }
   ion-spinner {
     display: none !important;
