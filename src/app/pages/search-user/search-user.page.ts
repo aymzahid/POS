@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-user.page.scss'],
 })
 export class SearchUserPage implements OnInit {
+  title: any;
   data: any = [];
+
   filterTerm: any = '';
 
   constructor(
@@ -17,6 +19,7 @@ export class SearchUserPage implements OnInit {
     private globals: GlobalVariable
   ) {
     this.data = this.navParams.get('modal_data');
+    this.title = this.navParams.get('title');
   }
 
   ngOnInit() {}

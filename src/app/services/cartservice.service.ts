@@ -9,8 +9,10 @@ export class CartserviceService {
   private cartItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
   );
-
   cartItems$ = this.cartItemsSubject.asObservable();
+
+  private purchaseCheckSubject = new BehaviorSubject<boolean>(false);
+  purchaseCheck$ = this.purchaseCheckSubject;
 
   constructor(private globals: GlobalVariable) {}
 
@@ -54,5 +56,14 @@ export class CartserviceService {
     this.cartItemsSubject.value.length = 0;
     this.cartItemsSubject.next(currentCartItems);
     console.log('reseting cart ', this.cartItems$);
+  }
+
+  setPurchaseCheck(value: boolean) {
+    const currentValue = this.purchaseCheckSubject.value;
+    this.purchaseCheckSubject.next(value);
+  }
+
+  getPurchaseCheck() {
+    return this.purchaseCheckSubject.asObservable();
   }
 }

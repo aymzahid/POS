@@ -3,7 +3,6 @@ import { CartserviceService } from '../services/cartservice.service';
 import { Component } from '@angular/core';
 import { GlobalVariable } from 'src/global';
 
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -22,18 +21,12 @@ export class Tab1Page {
     private cartService: CartserviceService,
     public service: ServiceService,
     public globals: GlobalVariable
-  ) {
-    console.log('constructor');
-    this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items;
-    });
+  ) {}
 
+  ionViewDidEnter() {
+    console.log('did enter');
     this.getProductsList();
-  }
-  ionViewWillEnter() {
-    console.log('will enter');
-
-    this.getProductsList();
+    this.cartService.setPurchaseCheck(false);
   }
 
   addToCart(product: any, quantity: any) {

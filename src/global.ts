@@ -97,13 +97,14 @@ export class GlobalVariable {
       .then(() => console.log('dismissed'));
   }
 
-  async searchUserModal(data: any): Promise<any> {
+  async searchUserModal(data: any, title: any): Promise<any> {
     return new Promise(async (resolve) => {
       const modal = await this.modalCtrl.create({
         component: SearchUserPage,
         cssClass: 'search_user_modal',
         id: 'search_user_modal',
-        componentProps: { modal_data: data },
+
+        componentProps: { modal_data: data, title: title },
       });
       await modal.present();
 

@@ -15,7 +15,7 @@ export class Tab2Page {
     private service: ServiceService
   ) {}
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.getSales();
   }
 

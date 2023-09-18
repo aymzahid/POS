@@ -1,9 +1,9 @@
 <ion-content [fullscreen]="true">
   <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="success">
       <ion-row class="toolbar_row">
         <ion-col size="2">
-          <ion-title size="large">Point Of Sale</ion-title>
+          <ion-title size="large">Purchase</ion-title>
         </ion-col>
         <ion-col size="8">
           <ion-segment
@@ -46,8 +46,8 @@
       <ion-row
         style="text-align: center; align-items: center; font-size: 1.8rem"
       >
-        <ion-col size="6">
-          <ion-label
+        <ion-col size="4" offset="1">
+          <!-- <ion-label
             style="
               font-size: 15px;
               font-weight: bolder;
@@ -57,13 +57,11 @@
           >
             {{displayProduct()[0]?.sub_category_name}}
             (<span>{{displayProduct().length}}</span>)
-          </ion-label>
-          <!-- <ion-icon
-            style="vertical-align: middle; margin-right: 20px"
-            name="add-circle-outline"
-          ></ion-icon> -->
+          </ion-label> -->
+
+          <ion-button expand="block"> Add New Product </ion-button>
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="6" offset="1">
           <ion-searchbar
             mode="ios"
             placeholder="Filter Products"
@@ -87,28 +85,6 @@
             <ion-ripple-effect></ion-ripple-effect>
             <ion-card-header>
               <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
-              <ion-card-title color="primary"
-                >PKR: {{item.s_price}}
-                <span style="color: var(--ion-color-dark); font-size: 0.9rem">
-                  / Unit</span
-                >
-              </ion-card-title>
-            </ion-card-header>
-          </ion-card>
-          <ion-card
-            class="ion-activatable ripple-parent rectangle no_stock_card"
-            *ngIf="item.quantity_in_stock<1"
-            (click)="this.globals.presentToast('Out Of Stock Product','','danger');"
-          >
-            <ion-ripple-effect></ion-ripple-effect>
-            <ion-card-header>
-              <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
-              <ion-card-title color="primary"
-                >PKR: {{item.s_price}}
-                <span style="color: var(--ion-color-dark); font-size: 0.9rem">
-                  / Unit</span
-                >
-              </ion-card-title>
             </ion-card-header>
           </ion-card>
         </div>

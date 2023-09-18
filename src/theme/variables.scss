@@ -74,6 +74,11 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** Custom Colors **/
+
+  --ion-color-first: #78e08f;
+
   ion-toolbar {
     --background: var(--ion-color-primary);
     ion-title {

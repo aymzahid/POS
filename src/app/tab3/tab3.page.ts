@@ -21,18 +21,12 @@ export class Tab3Page {
     private cartService: CartserviceService,
     public service: ServiceService,
     public globals: GlobalVariable
-  ) {
-    console.log('constructor');
-    this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items;
-    });
+  ) {}
+  ionViewDidEnter() {
+    console.log('did enter');
 
     this.getProductsList();
-  }
-  ionViewWillEnter() {
-    console.log('will enter');
-
-    this.getProductsList();
+    this.cartService.setPurchaseCheck(true);
   }
 
   addToCart(product: any, quantity: any) {
