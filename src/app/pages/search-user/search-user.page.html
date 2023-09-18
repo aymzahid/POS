@@ -16,7 +16,7 @@
       <ion-searchbar
         mode="ios"
         animated="true"
-        placeholder="Filter User"
+        placeholder="Filter {{title}}"
         inputmode="decimal"
         type="decimal"
         [debounce]="250"
@@ -47,14 +47,14 @@
   </ion-row>
 
   <ion-row class="buttom_row">
-    <ion-col size="6"
+    <ion-col size="6" offset="3" *ngIf="this.title==='Customers'"
       ><ion-button (click)="createUser('customer')">
-        Create Customer
+        Create New Customer
       </ion-button></ion-col
     >
-    <ion-col size="6"
+    <ion-col size="6" offset="3" *ngIf="title==='Vendors'"
       ><ion-button (click)="createUser('vendor')">
-        Create Vendor
+        Create New Vendor
       </ion-button></ion-col
     >
   </ion-row>

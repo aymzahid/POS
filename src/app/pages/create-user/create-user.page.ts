@@ -12,6 +12,7 @@ export class CreateUserPage implements OnInit {
   // name: any;
   // phone: any;
   user_type: any;
+  user_title: any;
 
   // formData = {
   //   name: '',
@@ -25,6 +26,7 @@ export class CreateUserPage implements OnInit {
   ) {
     ngform: NgForm;
     this.user_type = this.navParams.get('modal_data');
+    this.user_title = this.navParams.get('user_title');
   }
 
   ngOnInit() {}
@@ -85,7 +87,12 @@ export class CreateUserPage implements OnInit {
 
           console.log('API refreshed', this.globals.global_array);
           this.globals.product_list = this.globals.global_array.products;
-          this.close(this.globals.global_array.customers);
+
+          if (this.user_title === 'Customers') {
+            this.close(this.globals.global_array.customers);
+          } else {
+            this.close(this.globals.global_array.vendors);
+          }
         }
       },
       (err: any) => {

@@ -134,7 +134,7 @@ export class CartComponent implements OnInit {
     let title;
     let user_type;
 
-    if (!this.cartService.getPurchaseCheck()) {
+    if (!this.purchaseCheck) {
       title = 'Customers';
       user_type = this.globals.global_array.customers;
     } else {

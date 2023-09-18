@@ -29,7 +29,7 @@ export class SearchUserPage implements OnInit {
   }
 
   createUser(user_type: any) {
-    this.globals.createUser(user_type).then((res) => {
+    this.globals.createUser(user_type, this.title).then((res) => {
       if (!res) {
         console.log('guest');
       } else {

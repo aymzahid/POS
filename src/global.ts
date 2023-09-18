@@ -121,13 +121,13 @@ export class GlobalVariable {
     });
   }
 
-  async createUser(data: any): Promise<any> {
+  async createUser(data: any, title: any): Promise<any> {
     return new Promise(async (resolve) => {
       const modal = await this.modalCtrl.create({
         component: CreateUserPage,
         cssClass: 'create_user_modal',
         id: 'create_user_modal',
-        componentProps: { modal_data: data },
+        componentProps: { modal_data: data, user_title: title },
       });
       await modal.present();
 
