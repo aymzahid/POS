@@ -161,15 +161,17 @@ export class CartComponent implements OnInit {
 
       let data = {
         items: this.cartItems,
-        totalAmount: this.calBill(),
-        paymentAmount: Number(this.total_bill),
+        total_amount: this.calBill().toFixed(2),
+        payment_amount: Number(this.total_bill).toFixed(2),
         customer: {
           name: this.customer,
           phone: this.customer_phone,
         },
-        saleId: this.globals.global_array.saleId,
-        timestamp: currentDate,
-        discounts: [{ name: 'Percentage', value: this.discount }],
+        sale_id: this.globals.global_array.saleId,
+        date: currentDate,
+        discounts: [
+          { discount_type: 'Percentage', discount_value: this.discount },
+        ],
       };
 
       localStorage.setItem('bill_data', JSON.stringify(data));
@@ -190,7 +192,7 @@ export class CartComponent implements OnInit {
           // setTimeout(() => {
           //   this.globals.dismiss();
           // }, 2000);
-          this.resetCart();
+
           this.globals.presentToast(
             'Something went wrong, try again later',
             '',
@@ -265,15 +267,17 @@ export class CartComponent implements OnInit {
 
       let data = {
         items: this.cartItems,
-        totalAmount: this.calBill(),
-        paymentAmount: Number(this.total_bill),
+        total_amount: this.calBill(),
+        payment_amount: Number(this.total_bill),
         customer: {
           name: this.customer,
           phone: this.customer_phone,
         },
-        saleId: this.globals.global_array.saleId,
-        timestamp: currentDate,
-        discounts: [{ name: 'Percentage', value: this.discount }],
+        sale_id: this.globals.global_array.saleId,
+        date: currentDate,
+        discounts: [
+          { discount_name: 'Percentage', discount_value: this.discount },
+        ],
       };
 
       localStorage.setItem('bill_data', JSON.stringify(data));

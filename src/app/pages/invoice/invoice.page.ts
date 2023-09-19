@@ -14,12 +14,12 @@ export class InvoicePage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
-    // private navParams: NavParams
+    private navParams: NavParams
   ) {
-    // this.data = this.navParams.get('modal_data');
-    this.data = JSON.parse(localStorage.getItem('bill_data') || '{}');
+    this.data = this.navParams.get('modal_data');
+    // this.data = JSON.parse(localStorage.getItem('bill_data') || '{}');
 
-    console.log(this.data);
+    console.log('Invoice', this.data);
   }
 
   ngOnInit() {}

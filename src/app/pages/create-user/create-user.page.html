@@ -48,7 +48,7 @@
                 <ion-item
                   [style]="email.invalid && (email.dirty || email.touched) ? ' border: 2px solid var(--ion-color-danger);' : ''"
                 >
-                  <ion-label position="floating">Enter  Email</ion-label>
+                  <ion-label position="floating">Enter Email</ion-label>
                   <ion-input
                     type="email"
                     name="email"
@@ -75,12 +75,11 @@
                 >
                   <ion-label position="floating">Enter Phone Number</ion-label>
                   <ion-input
-                    type="number"
+                    type="tel"
                     name="phone"
                     ngModel
                     #phone="ngModel"
                     required
-                    pattern="^\d{10}$"
                   ></ion-input>
                 </ion-item>
                 <div
@@ -90,9 +89,9 @@
                   <div *ngIf="phone.errors?.['required']">
                     Phone Number is required.
                   </div>
-                  <div *ngIf="phone.errors?.['pattern']">
-                    Phone Number must be at 10 Digits long.
-                  </div>
+                  <!-- <div *ngIf="phone.errors?.['pattern']">
+                    Phone Number must be at 11 Digits long.
+                  </div> -->
                 </div>
               </ion-col>
 

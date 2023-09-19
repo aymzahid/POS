@@ -24,7 +24,7 @@ export class Tab1Page {
   ) {}
 
   ionViewDidEnter() {
-    console.log('did enter');
+    console.log('Did Enter');
     this.getProductsList();
     this.cartService.setPurchaseCheck(false);
   }

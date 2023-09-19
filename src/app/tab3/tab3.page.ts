@@ -23,8 +23,7 @@ export class Tab3Page {
     public globals: GlobalVariable
   ) {}
   ionViewDidEnter() {
-    console.log('did enter');
-
+    console.log('Did Enter');
     this.getProductsList();
     this.cartService.setPurchaseCheck(true);
   }

@@ -7,6 +7,22 @@
   .print_button {
     display: none;
   }
+
+  .item {
+    ion-label {
+      font-size: 0.8rem;
+    }
+  }
+
+  .totals {
+    .label {
+      font-size: 0.8rem !important;
+    }
+
+    .value {
+      font-size: 0.8rem;
+    }
+  }
 }
 
 ion-label {
@@ -16,6 +32,7 @@ ion-label {
   margin: 0px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .invoice-title {
@@ -25,9 +42,15 @@ ion-label {
 }
 
 .company-header {
+  color: black;
   align-items: center;
   padding: 16px;
   border-bottom: 1px solid #ddd;
+
+  p {
+    margin-top: 0;
+    font-size: 0.8rem;
+  }
 }
 
 .company-logo {
@@ -41,6 +64,7 @@ ion-label {
   font-size: 20px;
   font-weight: bold;
   margin-top: 8px;
+  margin-bottom: 0;
 }
 
 .invoice-id {
@@ -73,6 +97,7 @@ ion-label {
 .item-list {
   margin-top: 16px;
   border-collapse: collapse;
+  font-family: "Times New Roman", Times, serif;
 
   .list-header {
     // background-color: #f0f0f0;
@@ -89,6 +114,7 @@ ion-label {
     border-bottom: 1px solid #ddd;
 
     ion-label {
+      font-family: "Times New Roman", Times, serif;
       text-align: center;
       padding: 0px;
       display: block;
@@ -97,6 +123,7 @@ ion-label {
 }
 
 .totals {
+  color: black;
   ion-label {
     padding: 0px 3px;
   }
@@ -105,12 +132,12 @@ ion-label {
   // text-align: end;
   .label {
     font-weight: bold;
-    // font-size: 1.1rem;
+    font-size: 1rem;
   }
 
-  .value {
-    // font-weight: 800;
-  }
+  // .value {
+  //    font-size: 1rem;
+  // }
 }
 
 .notes {

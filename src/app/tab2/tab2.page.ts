@@ -57,6 +57,8 @@ export class Tab2Page {
   }
 
   printInvoice(data: any) {
+    console.log('data', data);
+
     this.globals.invoiceModal(data).then((res) => {
       if (!res) {
       } else {

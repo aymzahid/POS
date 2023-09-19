@@ -33,7 +33,7 @@
           <ion-card-title color="success"
             >Amount: {{item.payment_amount }}</ion-card-title
           >
-          <ion-card-title>Date: {{item.date }}</ion-card-title>
+          <ion-card-title>Date: {{item.date|date: 'medium' }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
