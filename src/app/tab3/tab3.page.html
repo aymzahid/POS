@@ -79,7 +79,6 @@
         <div *ngFor="let item of displayProduct() | filter:filterTerm">
           <ion-card
             class="ion-activatable ripple-parent rectangle"
-            *ngIf="item.quantity_in_stock>0"
             (click)="openProductModal(item)"
           >
             <ion-ripple-effect></ion-ripple-effect>

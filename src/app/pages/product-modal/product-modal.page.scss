@@ -1,36 +1,64 @@
-.top_grid {
-  height: 60vh;
-  overflow-y: auto;
-}
-.head_row {
-  background: #373434c4;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: white;
+ion-card {
+  margin: 20px;
+  height: max-content;
+  margin-bottom: 30px;
 }
 
-ion-icon {
-  font-size: 1.8rem;
-  vertical-align: middle;
-  padding: 0px 5px;
+ion-card-header {
+  text-align: center;
 }
-.list_row {
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border-bottom: 1px dotted black;
-  ion-input {
-    min-height: 30px;
-    background: #8080805e;
-    border-radius: 11px;
-    text-align: center;
-    color: black;
+
+ion-card-content {
+  padding: 16px;
+}
+
+ion-grid {
+  padding: 0;
+}
+
+ion-row {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+ion-col {
+  --ion-text-color: #333; /* Set text color for labels and input fields */
+}
+
+ion-label {
+  font-weight: bold;
+}
+
+ion-input,
+ion-textarea {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 8px;
+  width: 100%; /* Make input fields fill the entire column */
+  text-align: center;
+}
+
+.edit_input {
+  border: 2px solid var(--ion-color-primary);
+}
+
+ion-footer {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+
+  ion-row {
+    margin-bottom: 1px;
   }
-  ion-col {
-    display: flex;
-    align-items: center;
-    // justify-content: center;
+
+  ion-button {
+    width: 100%;
     font-weight: 700;
-    height: 8vh;
+    font-size: 1.2rem;
   }
+}
+
+ion-button[color="secondary"] {
+  --background: var(--ion-color-secondary);
 }

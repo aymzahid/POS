@@ -1,53 +1,176 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button expand="block" color="dark" (click)="close()">
         <ion-icon slot="start" name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title color="light">Product Details</ion-title>
+    <ion-title class="ion-text-center" color="light"
+      >Product Details
+    </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Product Name</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              mode="ios"
+              readonly
+              type="text"
+              [value]="data?.name"
+              placeholder="Product Name"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
 
-<ion-content [fullscreen]="true">
-  <ion-grid class="top_grid">
-    <ion-row class="head_row">
-      <ion-col size="4"> Name </ion-col>
-      <ion-col size="5"> QTY </ion-col>
-      <ion-col size="3"> Price/Unit </ion-col>
-    </ion-row>
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Category</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              mode="ios"
+              readonly
+              type="text"
+              [value]="data?.category_name"
+              placeholder=" Category"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
 
-    <ion-row class="list_row">
-      <ion-col size="4">
-        <ion-button
-          class="ion-activatable ripple-parent rectangle"
-          fill="clear"
-          size="small"
-          color="danger"
-        >
-          <ion-ripple-effect></ion-ripple-effect>
-          <ion-icon name="trash-outline"></ion-icon> </ion-button
-        >Name
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Sub Category</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              mode="ios"
+              type="text"
+              readonly
+              [value]="data?.sub_category_name"
+              placeholder="Sub Category"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Manufacturer</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              mode="ios"
+              type="text"
+              readonly
+              [value]="data?.manufacturer"
+              placeholder="Manufacturer"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Unit of Measurement</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              mode="ios"
+              type="text"
+              readonly
+              [value]="data?.unit_of_measurement"
+              placeholder=" Unit of Measurement"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Current Stock Quantity</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              mode="ios"
+              type="number"
+              readonly
+              [value]="data?.quantity_in_stock"
+              placeholder="Current Stock Quantity"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Purchase Price/Unit</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              class="edit_input"
+              mode="ios"
+              type="number"
+              [value]="data?.p_price"
+              placeholder="Enter Purchase Price/Unit"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Sale Price/Unit</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              class="edit_input"
+              mode="ios"
+              type="number"
+              [value]="data?.s_price"
+              placeholder="Enter Sale Price/Unit"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Enter New Quantity</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-input
+              class="edit_input"
+              mode="ios"
+              type="text"
+              placeholder="Enter New Quantity"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="3" offset="2">
+            <ion-label>Product Description</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-textarea
+              class="edit_input"
+              [value]="data?.description"
+              placeholder="Enter Product Description"
+            ></ion-textarea>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-footer>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button color="primary">Update</ion-button>
       </ion-col>
-      <ion-col size="5" style="justify-content: center" class="qty">
-        <ion-button fill="clear" size="small">
-          <ion-icon name="remove-circle-outline"></ion-icon>
-        </ion-button>
-        <ion-input type="number"></ion-input>
-        <ion-button fill="clear" size="small">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <!-- <ion-col size="3" *ngIf="!purchaseCheck">
-        <ion-input
-          type="number"
-          [(ngModel)]="item.s_price"
-          [value]="item.s_price"
-        ></ion-input>
-      </ion-col> -->
-      <ion-col size="3">
-        <ion-input type="number"></ion-input>
+      <ion-col size="6">
+        <ion-button color="secondary">Add to Cart</ion-button>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-footer>
 </ion-content>

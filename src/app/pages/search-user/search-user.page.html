@@ -40,7 +40,7 @@
         </ion-card-header>
 
         <ion-card-content>
-          <ion-button (click)="close(item)"> Select</ion-button>
+          <ion-button mode="ios" (click)="close(item)"> Select</ion-button>
         </ion-card-content>
       </ion-card></ion-col
     >
@@ -48,12 +48,12 @@
 
   <ion-row class="buttom_row">
     <ion-col size="6" offset="3" *ngIf="this.title==='Customers'"
-      ><ion-button (click)="createUser('customer')">
+      ><ion-button mode="ios" (click)="createUser('customer')">
         Create New Customer
       </ion-button></ion-col
     >
     <ion-col size="6" offset="3" *ngIf="title==='Vendors'"
-      ><ion-button (click)="createUser('vendor')">
+      ><ion-button mode="ios" (click)="createUser('vendor')">
         Create New Vendor
       </ion-button></ion-col
     >
