@@ -73,7 +73,7 @@ export class CartserviceService {
     const currentCartItems = this.cartItemsSubject.value;
     this.cartItemsSubject.value.length = 0;
     this.cartItemsSubject.next(currentCartItems);
-    console.log('reseting cart ', this.cartItems$);
+    // console.log('reseting cart ', this.cartItems$);
   }
 
   setPurchaseCheck(value: boolean) {

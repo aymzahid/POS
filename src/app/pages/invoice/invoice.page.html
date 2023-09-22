@@ -6,10 +6,16 @@
           <ion-icon slot="start" name="close-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title class="invoice-title"
-        >Invoice (<span style="font-size: 1.2rem">{{data?.sale_id}}</span
-        >)</ion-title
-      >
+      <ion-title class="invoice-title">
+        <span *ngIf="!purchaseCheck">
+          Sale Invoice(<span style="font-size: 1.2rem">{{data?.sale_id}}</span>)
+        </span>
+        <span *ngIf="purchaseCheck">
+          Purchase Invoice (<span style="font-size: 1.2rem"
+            >{{data?.purchase_id}}</span
+          >)
+        </span>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
   <!-- <div class="header">
@@ -33,8 +39,11 @@
           </ion-col>
           <ion-col size="5" offset="1">
             <ion-label class="invoice-id"
-              >Invoice # <span>{{data?.sale_id}}</span></ion-label
-            >
+              >Invoice #
+
+              <span *ngIf="!purchaseCheck">{{data?.sale_id}}</span>
+              <span *ngIf="purchaseCheck">{{data?.purchase_id}}</span>
+            </ion-label>
             <ion-label class="date-time"
               >Date: {{data?.date|date : 'medium'}}</ion-label
             >
@@ -45,14 +54,34 @@
       <ion-card-content>
         <ion-row class="customer-details">
           <ion-col size="6">
-            <ion-label class="label">Customer Name:</ion-label>
-            <ion-label class="value" style="text-transform: capitalize"
+            <ion-label *ngIf="!purchaseCheck" class="label"
+              >Customer Name:</ion-label
+            >
+            <ion-label *ngIf="purchaseCheck" class="label"
+              >Vendor Name:</ion-label
+            >
+
+            <ion-label
+              *ngIf="!purchaseCheck"
+              class="value"
+              style="text-transform: capitalize"
               >{{data?.customer.name }}</ion-label
+            >
+            <ion-label
+              *ngIf="purchaseCheck"
+              class="value"
+              style="text-transform: capitalize"
+              >{{data?.vendor.name }}</ion-label
             >
           </ion-col>
           <ion-col size="6">
             <ion-label class="label">Phone Number:</ion-label>
-            <ion-label class="value">{{data?.customer.phone }}</ion-label>
+            <ion-label class="value" *ngIf="!purchaseCheck"
+              >{{data?.customer.phone }}</ion-label
+            >
+            <ion-label class="value" *ngIf="purchaseCheck"
+              >{{data?.vendor.phone }}</ion-label
+            >
           </ion-col>
         </ion-row>
 

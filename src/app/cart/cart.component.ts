@@ -334,23 +334,23 @@ export class CartComponent implements OnInit {
 
         let data = {
           items: this.cartItems,
-          total_amount: this.calBill(),
-          payment_amount: Number(this.total_bill),
+          total_amount: this.calBill().toFixed(2),
+          payment_amount: Number(this.total_bill).toFixed(2),
           vendor: {
             name: this.user,
             phone: this.user_phone,
           },
-          purchase_id: this.globals.global_array.purchaseId,
+          purchase_id: this.globals.global_array.purchase_id,
           date: currentDate,
           discounts: [
-            { discount_name: 'Percentage', discount_value: this.discount },
+            { discount_type: 'Percentage', discount_value: this.discount },
           ],
         };
 
         localStorage.setItem('bill_data', JSON.stringify(data));
 
-        console.log('sale payload', data);
-        this.service.addSale(data).subscribe(
+        console.log('purchase payload', data);
+        this.service.addPurchase(data).subscribe(
           (res) => {
             if (localStorage.getItem('bill_data') != null) {
               this.printInvoice(
