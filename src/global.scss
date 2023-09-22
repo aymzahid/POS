@@ -37,6 +37,38 @@
   }
 }
 
+.gameOver-alert-css {
+  backdrop-filter: brightness(0.07);
+  .alert-wrapper {
+    --width: 663407px !important;
+    --min-width: 634px !important;
+    padding-bottom: 16px;
+  }
+
+  .alert-head {
+    .alert-title {
+      font-size: 1.5rem;
+      color: var(--ion-color-light);
+    }
+  }
+
+  .alert-message {
+    font-size: 1.5rem;
+  }
+
+  .alert-button {
+    font-size: 1.2rem;
+    font-weight: bold !important;
+  }
+
+  .yes-btn {
+    color: var(--ion-color-primary) !important;
+  }
+  .no-btn {
+    color: var(--ion-color-success) !important;
+  }
+}
+
 .custom_loading_p {
   .loading-wrapper {
     background: url("../src/assets/icon/loader.svg");

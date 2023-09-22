@@ -98,7 +98,7 @@
           <ion-card
             class="ion-activatable ripple-parent rectangle no_stock_card"
             *ngIf="item.quantity_in_stock<1"
-            (click)="this.globals.presentToast('Out Of Stock Product','','danger');"
+            (click)="this.globals.presentToast('Product (Out Of Stock)','','danger');"
           >
             <ion-ripple-effect></ion-ripple-effect>
             <ion-card-header>

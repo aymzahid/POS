@@ -2,6 +2,7 @@ import { ServiceService } from './../services/service.service';
 import { CartserviceService } from '../services/cartservice.service';
 import { Component } from '@angular/core';
 import { GlobalVariable } from 'src/global';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -17,16 +18,37 @@ export class Tab1Page {
   filterTerm: any = '';
   loader: boolean = false;
 
+  purchaseCart: any = [];
+
   constructor(
     private cartService: CartserviceService,
     public service: ServiceService,
-    public globals: GlobalVariable
-  ) {}
+    public globals: GlobalVariable,
+    private router: Router
+  ) {
+    this.cartService.purchase_cartItems$.subscribe((items) => {
+      this.purchaseCart = items;
+    });
+  }
 
   ionViewDidEnter() {
     console.log('Did Enter');
-    this.getProductsList();
+
     this.cartService.setPurchaseCheck(false);
+    if (this.purchaseCart != 0) {
+      this.globals.alert('Purchase Cart').then((res) => {
+        console.log('then res', res);
+
+        if (res === 'ok') {
+          this.cartService.resetCart();
+          this.getProductsList();
+        } else {
+          this.router.navigateByUrl('/tabs/tabs/tab3');
+        }
+      });
+    } else {
+      this.getProductsList();
+    }
   }
 
   addToCart(product: any, quantity: any) {
@@ -52,9 +74,7 @@ export class Tab1Page {
         if (res.status) {
           // this.announcementError = false;
           if (res.data.length != 0) {
-            setTimeout(() => {
-              this.globals.dismiss();
-            }, 2000);
+            this.globals.dismiss();
 
             let res_products = [];
 
@@ -85,9 +105,8 @@ export class Tab1Page {
       (err) => {
         // this.loader = false;
 
-        setTimeout(() => {
-          this.globals.dismiss();
-        }, 2000);
+        this.globals.dismiss();
+
         this.globals.presentToast(
           'Something went wrong, try again later',
           '',

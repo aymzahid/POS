@@ -20,6 +20,7 @@
           </ion-col>
           <ion-col size="4">
             <ion-input
+              class="product_name"
               mode="ios"
               readonly
               type="text"
@@ -35,6 +36,7 @@
           </ion-col>
           <ion-col size="4">
             <ion-input
+              class="category"
               mode="ios"
               readonly
               type="text"
@@ -50,6 +52,7 @@
           </ion-col>
           <ion-col size="4">
             <ion-input
+              class="sub_category"
               mode="ios"
               type="text"
               readonly
@@ -65,6 +68,7 @@
           </ion-col>
           <ion-col size="4">
             <ion-input
+              class="manufacturer"
               mode="ios"
               type="text"
               readonly
@@ -95,6 +99,7 @@
           </ion-col>
           <ion-col size="4">
             <ion-input
+              class="current_stock"
               mode="ios"
               type="number"
               readonly
@@ -110,7 +115,8 @@
           </ion-col>
           <ion-col size="4">
             <ion-input
-              class="edit_input"
+              clear-input
+              class="p_price edit_input"
               mode="ios"
               type="number"
               [value]="data?.p_price"
@@ -125,7 +131,8 @@
           </ion-col>
           <ion-col size="4">
             <ion-input
-              class="edit_input"
+              clear-input
+              class="s_price edit_input"
               mode="ios"
               type="number"
               [value]="data?.s_price"
@@ -140,10 +147,12 @@
           </ion-col>
           <ion-col size="4">
             <ion-input
-              class="edit_input"
+              class="new_stock edit_input"
               mode="ios"
               type="text"
-              placeholder="Enter New Quantity"
+              [(ngModel)]="purchase_quantity"
+              placeholder="Enter Purchase Quantity"
+              clear-input
             ></ion-input>
           </ion-col>
         </ion-row>
@@ -154,7 +163,7 @@
           </ion-col>
           <ion-col size="4">
             <ion-textarea
-              class="edit_input"
+              clear-input
               [value]="data?.description"
               placeholder="Enter Product Description"
             ></ion-textarea>
@@ -169,7 +178,9 @@
         <ion-button color="primary">Update</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button color="secondary">Add to Cart</ion-button>
+        <ion-button color="secondary" (click)="addToCart(data,2)"
+          >Add to Cart</ion-button
+        >
       </ion-col>
     </ion-row>
   </ion-footer>

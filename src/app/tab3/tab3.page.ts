@@ -38,7 +38,7 @@ export class Tab3Page {
     } else {
       console.log('product', product, 'quantity--->', quantity);
 
-      this.cartService.addToCart(product, quantity);
+      // this.cartService.addToCart(product, quantity);
     }
   }
 
@@ -51,9 +51,7 @@ export class Tab3Page {
         if (res.status) {
           // this.announcementError = false;
           if (res.data.length != 0) {
-            setTimeout(() => {
-              this.globals.dismiss();
-            }, 2000);
+            this.globals.dismiss();
 
             let res_products = [];
 
@@ -84,9 +82,8 @@ export class Tab3Page {
       (err) => {
         // this.loader = false;
 
-        setTimeout(() => {
-          this.globals.dismiss();
-        }, 2000);
+        this.globals.dismiss();
+
         this.globals.presentToast(
           'Something went wrong, try again later',
           '',

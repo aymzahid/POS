@@ -37,6 +37,15 @@ ion-textarea {
   padding: 8px;
   width: 100%; /* Make input fields fill the entire column */
   text-align: center;
+  font-weight: 700;
+}
+.category {
+  text-transform: uppercase;
+}
+
+.sub_category,
+.manufacturer {
+  text-transform: capitalize;
 }
 
 .edit_input {

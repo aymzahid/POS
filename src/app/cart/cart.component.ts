@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVariable } from 'src/global';
 import { CartserviceService } from '../services/cartservice.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cart',
@@ -11,29 +12,79 @@ import { CartserviceService } from '../services/cartservice.service';
 })
 export class CartComponent implements OnInit {
   @ViewChild('badge') badge: any = ElementRef;
+  name_col: string = '4';
+  qty_col: string = '5';
+  p_unit_col: string = '3';
+  total_col: string = '3';
+
+  cartPageCheck = false;
   cartItems: any = [];
+  purchaseCart: any = [];
   purchaseCheck: any;
   discount: any = 0;
   total_bill: any = 0;
-  customer = 'Guest';
-  customer_phone: any = '-';
+  user = 'Guest';
+  user_phone: any = '-';
   constructor(
     private cartService: CartserviceService,
     private router: Router,
     private globals: GlobalVariable,
-    private service: ServiceService
+    private service: ServiceService,
+    private navCtrl: NavController
   ) {
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items;
-      this.get_bill();
-      this.animateCss();
+      // this.get_bill();
+      // this.animateCss();
       console.log('total cart items', this.cartItems);
+
+      this.cartSwitch();
     });
 
     this.cartService.getPurchaseCheck().subscribe((items) => {
       this.purchaseCheck = items;
       console.log('Purchase Check', this.purchaseCheck);
     });
+
+    this.cartService.purchase_cartItems$.subscribe((items) => {
+      this.purchaseCart = items;
+      // this.get_bill();
+      // this.animateCss();
+      // console.log('total Purchase cart items', this.cartItems);
+      this.cartSwitch();
+    });
+  }
+
+  ionViewWillEnter() {
+    this.cartSwitch();
+    this.cartPageCheck = true;
+
+    this.pageLayout();
+  }
+  ionViewWillLeave() {
+    this.cartPageCheck = false;
+    this.pageLayout();
+  }
+
+  pageLayout() {
+    if (this.cartPageCheck) {
+      this.name_col = '3';
+      this.qty_col = '4';
+      this.p_unit_col = '2';
+      this.total_col = '2';
+    }
+  }
+
+  cartSwitch() {
+    if (this.purchaseCheck) {
+      this.cartItems = this.purchaseCart;
+
+      console.log('assign purchase cart', this.cartItems);
+    } else {
+      console.log('it is POS cart');
+    }
+    this.get_bill();
+    this.animateCss();
   }
 
   ngOnInit() {}
@@ -91,6 +142,9 @@ export class CartComponent implements OnInit {
   goToCart() {
     this.router.navigateByUrl('/cart');
   }
+  goBack() {
+    this.navCtrl.back();
+  }
 
   get_bill() {
     let total_discount: number = 0;
@@ -119,13 +173,23 @@ export class CartComponent implements OnInit {
   calBill() {
     let sub_bill: number = 0;
 
-    this.cartItems.forEach((element: any) => {
-      element.total_price = Number(element.s_price * element.quantity).toFixed(
-        2
-      );
+    if (!this.purchaseCheck) {
+      this.cartItems.forEach((element: any) => {
+        element.total_price = Number(
+          element.s_price * element.quantity
+        ).toFixed(2);
 
-      sub_bill += Number(element.total_price);
-    });
+        sub_bill += Number(element.total_price);
+      });
+    } else {
+      this.cartItems.forEach((element: any) => {
+        element.total_price = Number(
+          element.p_price * element.quantity
+        ).toFixed(2);
+
+        sub_bill += Number(element.total_price);
+      });
+    }
 
     return Number(sub_bill);
   }
@@ -147,8 +211,8 @@ export class CartComponent implements OnInit {
         console.log('guest');
       } else {
         console.log(res);
-        this.customer = res.name;
-        this.customer_phone = res.phone;
+        this.user = res.name;
+        this.user_phone = res.phone;
       }
     });
   }
@@ -164,8 +228,8 @@ export class CartComponent implements OnInit {
         total_amount: this.calBill().toFixed(2),
         payment_amount: Number(this.total_bill).toFixed(2),
         customer: {
-          name: this.customer,
-          phone: this.customer_phone,
+          name: this.user,
+          phone: this.user_phone,
         },
         sale_id: this.globals.global_array.saleId,
         date: currentDate,
@@ -217,8 +281,8 @@ export class CartComponent implements OnInit {
     this.cartItems = [];
     this.discount = 0;
     this.total_bill = 0;
-    this.customer = 'Guest';
-    this.customer_phone = '-';
+    this.user = 'Guest';
+    this.user_phone = '-';
     this.cartService.resetCart();
   }
 
@@ -261,51 +325,55 @@ export class CartComponent implements OnInit {
     console.log('purchase');
 
     if (this.cartItems.length != 0) {
-      console.log('cart item', this.cartItems);
+      if (this.user === 'Guest' || this.user === '') {
+        this.globals.presentToast('Add Vendor Details', '', 'warning');
+      } else {
+        console.log('cart item', this.cartItems);
 
-      const currentDate = new Date().toLocaleString('en-US');
+        const currentDate = new Date().toLocaleString('en-US');
 
-      let data = {
-        items: this.cartItems,
-        total_amount: this.calBill(),
-        payment_amount: Number(this.total_bill),
-        customer: {
-          name: this.customer,
-          phone: this.customer_phone,
-        },
-        sale_id: this.globals.global_array.saleId,
-        date: currentDate,
-        discounts: [
-          { discount_name: 'Percentage', discount_value: this.discount },
-        ],
-      };
+        let data = {
+          items: this.cartItems,
+          total_amount: this.calBill(),
+          payment_amount: Number(this.total_bill),
+          vendor: {
+            name: this.user,
+            phone: this.user_phone,
+          },
+          purchase_id: this.globals.global_array.purchaseId,
+          date: currentDate,
+          discounts: [
+            { discount_name: 'Percentage', discount_value: this.discount },
+          ],
+        };
 
-      localStorage.setItem('bill_data', JSON.stringify(data));
+        localStorage.setItem('bill_data', JSON.stringify(data));
 
-      console.log('sale payload', data);
-      this.service.addSale(data).subscribe(
-        (res) => {
-          if (localStorage.getItem('bill_data') != null) {
-            this.printInvoice(
-              JSON.parse(localStorage.getItem('bill_data') || '{}')
+        console.log('sale payload', data);
+        this.service.addSale(data).subscribe(
+          (res) => {
+            if (localStorage.getItem('bill_data') != null) {
+              this.printInvoice(
+                JSON.parse(localStorage.getItem('bill_data') || '{}')
+              );
+            }
+
+            this.refreshAPI();
+            this.resetCart();
+          },
+          (err) => {
+            // setTimeout(() => {
+            //   this.globals.dismiss();
+            // }, 2000);
+            this.resetCart();
+            this.globals.presentToast(
+              'Something went wrong, try again later',
+              '',
+              'danger'
             );
           }
-
-          this.refreshAPI();
-          this.resetCart();
-        },
-        (err) => {
-          // setTimeout(() => {
-          //   this.globals.dismiss();
-          // }, 2000);
-          this.resetCart();
-          this.globals.presentToast(
-            'Something went wrong, try again later',
-            '',
-            'danger'
-          );
-        }
-      );
+        );
+      }
     } else {
       this.globals.presentToast('Purchase Cart is Empty', '', 'warning');
     }

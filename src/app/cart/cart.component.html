@@ -8,38 +8,52 @@
       <ion-ripple-effect></ion-ripple-effect
     ></ion-col>
     <ion-col size="8" class="customer_search">
-      <ion-input type="text" [(ngModel)]="customer"> </ion-input>
+      <ion-input type="text" [(ngModel)]="user"> </ion-input>
       <span class="ion-activatable ripple-parent circle">
         <ion-ripple-effect></ion-ripple-effect>
 
         <ion-icon
           slot="start"
-          (click)="customer = 'Guest'"
-          (click)="customer_phone = ''"
+          (click)="user = 'Guest'"
+          (click)="user_phone = ''"
           name="close-circle"
         ></ion-icon
       ></span>
 
       <!-- <p (click)="goToCart()">Check Out</p> -->
     </ion-col>
-    <ion-col size="2" class="cart_section">
+    <ion-col size="1" class="cart_section">
       <ion-fab-button class="cart_button" (click)="goToCart()">
         <ion-icon name="cart"></ion-icon
         ><span class="badge bounce" #badge>{{ cartItems.length }}</span>
       </ion-fab-button>
+    </ion-col>
+    <ion-col size="1">
+      <ion-button
+        style="--background: var(--ion-color-danger)"
+        (click)="goBack()"
+        *ngIf="this.cartPageCheck"
+      >
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
     </ion-col>
   </ion-row>
 
   <div *ngIf="cartItems != ''">
     <ion-grid class="top_grid">
       <ion-row class="head_row">
-        <ion-col size="4"> Name </ion-col>
-        <ion-col size="5"> QTY </ion-col>
-        <ion-col size="3"> Price/Unit </ion-col>
+        <ion-col [size]="name_col"> Name </ion-col>
+        <ion-col [size]="qty_col"> QTY </ion-col>
+        <ion-col [size]="p_unit_col" *ngIf="cartPageCheck">
+          Price/Unit
+        </ion-col>
+        <ion-col [size]="[total_col]" style="color: var(--ion-color-primary)">
+          Total
+        </ion-col>
       </ion-row>
 
       <ion-row class="list_row" *ngFor="let item of cartItems; let i = index">
-        <ion-col size="4">
+        <ion-col [size]="name_col">
           <ion-button
             class="ion-activatable ripple-parent rectangle"
             (click)="removeItem(i)"
@@ -48,10 +62,10 @@
             color="danger"
           >
             <ion-ripple-effect></ion-ripple-effect>
-            <ion-icon name="trash-outline"></ion-icon> </ion-button
+            <ion-icon name="trash-outline"></ion-icon></ion-button
           >{{ item.name }}
         </ion-col>
-        <ion-col size="5" style="justify-content: center" class="qty">
+        <ion-col [size]="qty_col" style="justify-content: center" class="qty">
           <ion-button fill="clear" size="small" (click)="dec_quantity(item)">
             <ion-icon name="remove-circle-outline"></ion-icon>
           </ion-button>
@@ -65,7 +79,7 @@
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </ion-col>
-        <ion-col size="3" *ngIf="!purchaseCheck">
+        <ion-col [size]="p_unit_col" *ngIf="!purchaseCheck && cartPageCheck">
           <ion-input
             type="number"
             [(ngModel)]="item.s_price"
@@ -73,12 +87,21 @@
             (keyup)="get_bill()"
           ></ion-input>
         </ion-col>
-        <ion-col size="3" *ngIf="purchaseCheck">
+        <ion-col [size]="p_unit_col" *ngIf="purchaseCheck && cartPageCheck">
           <ion-input
             type="number"
             [(ngModel)]="item.p_price"
             [value]="item.p_price"
             (keyup)="get_bill()"
+          ></ion-input>
+        </ion-col>
+
+        <ion-col [size]="[total_col]">
+          <ion-input
+            type="number"
+            readonly
+            style="background: unset; color: var(--ion-color-primary)"
+            [value]="item.total_price"
           ></ion-input>
         </ion-col>
       </ion-row>

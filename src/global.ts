@@ -2,7 +2,11 @@ import { SearchUserPage } from './app/pages/search-user/search-user.page';
 import { Injectable } from '@angular/core';
 
 import { readBlobAsBase64 } from '@capacitor/core/types/core-plugins';
-import { ModalController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  ModalController,
+  ToastController,
+} from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { InvoicePage } from './app/pages/invoice/invoice.page';
 import { CreateUserPage } from './app/pages/create-user/create-user.page';
@@ -20,7 +24,8 @@ export class GlobalVariable {
   constructor(
     private toastController: ToastController,
     private loadingController: LoadingController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private alertController: AlertController
   ) {}
 
   async presentToast(msg?: any, position?: any, color?: any) {
@@ -186,6 +191,39 @@ export class GlobalVariable {
           resolve(false);
         }
       });
+    });
+  }
+
+  async alert(cart_name: any) {
+    console.log('Dicarding Previous Cart');
+    return new Promise(async (resolve) => {
+      const alert = await this.alertController.create({
+        cssClass: 'gameOver-alert-css',
+        header: `Do You want to Discard  ${cart_name} `,
+        backdropDismiss: false,
+        message: '',
+        buttons: [
+          {
+            role: 'Replay',
+            text: 'Yes',
+            cssClass: 'yes-btn',
+            handler: () => {
+              resolve('ok');
+            },
+          },
+          {
+            text: `Open  ${cart_name} `,
+            role: 'change Game',
+
+            cssClass: 'no-btn',
+            handler: (blah) => {
+              resolve('no');
+            },
+          },
+        ],
+      });
+
+      await alert.present();
     });
   }
 

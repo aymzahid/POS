@@ -14,6 +14,9 @@ export class CartserviceService {
   private purchaseCheckSubject = new BehaviorSubject<boolean>(false);
   purchaseCheck$ = this.purchaseCheckSubject;
 
+  private purchaseCartSubject = new BehaviorSubject<any>([]);
+  purchase_cartItems$ = this.purchaseCartSubject.asObservable();
+
   constructor(private globals: GlobalVariable) {}
 
   addToCart(product: any, quantity: any) {
@@ -49,6 +52,21 @@ export class CartserviceService {
     }
 
     this.cartItemsSubject.next(currentCartItems);
+  }
+
+  addPurchaseCart(product: any, quantity: any) {
+    const currentItems = this.purchaseCartSubject.value;
+    let item = {
+      product_id: product.id,
+      name: product.name,
+      p_price: product.p_price,
+      s_price: product.s_price,
+      quantity: quantity,
+      total_price: product.s_price,
+    };
+    currentItems.push(item);
+
+    this.purchaseCartSubject.next(currentItems);
   }
 
   resetCart() {

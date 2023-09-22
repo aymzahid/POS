@@ -28,9 +28,7 @@ export class Tab2Page {
         if (res.status) {
           // this.announcementError = false;
           if (res.data.length != 0) {
-            setTimeout(() => {
-              this.globals.dismiss();
-            }, 2000);
+            this.globals.dismiss();
 
             this.data = res.data;
             console.log('data', this.data);
@@ -44,9 +42,8 @@ export class Tab2Page {
       (err) => {
         // this.loader = false;
 
-        setTimeout(() => {
-          this.globals.dismiss();
-        }, 2000);
+        this.globals.dismiss();
+
         this.globals.presentToast(
           'Something went wrong, try again later',
           '',
