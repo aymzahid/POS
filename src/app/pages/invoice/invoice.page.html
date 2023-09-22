@@ -1,4 +1,4 @@
-<div id="print-section">
+<div id="print-section" class="print-section">
   <ion-header>
     <ion-toolbar>
       <ion-buttons class="close_button" slot="end">
@@ -47,7 +47,17 @@
             <ion-label class="date-time"
               >Date: {{data?.date|date : 'medium'}}</ion-label
             >
+            <p style="font-weight: 700; margin-bottom: 8px">Contact:</p>
+
+            <div class="contact_div">
+              <p>Website:<span> www.theplannercrb.com </span></p>
+              <p>Phone: <span>+923339697322</span></p>
+              <p>Phone: <span>+923349650777</span></p>
+            </div>
           </ion-col>
+          <button class="print_button" (click)="print()">
+            <ion-icon name="print-outline"></ion-icon>
+          </button>
         </ion-row>
       </ion-card-header>
 
@@ -142,10 +152,6 @@
         >
           <ion-icon name="print-outline"></ion-icon>
         </button> -->
-
-        <button class="print_button" (click)="print()">
-          <ion-icon name="print-outline"></ion-icon>
-        </button>
       </ion-card-content>
     </ion-card>
   </ion-content>

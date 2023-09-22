@@ -54,4 +54,20 @@ export class InvoicePage implements OnInit {
     // }
     // });
   }
+
+  printContent() {
+    // Apply the print-specific CSS
+    const printStyles = document.createElement('link');
+    printStyles.setAttribute('rel', 'stylesheet');
+    printStyles.setAttribute('type', 'text/css');
+    printStyles.setAttribute('href', 'path-to-your-print-stylesheet.css');
+    printStyles.setAttribute('media', 'print');
+    document.head.appendChild(printStyles);
+
+    // Trigger the print function
+    window.print();
+
+    // Remove the print-specific CSS after printing
+    document.head.removeChild(printStyles);
+  }
 }

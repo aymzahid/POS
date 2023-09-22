@@ -3,6 +3,11 @@
 }
 
 @media print {
+  .print-section {
+    // height: max-content;
+    // width: max-content;
+    // overflow: visible !important;
+  }
   .close_button,
   .print_button {
     display: none;
@@ -33,6 +38,7 @@ ion-label {
   border: 1px solid #ddd;
   border-radius: 8px;
   font-family: "Times New Roman", Times, serif;
+  box-shadow: none;
 }
 
 .invoice-title {
@@ -44,13 +50,17 @@ ion-label {
 .company-header {
   color: black;
   align-items: center;
-  padding: 16px;
+  padding: 0px 16px;
   border-bottom: 1px solid #ddd;
+  align-items: flex-start;
 
   p {
     margin-top: 0;
     font-size: 0.8rem;
   }
+}
+.contact_div {
+  line-height: 5px;
 }
 
 .company-logo {
@@ -68,13 +78,13 @@ ion-label {
 }
 
 .invoice-id {
-  text-align: right;
+  padding-left: 0;
   font-size: 14px;
   font-weight: bold;
 }
 
 .date-time {
-  padding: 16px 9px;
+  padding: 7px 0px;
 
   font-size: 14px;
   font-weight: bold;
