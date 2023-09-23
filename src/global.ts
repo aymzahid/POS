@@ -1,3 +1,4 @@
+import { AddProductPage } from './app/pages/add-product/add-product.page';
 import { SearchUserPage } from './app/pages/search-user/search-user.page';
 import { Injectable } from '@angular/core';
 
@@ -194,12 +195,35 @@ export class GlobalVariable {
     });
   }
 
+  async addNewProductModal(data: any): Promise<any> {
+    return new Promise(async (resolve) => {
+      const modal = await this.modalCtrl.create({
+        component: AddProductPage,
+        cssClass: 'product_modal',
+        id: 'addNewProduct_modal',
+        componentProps: { modal_data: data },
+        backdropDismiss: false,
+      });
+      await modal.present();
+
+      modal.onDidDismiss().then((data) => {
+        console.log('modal dismissed with', data.data);
+
+        if (data.data != undefined) {
+          resolve(data.data);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
   async alert(cart_name: any) {
     console.log('Dicarding Previous Cart');
     return new Promise(async (resolve) => {
       const alert = await this.alertController.create({
         cssClass: 'gameOver-alert-css',
-        header: `Do You want to Discard  ${cart_name} `,
+        header: `Do You want to Discard  ${cart_name} ? `,
         backdropDismiss: false,
         message: '',
         buttons: [

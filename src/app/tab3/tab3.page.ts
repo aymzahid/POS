@@ -159,4 +159,10 @@ export class Tab3Page {
       console.log('res product modal', res);
     });
   }
+
+  addProductModal() {
+    this.globals.addNewProductModal(this.globals.global_array).then((res) => {
+      console.log('Add new product modal', res);
+    });
+  }
 }
