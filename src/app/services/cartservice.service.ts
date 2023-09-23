@@ -6,10 +6,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CartserviceService {
-  private cartItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
+  private saleCartSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
   );
-  cartItems$ = this.cartItemsSubject.asObservable();
+  sale_cartItems$ = this.saleCartSubject.asObservable();
 
   private purchaseCheckSubject = new BehaviorSubject<boolean>(false);
   purchaseCheck$ = this.purchaseCheckSubject;
@@ -30,7 +30,7 @@ export class CartserviceService {
       total_price: product.s_price,
     };
 
-    const currentCartItems = this.cartItemsSubject.value;
+    const currentCartItems = this.saleCartSubject.value;
     if (currentCartItems.length != 0) {
       for (let item of currentCartItems) {
         if (item.product_id == product.id) {
@@ -51,11 +51,12 @@ export class CartserviceService {
       currentCartItems.push(item);
     }
 
-    this.cartItemsSubject.next(currentCartItems);
+    this.saleCartSubject.next(currentCartItems);
   }
 
   addPurchaseCart(product: any, quantity: any) {
-    const currentItems = this.purchaseCartSubject.value;
+    let duplicate_product: boolean = false;
+
     let item = {
       product_id: product.id,
       name: product.name,
@@ -64,20 +65,42 @@ export class CartserviceService {
       quantity: quantity,
       total_price: product.s_price,
     };
-    currentItems.push(item);
 
-    this.purchaseCartSubject.next(currentItems);
+    const currentCartItems = this.purchaseCartSubject.value;
+    if (currentCartItems.length != 0) {
+      for (let item of currentCartItems) {
+        if (item.product_id == product.id) {
+          duplicate_product = true;
+
+          item.quantity = item.quantity + quantity;
+
+          break;
+        }
+      }
+
+      if (!duplicate_product) {
+        currentCartItems.push(item);
+      }
+    } else {
+      currentCartItems.push(item);
+    }
+
+    this.saleCartSubject.next(currentCartItems);
   }
 
   resetCart() {
-    const currentCartItems = this.cartItemsSubject.value;
-    this.cartItemsSubject.value.length = 0;
-    this.cartItemsSubject.next(currentCartItems);
-    // console.log('reseting cart ', this.cartItems$);
+    const currentCartItems = this.saleCartSubject.value;
+    this.saleCartSubject.value.length = 0;
+    this.saleCartSubject.next(currentCartItems);
+
+    console.log(
+      'reseting cart',
+      this.purchase_cartItems$,
+      this.sale_cartItems$
+    );
   }
 
   setPurchaseCheck(value: boolean) {
-    const currentValue = this.purchaseCheckSubject.value;
     this.purchaseCheckSubject.next(value);
   }
 

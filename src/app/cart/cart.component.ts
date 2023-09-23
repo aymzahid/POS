@@ -16,11 +16,11 @@ export class CartComponent implements OnInit {
   qty_col: string = '5';
   p_unit_col: string = '3';
   total_col: string = '3';
-
   cartPageCheck = false;
-  cartItems: any = [];
+  saleCart: any = [];
   purchaseCart: any = [];
-  purchaseCheck: any;
+  displayCart: any = [];
+  purchaseCheck: boolean = false;
   discount: any = 0;
   total_bill: any = 0;
   user = 'Guest';
@@ -32,33 +32,23 @@ export class CartComponent implements OnInit {
     private service: ServiceService,
     private navCtrl: NavController
   ) {
-    this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items;
-      // this.get_bill();
-      // this.animateCss();
-      console.log('total cart items', this.cartItems);
-
+    this.cartService.sale_cartItems$.subscribe((items) => {
+      this.saleCart = items;
       this.cartSwitch();
     });
 
     this.cartService.getPurchaseCheck().subscribe((items) => {
       this.purchaseCheck = items;
-      console.log('Purchase Check', this.purchaseCheck);
     });
 
     this.cartService.purchase_cartItems$.subscribe((items) => {
       this.purchaseCart = items;
-      // this.get_bill();
-      // this.animateCss();
-      // console.log('total Purchase cart items', this.cartItems);
       this.cartSwitch();
     });
   }
 
   ionViewWillEnter() {
-    this.cartSwitch();
     this.cartPageCheck = true;
-
     this.pageLayout();
   }
   ionViewWillLeave() {
@@ -77,11 +67,12 @@ export class CartComponent implements OnInit {
 
   cartSwitch() {
     if (this.purchaseCheck) {
-      this.cartItems = this.purchaseCart;
+      this.displayCart = this.purchaseCart;
 
-      console.log('assign purchase cart', this.cartItems);
+      console.log('PurchaseCart', this.displayCart);
     } else {
-      console.log('it is POS cart');
+      this.displayCart = this.saleCart;
+      console.log('POS cart');
     }
     this.get_bill();
     this.animateCss();
@@ -89,9 +80,9 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {}
   removeItem(productindex: any) {
-    this.cartItems.splice(productindex, 1);
+    this.displayCart.splice(productindex, 1);
 
-    console.log('after cart item', this.cartItems);
+    console.log('after cart item', this.displayCart);
 
     this.get_bill();
   }
@@ -111,7 +102,7 @@ export class CartComponent implements OnInit {
   }
 
   validateStockLimit(item: any) {
-    if (!this.purchaseCart) {
+    if (!this.purchaseCheck) {
       if (this.globals.product_list != null || undefined) {
         let product = this.globals.product_list.find(
           (element: any) => element.id == item.product_id
@@ -136,10 +127,23 @@ export class CartComponent implements OnInit {
         } else {
         }
       }
-      setTimeout(() => {
-        this.get_bill();
-      }, 100);
+    } else {
+      if (item.quantity == 0 || item.quantity == null) {
+        setTimeout(() => {
+          item.quantity = 1;
+        }, 500);
+
+        this.globals.presentToast(
+          'Quantity Can not be 0 or Null',
+          '',
+          'danger'
+        );
+      }
     }
+
+    setTimeout(() => {
+      this.get_bill();
+    }, 100);
   }
 
   goToCart() {
@@ -177,7 +181,7 @@ export class CartComponent implements OnInit {
     let sub_bill: number = 0;
 
     if (!this.purchaseCheck) {
-      this.cartItems.forEach((element: any) => {
+      this.displayCart.forEach((element: any) => {
         element.total_price = Number(
           element.s_price * element.quantity
         ).toFixed(2);
@@ -185,7 +189,7 @@ export class CartComponent implements OnInit {
         sub_bill += Number(element.total_price);
       });
     } else {
-      this.cartItems.forEach((element: any) => {
+      this.displayCart.forEach((element: any) => {
         element.total_price = Number(
           element.p_price * element.quantity
         ).toFixed(2);
@@ -221,13 +225,13 @@ export class CartComponent implements OnInit {
   }
 
   pay() {
-    if (this.cartItems.length != 0) {
-      console.log('cart item', this.cartItems);
+    if (this.displayCart.length != 0) {
+      console.log('cart item', this.displayCart);
 
       const currentDate = new Date().toLocaleString('en-US');
 
       let data = {
-        items: this.cartItems,
+        items: this.displayCart,
         total_amount: this.calBill().toFixed(2),
         payment_amount: Number(this.total_bill).toFixed(2),
         customer: {
@@ -281,7 +285,7 @@ export class CartComponent implements OnInit {
   }
 
   resetCart() {
-    this.cartItems = [];
+    this.displayCart = [];
     this.discount = 0;
     this.total_bill = 0;
     this.user = 'Guest';
@@ -327,16 +331,16 @@ export class CartComponent implements OnInit {
   Purchasepay() {
     console.log('purchase');
 
-    if (this.cartItems.length != 0) {
+    if (this.displayCart.length != 0) {
       if (this.user === 'Guest' || this.user === '') {
         this.globals.presentToast('Add Vendor Details', '', 'warning');
       } else {
-        console.log('cart item', this.cartItems);
+        console.log('cart item', this.displayCart);
 
         const currentDate = new Date().toLocaleString('en-US');
 
         let data = {
-          items: this.cartItems,
+          items: this.displayCart,
           total_amount: this.calBill().toFixed(2),
           payment_amount: Number(this.total_bill).toFixed(2),
           vendor: {
@@ -368,7 +372,7 @@ export class CartComponent implements OnInit {
             // setTimeout(() => {
             //   this.globals.dismiss();
             // }, 2000);
-            this.resetCart();
+
             this.globals.presentToast(
               'Something went wrong, try again later',
               '',

@@ -6,6 +6,23 @@ ion-content {
     font-size: 1rem;
   }
 
+  .header_row {
+    margin-bottom: -14px;
+  }
+
+  ion-segment {
+    box-shadow: burlywood;
+    box-shadow: 7px 2px 11px teal;
+    padding: 1px;
+    ion-segment-button {
+      --background-checked: #3880ff;
+      --color-checked: #ffffff;
+      --transition: background-color 25ms linear;
+      --indicator-color: none;
+      padding: 1px;
+    }
+  }
+
   .card_colum {
     height: auto;
     overflow-y: auto;

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ServiceService } from './../services/service.service';
 import { CartserviceService } from '../services/cartservice.service';
 import { Component } from '@angular/core';
@@ -16,16 +17,34 @@ export class Tab3Page {
   subcat_id: any;
   filterTerm: any = '';
   loader: boolean = false;
+  saleCart: any = [];
 
   constructor(
     private cartService: CartserviceService,
     public service: ServiceService,
-    public globals: GlobalVariable
-  ) {}
+    public globals: GlobalVariable,
+    private router: Router
+  ) {
+    this.cartService.sale_cartItems$.subscribe((items) => {
+      this.saleCart = items;
+    });
+  }
   ionViewDidEnter() {
     console.log('Did Enter');
     this.getProductsList();
     this.cartService.setPurchaseCheck(true);
+    if (this.saleCart.length != 0) {
+      this.globals.alert('Sale Cart').then((res) => {
+        console.log('then res', res);
+
+        if (res === 'ok') {
+          this.cartService.resetCart();
+          this.getProductsList();
+        } else {
+          this.router.navigateByUrl('/tabs/tabs/tab1');
+        }
+      });
+    }
   }
 
   addToCart(product: any, quantity: any) {

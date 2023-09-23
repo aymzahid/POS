@@ -65,6 +65,11 @@ export class ServiceService {
     return this.http.get<any>(path);
   }
 
+  getPurchases() {
+    let path = this.globals.baseURL + 'get-purchases';
+
+    return this.http.get<any>(path);
+  }
   //POST
 
   addSale(data: any) {

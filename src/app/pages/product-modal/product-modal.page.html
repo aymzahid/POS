@@ -120,6 +120,7 @@
               mode="ios"
               type="number"
               [value]="data?.p_price"
+              [(ngModel)]="data.p_price"
               placeholder="Enter Purchase Price/Unit"
             ></ion-input>
           </ion-col>
@@ -136,6 +137,7 @@
               mode="ios"
               type="number"
               [value]="data?.s_price"
+              [(ngModel)]="data.s_price"
               placeholder="Enter Sale Price/Unit"
             ></ion-input>
           </ion-col>
@@ -150,7 +152,7 @@
               class="new_stock edit_input"
               mode="ios"
               type="number"
-              [(ngModel)]="purchase_quantity"
+              [(ngModel)]="p_quantity"
               placeholder="Enter Purchase Quantity"
               clear-input
             ></ion-input>
@@ -178,7 +180,7 @@
         <ion-button color="primary">Update</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button color="secondary" (click)="addToCart(data,2)"
+        <ion-button color="secondary" (click)="addToCart(data,p_quantity)"
           >Add to Cart</ion-button
         >
       </ion-col>

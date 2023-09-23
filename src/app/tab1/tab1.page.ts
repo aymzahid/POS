@@ -35,7 +35,7 @@ export class Tab1Page {
     console.log('Did Enter');
 
     this.cartService.setPurchaseCheck(false);
-    if (this.purchaseCart != 0) {
+    if (this.purchaseCart.length != 0) {
       this.globals.alert('Purchase Cart').then((res) => {
         console.log('then res', res);
 

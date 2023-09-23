@@ -10,7 +10,8 @@ import { CartserviceService } from 'src/app/services/cartservice.service';
 })
 export class ProductModalPage implements OnInit {
   data: any;
-  purchase_quantity: number = 0;
+  p_quantity: number = 0;
+
   constructor(
     private navParams: NavParams,
     private modalCtrl: ModalController,
@@ -28,17 +29,19 @@ export class ProductModalPage implements OnInit {
     this.modalCtrl.dismiss(item);
   }
 
-  addToCart(product: any, quantity: any) {
-    if (this.purchase_quantity < 1 || null) {
+  addToCart(product: any, p_quantity: any) {
+    console.log('p quantity', this.p_quantity);
+
+    if (this.p_quantity < 1 || null) {
       this.globals.presentToast(
         'Purchasing Quanity can not be zero or null',
         '',
         'danger'
       );
     } else {
-      console.log('product', product, 'quantity--->', quantity);
+      console.log('product', product, 'quantity--->', p_quantity);
 
-      this.cartService.addPurchaseCart(product, quantity);
+      this.cartService.addPurchaseCart(product, p_quantity);
       this.close();
     }
   }

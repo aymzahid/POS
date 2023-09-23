@@ -25,7 +25,7 @@
     <ion-col size="1" class="cart_section">
       <ion-fab-button class="cart_button" (click)="goToCart()">
         <ion-icon name="cart"></ion-icon
-        ><span class="badge bounce" #badge>{{ cartItems.length }}</span>
+        ><span class="badge bounce" #badge>{{ displayCart.length }}</span>
       </ion-fab-button>
     </ion-col>
     <ion-col size="1">
@@ -39,7 +39,7 @@
     </ion-col>
   </ion-row>
 
-  <div *ngIf="cartItems != ''">
+  <div *ngIf="displayCart != ''">
     <ion-grid class="top_grid">
       <ion-row class="head_row">
         <ion-col [size]="name_col"> Name </ion-col>
@@ -52,7 +52,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row class="list_row" *ngFor="let item of cartItems; let i = index">
+      <ion-row class="list_row" *ngFor="let item of displayCart; let i = index">
         <ion-col [size]="name_col">
           <ion-button
             class="ion-activatable ripple-parent rectangle"
@@ -108,7 +108,7 @@
     </ion-grid>
   </div>
 
-  <div *ngIf="cartItems == ''" class="empty_cart">
+  <div *ngIf="displayCart == ''" class="empty_cart">
     <ion-icon slot="center" name="cart-outline"></ion-icon>
     <span>Empty Cart</span>
   </div>

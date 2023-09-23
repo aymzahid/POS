@@ -1,5 +1,6 @@
+import { CartserviceService } from 'src/app/services/cartservice.service';
 import { ServiceService } from './../services/service.service';
-import { Component } from '@angular/core';
+import { Component, Pipe } from '@angular/core';
 import { GlobalVariable } from 'src/global';
 
 @Component({
@@ -10,30 +11,52 @@ import { GlobalVariable } from 'src/global';
 export class Tab2Page {
   data: any = [];
   filterTerm: any = '';
+  record_type: any = 'Sales';
+  purchase_record = false;
+
   constructor(
     private globals: GlobalVariable,
-    private service: ServiceService
+    private service: ServiceService,
+    private cartService: CartserviceService
   ) {}
 
   ionViewDidEnter() {
     this.getSales();
   }
 
+  segmentChanged(event: any) {
+    this.record_type = event.detail.value;
+
+    if (this.record_type === 'Purchases') {
+      this.purchase_record = true;
+    } else {
+      this.purchase_record = false;
+    }
+    this.getSales();
+  }
   getSales() {
+    let call_API = this.service.getSales();
+    if (this.record_type === 'Purchases') {
+      call_API = this.service.getPurchases();
+    }
+
     this.globals.loader();
-    this.service.getSales().subscribe(
+    call_API.subscribe(
       (res) => {
-        // this.loader = false;
-        // console.log(res);
         if (res.status) {
           // this.announcementError = false;
+          this.cartService.setPurchaseCheck(this.purchase_record);
           if (res.data.length != 0) {
             this.globals.dismiss();
 
             this.data = res.data;
             console.log('data', this.data);
 
-            this.globals.presentToast('Sales Fetched', '', 'success');
+            this.globals.presentToast(
+              `${this.record_type} Fetched`,
+              '',
+              'success'
+            );
           } else {
             this.globals.presentToast('No data found', '', '');
           }
