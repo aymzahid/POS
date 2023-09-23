@@ -11,163 +11,180 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Product Name</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-input
-              class="product_name"
-              mode="ios"
-              type="text"
-              placeholder="Product Name"
-            ></ion-input>
-          </ion-col>
-        </ion-row>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Product Name</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-input
+                class="product_name"
+                mode="ios"
+                type="text"
+                name="p_name"
+                ngModel
+                placeholder="Product Name"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Category</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-select
-              (ionChange)="selectCategory($event)"
-              class="category"
-              mode="ios"
-              [interfaceOptions]="categoryOptions"
-              placeholder="Select Product Category"
-            >
-              <ion-select-option
-                [value]="item.id"
-                *ngFor="let item of data?.product_categories"
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Category</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-select
+                (ionChange)="selectCategory($event)"
+                class="category"
+                mode="ios"
+                [interfaceOptions]="categoryOptions"
+                name="cat_id"
+                ngModel
+                placeholder="Select Product Category"
               >
-                {{item.name}}</ion-select-option
+                <ion-select-option
+                  [value]="item.id"
+                  *ngFor="let item of data?.product_categories"
+                >
+                  {{item.name}}</ion-select-option
+                >
+              </ion-select>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Sub Category</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-select
+                (ionChange)="selectSubCategory($event)"
+                class="category"
+                mode="ios"
+                [interfaceOptions]="categoryOptions"
+                name="sub_cat_id"
+                ngModel
+                placeholder="Select Sub Category"
               >
-            </ion-select>
-          </ion-col>
-        </ion-row>
+                <ion-select-option
+                  [value]="item.id"
+                  *ngFor="let item of sub_categories_list"
+                >
+                  {{item.name}}</ion-select-option
+                >
+              </ion-select>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Sub Category</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-select
-              (ionChange)="selectSubCategory($event)"
-              class="category"
-              mode="ios"
-              [interfaceOptions]="categoryOptions"
-              placeholder="Select Sub Category"
-            >
-              <ion-select-option
-                [value]="item.id"
-                *ngFor="let item of data?.product_sub_categories"
-              >
-                {{item.name}}</ion-select-option
-              >
-            </ion-select>
-          </ion-col>
-        </ion-row>
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Manufacturer</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-input
+                class="manufacturer"
+                mode="ios"
+                type="text"
+                name="manufacturer"
+                ngModel
+                placeholder="Manufacturer"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Manufacturer</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-input
-              class="manufacturer"
-              mode="ios"
-              type="text"
-              readonly
-              placeholder="Manufacturer"
-            ></ion-input>
-          </ion-col>
-        </ion-row>
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Unit of Measurement</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-input
+                mode="ios"
+                type="text"
+                name="unit_of_measurement"
+                ngModel
+                placeholder=" Unit of Measurement"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Unit of Measurement</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-input
-              mode="ios"
-              type="text"
-              readonly
-              placeholder=" Unit of Measurement"
-            ></ion-input>
-          </ion-col>
-        </ion-row>
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Purchase Price/Unit</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-input
+                clear-input
+                class="p_price edit_input"
+                mode="ios"
+                type="number"
+                name="p_price"
+                ngModel
+                placeholder="Enter Purchase Price/Unit"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Purchase Price/Unit</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-input
-              clear-input
-              class="p_price edit_input"
-              mode="ios"
-              type="number"
-              placeholder="Enter Purchase Price/Unit"
-            ></ion-input>
-          </ion-col>
-        </ion-row>
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Sale Price/Unit</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-input
+                clear-input
+                class="s_price edit_input"
+                mode="ios"
+                type="number"
+                name="s_price"
+                ngModel
+                placeholder="Enter Sale Price/Unit"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Sale Price/Unit</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-input
-              clear-input
-              class="s_price edit_input"
-              mode="ios"
-              type="number"
-              placeholder="Enter Sale Price/Unit"
-            ></ion-input>
-          </ion-col>
-        </ion-row>
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Enter Quantity</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-input
+                class="quantity edit_input"
+                mode="ios"
+                type="number"
+                name="quantity"
+                ngModel
+                placeholder="Enter Purchase Quantity"
+                clear-input
+              ></ion-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Enter New Quantity</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-input
-              class="new_stock edit_input"
-              mode="ios"
-              type="number"
-              placeholder="Enter Purchase Quantity"
-              clear-input
-            ></ion-input>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col size="3" offset="2">
-            <ion-label>Product Description</ion-label>
-          </ion-col>
-          <ion-col size="4">
-            <ion-textarea
-              clear-input
-              placeholder="Enter Product Description"
-            ></ion-textarea>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-  <ion-footer>
-    <ion-row>
-      <ion-col size="6">
-        <ion-button color="primary">Update</ion-button>
-      </ion-col>
-      <ion-col size="6">
-        <ion-button color="secondary">Add to Cart</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-footer>
+          <ion-row>
+            <ion-col size="3" offset="2">
+              <ion-label>Product Description</ion-label>
+            </ion-col>
+            <ion-col size="4">
+              <ion-textarea
+                clear-input
+                name="description"
+                ngModel
+                placeholder="Enter Product Description"
+              ></ion-textarea>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    <ion-footer>
+      <ion-row>
+        <ion-col size="6" offset="2">
+          <ion-button type="submit" color="secondary"
+            >Add New Product
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </form>
 </ion-content>

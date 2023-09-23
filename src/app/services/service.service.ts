@@ -86,6 +86,10 @@ export class ServiceService {
 
     return this.http.post<any>(path, data);
   }
+  addProduct(data: any) {
+    let path = this.globals.baseURL + 'add-product';
+    return this.http.post<any>(path, data);
+  }
 
   addUser(data: any) {
     let path = this.globals.baseURL + 'add-user';
