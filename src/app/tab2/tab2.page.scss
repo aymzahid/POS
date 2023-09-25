@@ -42,7 +42,7 @@ ion-content {
     justify-content: center;
 
     ion-button {
-      width: 50%;
+      width: 25%;
     }
   }
   ion-card-header {
@@ -54,5 +54,14 @@ ion-content {
   }
   ion-card-title {
     font-size: 1.2rem;
+  }
+
+  .buttons_container {
+    display: flex;
+    justify-content: space-around;
+
+    .refund {
+      --background: var(--ion-color-success);
+    }
   }
 }

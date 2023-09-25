@@ -13,6 +13,7 @@ export class Tab2Page {
   filterTerm: any = '';
   record_type: any = 'Sales';
   purchase_record = false;
+  refund_button: boolean = true;
 
   constructor(
     private globals: GlobalVariable,
@@ -29,13 +30,16 @@ export class Tab2Page {
 
     if (this.record_type === 'Purchases') {
       this.purchase_record = true;
+      this.refund_button = false;
     } else {
       this.purchase_record = false;
+      this.refund_button = true;
     }
     this.getSales();
   }
   getSales() {
     let call_API = this.service.getSales();
+
     if (this.record_type === 'Purchases') {
       call_API = this.service.getPurchases();
     }
@@ -81,6 +85,18 @@ export class Tab2Page {
 
     this.globals.invoiceModal(data).then((res) => {
       if (!res) {
+      } else {
+      }
+    });
+  }
+
+  refund(data: any) {
+    this.cartService.refundCheck = true;
+    this.cartService.setRefundData(data);
+
+    this.globals.refundModal(data).then((res) => {
+      if (!res) {
+        this.cartService.refundCheck = false;
       } else {
       }
     });

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { GlobalVariable } from './../../global';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -6,6 +7,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CartserviceService {
+  refundData: any;
+  refundCheck: boolean = false;
+
   private saleCartSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
   );
@@ -17,7 +21,10 @@ export class CartserviceService {
   private purchaseCartSubject = new BehaviorSubject<any>([]);
   purchase_cartItems$ = this.purchaseCartSubject.asObservable();
 
-  constructor(private globals: GlobalVariable) {}
+  // private RefundCheckSubject = new BehaviorSubject<boolean>(false);
+  // refundCheck$ = this.RefundCheckSubject;
+
+  constructor(private globals: GlobalVariable, private router: Router) {}
 
   addToCart(product: any, quantity: any) {
     let duplicate_product: boolean = false;
@@ -106,5 +113,21 @@ export class CartserviceService {
 
   getPurchaseCheck() {
     return this.purchaseCheckSubject.asObservable();
+  }
+
+  // setRefundCheck(value: boolean) {
+  //   this.purchaseCheckSubject.next(value);
+  // }
+
+  // getRefundCheck() {
+  //   return this.purchaseCheckSubject.asObservable();
+  // }
+
+  setRefundData(data: any) {
+    this.refundData = data;
+  }
+
+  getRefundData() {
+    return this.refundData;
   }
 }

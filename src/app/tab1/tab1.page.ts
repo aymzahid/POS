@@ -33,7 +33,6 @@ export class Tab1Page {
 
   ionViewDidEnter() {
     console.log('Did Enter');
-
     this.cartService.setPurchaseCheck(false);
     if (this.purchaseCart.length != 0) {
       this.globals.alert('Purchase Cart').then((res) => {

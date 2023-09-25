@@ -63,7 +63,14 @@
           <ion-card-title>Date: {{item.date|date: 'medium' }}</ion-card-title>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content class="buttons_container">
+          <ion-button
+            *ngIf="this.refund_button"
+            class="refund"
+            (click)="refund(item)"
+          >
+            Refund</ion-button
+          >
           <ion-button (click)="printInvoice(item)"> Print</ion-button>
         </ion-card-content>
       </ion-card></ion-col

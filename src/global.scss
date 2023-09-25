@@ -179,6 +179,13 @@
   --height: 100vh;
 }
 
+.refund_modal {
+  --width: 90vw;
+  backdrop-filter: brightness(0.5);
+  --height: 100vh;
+}
+
+//Scrollbar
 ::-webkit-scrollbar {
   width: 10px;
 }

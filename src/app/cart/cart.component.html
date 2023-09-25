@@ -147,22 +147,32 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-button
-          *ngIf="!purchaseCheck"
-          expand="block"
-          style="font-weight: bolder"
-          (click)="pay()"
-        >
-          Pay ( <span> {{ total_bill }} </span>)
-        </ion-button>
+        <div *ngIf="!this.cartService.refundCheck">
+          <ion-button
+            *ngIf="!purchaseCheck"
+            expand="block"
+            style="font-weight: bolder"
+            (click)="pay()"
+          >
+            Pay ( <span> {{ total_bill }} </span>)
+          </ion-button>
 
-        <ion-button
-          *ngIf="purchaseCheck"
+          <ion-button
+            *ngIf="purchaseCheck"
+            expand="block"
+            style="font-weight: bolder; --background: var(--ion-color-dark)"
+            (click)="Purchasepay()"
+          >
+            Pay ( <span> {{ total_bill }} </span>)
+          </ion-button>
+        </div>
+
+        <ion-button *ngIf="this.cartService.refundCheck"
           expand="block"
-          style="font-weight: bolder; --background: var(--ion-color-dark)"
-          (click)="Purchasepay()"
+          style="font-weight: bolder; --background: var(--ion-color-success)"
+          (click)="refund()"
         >
-          Pay ( <span> {{ total_bill }} </span>)
+          Refund ( <span> {{ total_bill }} </span>)
         </ion-button>
       </ion-col>
     </ion-row>

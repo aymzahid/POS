@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalVariable } from 'src/global';
 import { CartserviceService } from '../services/cartservice.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cart',
@@ -26,19 +26,20 @@ export class CartComponent implements OnInit {
   user = 'Guest';
   user_phone: any = '-';
   constructor(
-    private cartService: CartserviceService,
+    public cartService: CartserviceService,
     private router: Router,
     private globals: GlobalVariable,
     private service: ServiceService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
   ) {
+    this.cartService.getPurchaseCheck().subscribe((items) => {
+      this.purchaseCheck = items;
+    });
+
     this.cartService.sale_cartItems$.subscribe((items) => {
       this.saleCart = items;
       this.cartSwitch();
-    });
-
-    this.cartService.getPurchaseCheck().subscribe((items) => {
-      this.purchaseCheck = items;
     });
 
     this.cartService.purchase_cartItems$.subscribe((items) => {
@@ -50,6 +51,10 @@ export class CartComponent implements OnInit {
   ionViewWillEnter() {
     this.cartPageCheck = true;
     this.pageLayout();
+
+    if (this.cartService.refundCheck) {
+      this.getRefundCart();
+    }
   }
   ionViewWillLeave() {
     this.cartPageCheck = false;
@@ -74,6 +79,7 @@ export class CartComponent implements OnInit {
       this.displayCart = this.saleCart;
       console.log('POS cart');
     }
+
     this.get_bill();
     this.animateCss();
   }
@@ -147,10 +153,18 @@ export class CartComponent implements OnInit {
   }
 
   goToCart() {
-    this.router.navigateByUrl('/cart');
+    if (this.cartService.refundCheck) {
+      this.close();
+    } else {
+      this.router.navigateByUrl('/cart');
+    }
   }
   goBack() {
-    this.navCtrl.back();
+    if (this.cartService.refundCheck) {
+      this.close();
+    } else {
+      this.navCtrl.back();
+    }
   }
 
   get_bill() {
@@ -384,5 +398,52 @@ export class CartComponent implements OnInit {
     } else {
       this.globals.presentToast('Purchase Cart is Empty', '', 'warning');
     }
+  }
+
+  //Refund
+
+  getRefundCart() {
+    let data = this.cartService.getRefundData();
+    console.log('data', data);
+
+    this.displayCart = data.items;
+    this.discount = data.discounts[0].discount_value;
+    this.user = data.customer.name;
+    this.user_phone = data.customer.phone;
+
+    this.get_bill();
+
+    this.refreshAPI();
+  }
+
+  refund() {
+    let return_id = this.globals.global_array.return_id;
+    console.log('return id', this.globals.global_array.return_id);
+    let data = this.cartService.getRefundData();
+    data.return_id = return_id;
+    console.log('after return id', data);
+    this.service.refundSale(data).subscribe(
+      (res) => {
+        this.refreshAPI();
+        this.resetCart();
+        this.close();
+        this.globals.presentToast('Refunded Successfully', '', 'success');
+      },
+      (err) => {
+        // setTimeout(() => {
+        //   this.globals.dismiss();
+        // }, 2000);
+
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
+      }
+    );
+  }
+
+  close() {
+    this.modalCtrl.dismiss();
   }
 }

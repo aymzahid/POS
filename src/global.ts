@@ -1,3 +1,6 @@
+import { CartComponent } from './app/cart/cart.component';
+import { Tab2Page } from './app/tab2/tab2.page';
+import { Tab1Page } from './app/tab1/tab1.page';
 import { AddProductPage } from './app/pages/add-product/add-product.page';
 import { SearchUserPage } from './app/pages/search-user/search-user.page';
 import { Injectable } from '@angular/core';
@@ -22,6 +25,7 @@ export class GlobalVariable {
   isLoading: boolean = false;
   global_array: any = [];
   product_list: any = [];
+
   constructor(
     private toastController: ToastController,
     private loadingController: LoadingController,
@@ -179,6 +183,29 @@ export class GlobalVariable {
         cssClass: 'product_modal',
         id: 'product_modal',
         componentProps: { modal_data: data },
+        backdropDismiss: false,
+      });
+      await modal.present();
+
+      modal.onDidDismiss().then((data) => {
+        console.log('modal dismissed with', data.data);
+
+        if (data.data != undefined) {
+          resolve(data.data);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
+  async refundModal(data: any): Promise<any> {
+    return new Promise(async (resolve) => {
+      const modal = await this.modalCtrl.create({
+        component: CartComponent,
+        cssClass: 'refund_modal',
+        id: 'refund_modal',
+        componentProps: {},
         backdropDismiss: false,
       });
       await modal.present();
