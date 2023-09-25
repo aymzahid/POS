@@ -51,10 +51,10 @@
             >Purchase ID : {{item.sale_id}}</ion-card-subtitle
           >
           <ion-card-title *ngIf="!purchase_record">
-            {{item.customer.name }}</ion-card-title
+            {{item.customer?.name }}</ion-card-title
           >
           <ion-card-title *ngIf="purchase_record">
-            {{item.vendor.name }}</ion-card-title
+            {{item.vendor?.name }}</ion-card-title
           >
 
           <ion-card-title color="success"

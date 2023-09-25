@@ -122,6 +122,7 @@
               [value]="data?.p_price"
               [(ngModel)]="data.p_price"
               placeholder="Enter Purchase Price/Unit"
+              min="1"
             ></ion-input>
           </ion-col>
         </ion-row>
@@ -139,6 +140,7 @@
               [value]="data?.s_price"
               [(ngModel)]="data.s_price"
               placeholder="Enter Sale Price/Unit"
+              min="1"
             ></ion-input>
           </ion-col>
         </ion-row>
@@ -155,6 +157,7 @@
               [(ngModel)]="p_quantity"
               placeholder="Enter Purchase Quantity"
               clear-input
+              min="1"
             ></ion-input>
           </ion-col>
         </ion-row>

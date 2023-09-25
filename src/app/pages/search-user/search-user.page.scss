@@ -12,7 +12,8 @@ ion-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    height: 73vh;
+    // height: 73vh;
+    height: calc(100vh - 240px);
   }
 
   .result_card {

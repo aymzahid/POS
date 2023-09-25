@@ -179,6 +179,25 @@
   --height: 100vh;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3366ff;
+  border-radius: 10px;
+  background-image: -webkit-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.5) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.5) 75%,
+    transparent 75%,
+    transparent
+  );
+}
+
 @font-face {
   font-family: "Rubik-reg";
   src: url("assets/fonts/Rubik/static/Rubik-Regular.ttf");

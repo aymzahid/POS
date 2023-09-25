@@ -47,9 +47,8 @@ ion-content {
     outline-offset: var(--g);
   }
   .products_container {
-    // height: 71vh;
-    height: auto;
-    overflow-y: auto;
+    height: 71vh;
+    overflow: scroll;
     display: flex;
     flex-wrap: wrap;
   }
@@ -105,8 +104,11 @@ ion-content {
       }
     }
 
-    // .products_container {
-    //   // height: 62vh;
-    // }
+    .products_container {
+      height: 62vh;
+    }
   }
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--ion-color-success);
 }

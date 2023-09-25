@@ -54,10 +54,6 @@ ion-select {
   text-transform: capitalize;
 }
 
-.edit_input {
-  border: 2px solid var(--ion-color-primary);
-}
-
 ion-footer {
   position: fixed;
   bottom: 0;
@@ -70,10 +66,14 @@ ion-footer {
   ion-button {
     width: 100%;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 
 ion-button[color="secondary"] {
   --background: var(--ion-color-secondary);
+}
+
+.alert {
+  border: 1px solid var(--ion-color-danger);
 }

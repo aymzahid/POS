@@ -76,43 +76,53 @@
           ></ion-searchbar>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col
+          size="12"
+          class="products_container"
+          *ngIf="displayProduct() != ''"
+        >
+          <div *ngFor="let item of displayProduct() | filter:filterTerm">
+            <ion-card
+              class="ion-activatable ripple-parent rectangle"
+              *ngIf="item.quantity_in_stock>0"
+              (click)="addToCart(item,1)"
+            >
+              <ion-ripple-effect></ion-ripple-effect>
+              <ion-card-header>
+                <ion-card-subtitle color="dark">
+                  {{item.name}}</ion-card-subtitle
+                >
+                <ion-card-title color="primary"
+                  >PKR: {{item.s_price}}
+                  <span style="color: var(--ion-color-dark); font-size: 0.9rem">
+                    / Unit</span
+                  >
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+            <ion-card
+              class="ion-activatable ripple-parent rectangle no_stock_card"
+              *ngIf="item.quantity_in_stock<1"
+              (click)="this.globals.presentToast('Product (Out Of Stock)','','danger');"
+            >
+              <ion-ripple-effect></ion-ripple-effect>
+              <ion-card-header>
+                <ion-card-subtitle color="dark">
+                  {{item.name}}</ion-card-subtitle
+                >
+                <ion-card-title color="primary"
+                  >PKR: {{item.s_price}}
+                  <span style="color: var(--ion-color-dark); font-size: 0.9rem">
+                    / Unit</span
+                  >
+                </ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
 
-      <div class="products_container" *ngIf="displayProduct() != ''">
-        <div *ngFor="let item of displayProduct() | filter:filterTerm">
-          <ion-card
-            class="ion-activatable ripple-parent rectangle"
-            *ngIf="item.quantity_in_stock>0"
-            (click)="addToCart(item,1)"
-          >
-            <ion-ripple-effect></ion-ripple-effect>
-            <ion-card-header>
-              <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
-              <ion-card-title color="primary"
-                >PKR: {{item.s_price}}
-                <span style="color: var(--ion-color-dark); font-size: 0.9rem">
-                  / Unit</span
-                >
-              </ion-card-title>
-            </ion-card-header>
-          </ion-card>
-          <ion-card
-            class="ion-activatable ripple-parent rectangle no_stock_card"
-            *ngIf="item.quantity_in_stock<1"
-            (click)="this.globals.presentToast('Product (Out Of Stock)','','danger');"
-          >
-            <ion-ripple-effect></ion-ripple-effect>
-            <ion-card-header>
-              <ion-card-subtitle color="dark"> {{item.name}}</ion-card-subtitle>
-              <ion-card-title color="primary"
-                >PKR: {{item.s_price}}
-                <span style="color: var(--ion-color-dark); font-size: 0.9rem">
-                  / Unit</span
-                >
-              </ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </div>
-      </div>
       <div
         *ngIf="displayProduct()==''"
         style="display: flex; justify-content: center; padding-top: 28vh"

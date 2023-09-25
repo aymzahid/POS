@@ -38,10 +38,11 @@ ion-content {
     outline: var(--b) solid var(--c);
     outline-offset: var(--g);
   }
+
   .products_container {
-    // height: 71vh;
-    height: auto;
-    overflow-y: auto;
+    height: 71vh;
+
+    overflow: scroll;
     display: flex;
     flex-wrap: wrap;
   }
@@ -98,7 +99,7 @@ ion-content {
     }
 
     .products_container {
-      // height: 62vh;
+      height: 62vh;
     }
   }
 }

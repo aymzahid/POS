@@ -21,13 +21,23 @@
             </ion-col>
             <ion-col size="4">
               <ion-input
+                clear-input
                 class="product_name"
                 mode="ios"
                 type="text"
                 name="p_name"
                 ngModel
+                required
+                #p_name="ngModel"
                 placeholder="Product Name"
+                [ngStyle]="{'border-color':  p_name.invalid && (p_name.dirty || p_name.touched)?'var(--ion-color-danger) ': p_name.valid?'var(--ion-color-success)' :'' }"
               ></ion-input>
+              <!-- <div
+                *ngIf="p_name.invalid && (p_name.dirty || p_name.touched)"
+                class="alert"
+              >
+                <div *ngIf="p_name.errors?.['required']">Name is required.</div>
+              </div> -->
             </ion-col>
           </ion-row>
 
@@ -42,8 +52,11 @@
                 mode="ios"
                 [interfaceOptions]="categoryOptions"
                 name="cat_id"
-                ngModel
                 placeholder="Select Product Category"
+                ngModel
+                #cat_id="ngModel"
+                required
+                [ngStyle]="{'border-color':  cat_id.invalid && (cat_id.dirty || cat_id.touched)?'var(--ion-color-danger) ': cat_id.valid?'var(--ion-color-success)' :'' }"
               >
                 <ion-select-option
                   [value]="item.id"
@@ -66,8 +79,11 @@
                 mode="ios"
                 [interfaceOptions]="categoryOptions"
                 name="sub_cat_id"
-                ngModel
                 placeholder="Select Sub Category"
+                ngModel
+                #sub_cat_id="ngModel"
+                required
+                [ngStyle]="{'border-color':  sub_cat_id.invalid && (sub_cat_id.dirty || sub_cat_id.touched)?'var(--ion-color-danger) ': sub_cat_id.valid?'var(--ion-color-success)' :'','z-index':cat_id.pristine  || cat_id.untouched ?'-1':''}"
               >
                 <ion-select-option
                   [value]="item.id"
@@ -85,12 +101,16 @@
             </ion-col>
             <ion-col size="4">
               <ion-input
+                clear-input
                 class="manufacturer"
                 mode="ios"
                 type="text"
                 name="manufacturer"
-                ngModel
                 placeholder="Manufacturer"
+                ngModel
+                #manufacturer="ngModel"
+                required
+                [ngStyle]="{'border-color':  manufacturer.invalid && (manufacturer.dirty || manufacturer.touched)?'var(--ion-color-danger) ': manufacturer.valid?'var(--ion-color-success)' :'' }"
               ></ion-input>
             </ion-col>
           </ion-row>
@@ -101,11 +121,15 @@
             </ion-col>
             <ion-col size="4">
               <ion-input
+                clear-input
                 mode="ios"
                 type="text"
                 name="unit_of_measurement"
-                ngModel
                 placeholder=" Unit of Measurement"
+                ngModel
+                #unit_of_measurement="ngModel"
+                required
+                [ngStyle]="{'border-color':  unit_of_measurement.invalid && (unit_of_measurement.dirty || unit_of_measurement.touched)?'var(--ion-color-danger) ': unit_of_measurement.valid?'var(--ion-color-success)' :'' }"
               ></ion-input>
             </ion-col>
           </ion-row>
@@ -121,8 +145,12 @@
                 mode="ios"
                 type="number"
                 name="p_price"
-                ngModel
                 placeholder="Enter Purchase Price/Unit"
+                ngModel
+                #p_price="ngModel"
+                required
+                min="0"
+                [ngStyle]="{'border-color':  p_price.invalid && (p_price.dirty || p_price.touched)?'var(--ion-color-danger) ': p_price.valid?'var(--ion-color-success)' :'' }"
               ></ion-input>
             </ion-col>
           </ion-row>
@@ -138,8 +166,12 @@
                 mode="ios"
                 type="number"
                 name="s_price"
-                ngModel
                 placeholder="Enter Sale Price/Unit"
+                ngModel
+                #s_price="ngModel"
+                required
+                min="0"
+                [ngStyle]="{'border-color':  s_price.invalid && (s_price.dirty || s_price.touched)?'var(--ion-color-danger) ': s_price.valid?'var(--ion-color-success)' :'' }"
               ></ion-input>
             </ion-col>
           </ion-row>
@@ -150,13 +182,17 @@
             </ion-col>
             <ion-col size="4">
               <ion-input
+                clear-input
                 class="quantity edit_input"
                 mode="ios"
                 type="number"
                 name="quantity"
-                ngModel
                 placeholder="Enter Purchase Quantity"
-                clear-input
+                ngModel
+                #quantity="ngModel"
+                required
+                min="0"
+                [ngStyle]="{'border-color':  quantity.invalid && (quantity.dirty || quantity.touched)?'var(--ion-color-danger) ': quantity.valid?'var(--ion-color-success)' :'' }"
               ></ion-input>
             </ion-col>
           </ion-row>
@@ -169,8 +205,11 @@
               <ion-textarea
                 clear-input
                 name="description"
-                ngModel
                 placeholder="Enter Product Description"
+                ngModel
+                #description="ngModel"
+                required
+                [ngStyle]="{'border-color':  description.invalid && (description.dirty || description.touched)?'var(--ion-color-danger) ': description.valid?'var(--ion-color-success)' :'' }"
               ></ion-textarea>
             </ion-col>
           </ion-row>
@@ -179,8 +218,11 @@
     </ion-card>
     <ion-footer>
       <ion-row>
-        <ion-col size="6" offset="2">
-          <ion-button type="submit" color="secondary"
+        <ion-col size="4" offset="4">
+          <ion-button disabled *ngIf="userForm.invalid" color="secondary"
+            >Add New Product
+          </ion-button>
+          <ion-button *ngIf="userForm.valid" type="submit" color="secondary"
             >Add New Product
           </ion-button>
         </ion-col>
