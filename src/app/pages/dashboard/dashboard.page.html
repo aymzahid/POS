@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="tabs"></ion-back-button>
+      <ion-back-button defaultHref="tabs" color="dark"></ion-back-button>
     </ion-buttons>
 
     <ion-title class="ion-text-center" color="light">Dashboard</ion-title>
@@ -14,7 +14,10 @@
       <ion-col size="4">
         <label for="title"
           ><img src="assets/icon/add-category-icon.png" alt="" /></label
-        ><ion-card class="ion-activatable ripple-parent rectangle">
+        ><ion-card
+          class="ion-activatable ripple-parent rectangle"
+          (click)="addCategoryModal('Category')"
+        >
           <ion-ripple-effect></ion-ripple-effect>
           <ion-card-header>
             <ion-card-title>Add Category</ion-card-title>
@@ -24,7 +27,10 @@
       <ion-col size="4">
         <label for="title" style="background-color: var(--ion-color-danger)"
           ><img src="assets/icon/add-sub-category-icon.png" alt="" /></label
-        ><ion-card class="ion-activatable ripple-parent rectangle">
+        ><ion-card
+          class="ion-activatable ripple-parent rectangle"
+          (click)="addCategoryModal('Sub Category')"
+        >
           <ion-ripple-effect></ion-ripple-effect>
           <ion-card-header>
             <ion-card-title>Add Sub Category</ion-card-title>

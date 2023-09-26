@@ -1,3 +1,4 @@
+import { AddCategoryPage } from './app/pages/add-category/add-category.page';
 import { CartComponent } from './app/cart/cart.component';
 import { Tab2Page } from './app/tab2/tab2.page';
 import { Tab1Page } from './app/tab1/tab1.page';
@@ -229,6 +230,28 @@ export class GlobalVariable {
         cssClass: 'product_modal',
         id: 'addNewProduct_modal',
         componentProps: { modal_data: data },
+        backdropDismiss: false,
+      });
+      await modal.present();
+
+      modal.onDidDismiss().then((data) => {
+        console.log('modal dismissed with', data.data);
+
+        if (data.data != undefined) {
+          resolve(data.data);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+  async addNewCategory(data: any, cat_type: any): Promise<any> {
+    return new Promise(async (resolve) => {
+      const modal = await this.modalCtrl.create({
+        component: AddCategoryPage,
+        cssClass: 'product_modal',
+        id: 'addNewProduct_modal',
+        componentProps: { modal_data: data, cat_type: cat_type },
         backdropDismiss: false,
       });
       await modal.present();

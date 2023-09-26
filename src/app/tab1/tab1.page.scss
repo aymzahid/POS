@@ -15,7 +15,7 @@ ion-content {
 
 .products_row {
   ion-card {
-    width: 14vw;
+    width: 15vw;
     height: 15vh;
     text-align: center;
     padding: 0px;
@@ -23,6 +23,7 @@ ion-content {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 10px;
     ion-card-header {
       flex-direction: column;
     }

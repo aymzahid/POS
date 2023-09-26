@@ -52,6 +52,10 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
+  {
+    path: 'add-category',
+    loadChildren: () => import('./pages/add-category/add-category.module').then( m => m.AddCategoryPageModule)
+  },
 
 ];
 @NgModule({

@@ -91,6 +91,16 @@ export class ServiceService {
     return this.http.post<any>(path, data);
   }
 
+  addCategory(data: any) {
+    let path = this.globals.baseURL + 'add-category';
+    return this.http.post<any>(path, data);
+  }
+  
+  addSubCategory(data: any) {
+    let path = this.globals.baseURL + 'add-sub-category';
+    return this.http.post<any>(path, data);
+  }
+
   addUser(data: any) {
     let path = this.globals.baseURL + 'add-user';
     return this.http.post<any>(path, data);

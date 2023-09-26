@@ -97,6 +97,7 @@ export class Tab2Page {
     this.globals.refundModal(data).then((res) => {
       if (!res) {
         this.cartService.refundCheck = false;
+        this.getSales();
       } else {
       }
     });

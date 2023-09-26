@@ -1,15 +1,16 @@
-import { ServiceService } from './../../services/service.service';
 import { GlobalVariable } from 'src/global';
+import { ServiceService } from './../../services/service.service';
+
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.page.html',
-  styleUrls: ['./add-product.page.scss'],
+  selector: 'app-add-category',
+  templateUrl: './add-category.page.html',
+  styleUrls: ['./add-category.page.scss'],
 })
-export class AddProductPage implements OnInit {
+export class AddCategoryPage implements OnInit {
   categoryOptions = {
     header: 'Select Category ',
     translucent: true,
@@ -17,7 +18,8 @@ export class AddProductPage implements OnInit {
   };
 
   data: any = [];
-  sub_categories_list: any = [];
+  cat_value: any;
+  cat_type: any;
 
   constructor(
     private navParams: NavParams,
@@ -25,14 +27,11 @@ export class AddProductPage implements OnInit {
     private globals: GlobalVariable,
     private service: ServiceService
   ) {
+    this.cat_type = this.navParams.get('cat_type');
     this.data = this.navParams.get('modal_data');
-
-    console.log('data ', this.data);
   }
 
-  ionViewWillEnter() {
-    console.log(this.globals.global_array);
-  }
+  ionViewWillEnter() {}
 
   ngOnInit() {}
   close(item?: any) {
@@ -40,47 +39,42 @@ export class AddProductPage implements OnInit {
   }
 
   selectCategory(ev?: any) {
-    this.sub_categories_list = [];
-    let cat_value = ev.target.value;
-    console.log('Product Cat value:', cat_value);
+    this.cat_value = ev.target.value;
+    console.log('Product Cat value:', this.cat_value);
+  }
 
-    console.log(this.data);
-    this.data.product_sub_categories.forEach((element: any) => {
-      if (Number(element.category_id) == cat_value) {
-        this.sub_categories_list.push(element);
-      }
-    });
-  }
-  selectSubCategory(ev?: any) {
-    console.log('Sub Cat value:', JSON.stringify(ev.target.value));
-  }
   onSubmit(form: NgForm) {
+    this.globals.loader();
+
     let data = {};
+    let Call_API;
     console.log('form values', form.value);
 
-    data = {
-      name: form.value.p_name,
-      subcategory_id: form.value.sub_cat_id,
-      manufacturer: form.value.manufacturer,
-      p_price: form.value.p_price,
-      s_price: form.value.s_price,
-      quantity_in_stock: form.value.quantity,
-      unit_of_measurement: form.value.unit_of_measurement,
-      description: form.value.description,
-    };
+    if (this.cat_type !== 'Category') {
+      data = {
+        category: this.cat_value,
+        name: form.value.p_name,
+      };
 
-    console.log('data', data);
+      Call_API = this.service.addSubCategory(data);
+    } else {
+      data = {
+        name: form.value.p_name,
+        description: form.value.description,
+      };
 
-    this.globals.loader();
-    this.service.addProduct(data).subscribe(
+      Call_API = this.service.addCategory(data);
+    }
+
+    console.log('Submiting data', data);
+
+    Call_API.subscribe(
       (res) => {
         if (res.status) {
-          setTimeout(() => {
-            this.globals.dismiss();
-          }, 1000);
+          this.globals.dismiss();
           this.close();
           this.globals.presentToast(
-            'Product Added Successfully',
+            `${this.cat_type} Added Successfully`,
             '',
             'success'
           );
@@ -106,20 +100,9 @@ export class AddProductPage implements OnInit {
     this.service.getProductsList().subscribe(
       (res: any) => {
         if (res.status) {
-          // setTimeout(() => {
-          //   this.globals.dismiss();
-          // }, 2000);
-
           this.globals.global_array = res.data;
-
           console.log('API refreshed', this.globals.global_array);
           this.globals.product_list = this.globals.global_array.products;
-
-          // if (this.user_title === 'Customers') {
-          //   this.close(this.globals.global_array.customers);
-          // } else {
-          //   this.close(this.globals.global_array.vendors);
-          // }
         }
       },
       (err: any) => {

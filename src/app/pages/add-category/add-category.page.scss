@@ -1,0 +1,80 @@
+ion-content {
+  --background: #eaf9f4;
+}
+ion-card {
+  margin: 20px;
+  height: max-content;
+  margin-bottom: 30px;
+}
+
+ion-card-header {
+  text-align: center;
+}
+
+ion-card-content {
+  padding: 16px;
+}
+
+ion-grid {
+  padding: 0;
+}
+
+ion-row {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+ion-col {
+  --ion-text-color: #333; /* Set text color for labels and input fields */
+}
+
+ion-label {
+  font-weight: bold;
+}
+
+ion-input,
+ion-textarea {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 8px;
+  width: 100%; /* Make input fields fill the entire column */
+  text-align: center;
+  font-weight: 700;
+}
+ion-select {
+  --padding: 4px;
+  padding-left: 20%;
+  --placeholder-color: #3880ff;
+  --placeholder-color-opacity: 1;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.sub_category,
+.manufacturer {
+  text-transform: capitalize;
+}
+
+ion-footer {
+  display: initial;
+
+  ion-row {
+    margin-bottom: 1px;
+  }
+
+  ion-button {
+    width: 100%;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}
+
+ion-button[color="secondary"] {
+  --background: var(--ion-color-secondary);
+}
+
+.alert {
+  border: 1px solid var(--ion-color-danger);
+}

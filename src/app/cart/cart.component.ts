@@ -239,6 +239,7 @@ export class CartComponent implements OnInit {
   }
 
   pay() {
+    this.globals.loader();
     if (this.displayCart.length != 0) {
       console.log('cart item', this.displayCart);
 
@@ -264,6 +265,9 @@ export class CartComponent implements OnInit {
       console.log('sale payload', data);
       this.service.addSale(data).subscribe(
         (res) => {
+          setTimeout(() => {
+            this.globals.dismiss();
+          }, 1500);
           if (localStorage.getItem('bill_data') != null) {
             this.printInvoice(
               JSON.parse(localStorage.getItem('bill_data') || '{}')
@@ -274,9 +278,9 @@ export class CartComponent implements OnInit {
           this.resetCart();
         },
         (err) => {
-          // setTimeout(() => {
-          //   this.globals.dismiss();
-          // }, 2000);
+          setTimeout(() => {
+            this.globals.dismiss();
+          }, 1500);
 
           this.globals.presentToast(
             'Something went wrong, try again later',
@@ -349,6 +353,7 @@ export class CartComponent implements OnInit {
       if (this.user === 'Guest' || this.user === '') {
         this.globals.presentToast('Add Vendor Details', '', 'warning');
       } else {
+        this.globals.loader();
         console.log('cart item', this.displayCart);
 
         const currentDate = new Date().toLocaleString('en-US');
@@ -373,6 +378,9 @@ export class CartComponent implements OnInit {
         console.log('purchase payload', data);
         this.service.addPurchase(data).subscribe(
           (res) => {
+            setTimeout(() => {
+              this.globals.dismiss();
+            }, 1500);
             if (localStorage.getItem('bill_data') != null) {
               this.printInvoice(
                 JSON.parse(localStorage.getItem('bill_data') || '{}')
@@ -383,9 +391,9 @@ export class CartComponent implements OnInit {
             this.resetCart();
           },
           (err) => {
-            // setTimeout(() => {
-            //   this.globals.dismiss();
-            // }, 2000);
+            setTimeout(() => {
+              this.globals.dismiss();
+            }, 1500);
 
             this.globals.presentToast(
               'Something went wrong, try again later',
@@ -417,6 +425,7 @@ export class CartComponent implements OnInit {
   }
 
   refund() {
+    this.globals.loader();
     let return_id = this.globals.global_array.return_id;
     console.log('return id', this.globals.global_array.return_id);
     let data = this.cartService.getRefundData();
@@ -424,15 +433,18 @@ export class CartComponent implements OnInit {
     console.log('after return id', data);
     this.service.refundSale(data).subscribe(
       (res) => {
+        setTimeout(() => {
+          this.globals.dismiss();
+        }, 1500);
         this.refreshAPI();
         this.resetCart();
         this.close();
         this.globals.presentToast('Refunded Successfully', '', 'success');
       },
       (err) => {
-        // setTimeout(() => {
-        //   this.globals.dismiss();
-        // }, 2000);
+        setTimeout(() => {
+          this.globals.dismiss();
+        }, 1500);
 
         this.globals.presentToast(
           'Something went wrong, try again later',
