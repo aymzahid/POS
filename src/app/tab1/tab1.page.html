@@ -93,10 +93,22 @@
                 <ion-card-subtitle color="dark">
                   {{item.name}}</ion-card-subtitle
                 >
+
                 <ion-card-title color="primary"
                   >PKR: {{item.s_price}}
                   <span style="color: var(--ion-color-dark); font-size: 0.9rem">
                     / Unit</span
+                  >
+                </ion-card-title>
+                <ion-card-title color="success"
+                  >Quantity:
+                  <span
+                    style="
+                      color: var(--ion-color-dark);
+                      padding: 5px;
+                      font-size: 0.9rem;
+                    "
+                    >{{item.quantity_in_stock}}</span
                   >
                 </ion-card-title>
               </ion-card-header>
@@ -111,6 +123,7 @@
                 <ion-card-subtitle color="dark">
                   {{item.name}}</ion-card-subtitle
                 >
+
                 <ion-card-title color="primary"
                   >PKR: {{item.s_price}}
                   <span style="color: var(--ion-color-dark); font-size: 0.9rem">
