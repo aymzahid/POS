@@ -1,3 +1,19 @@
 ion-content {
   --background: #eaf9f4;
 }
+
+ion-card {
+  ion-card-header {
+    font-weight: 600;
+  }
+  ion-card-content {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.doughnutCanvas {
+  height: 500px !important;
+  width: 500px !important;
+  //  style="position: relative; height: 10vh; width: 30vw"
+}
