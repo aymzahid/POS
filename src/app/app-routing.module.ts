@@ -56,6 +56,10 @@ const routes: Routes = [
     path: 'add-category',
     loadChildren: () => import('./pages/add-category/add-category.module').then( m => m.AddCategoryPageModule)
   },
+  {
+    path: 'charts',
+    loadChildren: () => import('./pages/charts/charts.module').then( m => m.ChartsPageModule)
+  },
 
 ];
 @NgModule({

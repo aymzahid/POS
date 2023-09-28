@@ -114,8 +114,12 @@
           >
             <ion-label class="serial">{{i+1}}</ion-label>
             <ion-label class="name">{{item.name}}</ion-label>
-            <ion-label class="quantity">{{item.quantity}} kg</ion-label>
-            <ion-label class="price-unit">{{item.s_price}}/kg</ion-label>
+            <ion-label class="quantity"
+              >{{item.quantity}} <span>{{item.unit}}</span></ion-label
+            >
+            <ion-label class="price-unit"
+              >{{item.s_price}}/ <span>{{item.unit}}</span>
+            </ion-label>
 
             <ion-label class="amount">{{item.total_price}}</ion-label>
           </ion-item>

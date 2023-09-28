@@ -90,12 +90,12 @@ ion-content {
 @media only screen and (min-width: 1200px) {
   .products_row {
     ion-card {
-      width: 14vw;
+      width: 15vw;
       height: 18vh;
-      line-height: 3;
+      line-height: 2;
 
       ion-card-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 700;
       }
       ion-card-title {

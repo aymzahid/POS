@@ -19,6 +19,7 @@ ion-content {
     height: 15vh;
     text-align: center;
     padding: 0px;
+    line-height: 1;
     box-shadow: 5px 7px 10px gray;
     display: flex;
     align-items: center;
@@ -85,12 +86,12 @@ ion-content {
 @media only screen and (min-width: 1200px) {
   .products_row {
     ion-card {
-      width: 14vw;
+      width: 15vw;
       height: 19vh;
-      line-height: 3;
+      line-height: 2;
 
       ion-card-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 700;
       }
       ion-card-title {

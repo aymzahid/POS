@@ -34,6 +34,7 @@ export class CartserviceService {
       name: product.name,
       s_price: product.s_price,
       quantity: quantity,
+      unit: product.unit_of_measurement,
       total_price: product.s_price,
     };
 
@@ -69,6 +70,7 @@ export class CartserviceService {
       name: product.name,
       p_price: product.p_price,
       s_price: product.s_price,
+      unit: product.unit_of_measurement,
       quantity: quantity,
       total_price: product.s_price,
     };

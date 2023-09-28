@@ -1,43 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs" color="dark"></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
 
     <ion-title class="ion-text-center" color="light">Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="4">
-        <label for="title"
-          ><img src="assets/icon/add-category-icon.png" alt="" /></label
-        ><ion-card
-          class="ion-activatable ripple-parent rectangle"
-          (click)="addCategoryModal('Category')"
-        >
-          <ion-ripple-effect></ion-ripple-effect>
-          <ion-card-header>
-            <ion-card-title>Add Category</ion-card-title>
-          </ion-card-header>
-        </ion-card></ion-col
-      >
-      <ion-col size="4">
-        <label for="title" style="background-color: var(--ion-color-danger)"
-          ><img src="assets/icon/add-sub-category-icon.png" alt="" /></label
-        ><ion-card
-          class="ion-activatable ripple-parent rectangle"
-          (click)="addCategoryModal('Sub Category')"
-        >
-          <ion-ripple-effect></ion-ripple-effect>
-          <ion-card-header>
-            <ion-card-title>Add Sub Category</ion-card-title>
-          </ion-card-header>
-        </ion-card></ion-col
-      >
-      <!-- <ion-col size="4">
+  <ion-row>
+    <ion-col size="11" offset="1">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <label for="title"
+              ><img src="assets/icon/add-category-icon.png" alt="" /></label
+            ><ion-card
+              class="ion-activatable ripple-parent rectangle"
+              (click)="addCategoryModal('Category')"
+            >
+              <ion-ripple-effect></ion-ripple-effect>
+              <ion-card-header>
+                <ion-card-title>Add Category</ion-card-title>
+              </ion-card-header>
+            </ion-card></ion-col
+          >
+          <ion-col size="4">
+            <label for="title" style="background-color: var(--ion-color-danger)"
+              ><img src="assets/icon/add-sub-category-icon.png" alt="" /></label
+            ><ion-card
+              class="ion-activatable ripple-parent rectangle"
+              (click)="addCategoryModal('Sub Category')"
+            >
+              <ion-ripple-effect></ion-ripple-effect>
+              <ion-card-header>
+                <ion-card-title>Add Sub Category</ion-card-title>
+              </ion-card-header>
+            </ion-card></ion-col
+          >
+          <!-- <ion-col size="4">
         <label for="title"
           ><img src="assets/icon/add-category-icon.png" alt="" /></label
         ><ion-card>
@@ -46,6 +48,8 @@
           </ion-card-header>
         </ion-card></ion-col
       > -->
-    </ion-row>
-  </ion-grid>
+        </ion-row>
+      </ion-grid></ion-col
+    >
+  </ion-row>
 </ion-content>
