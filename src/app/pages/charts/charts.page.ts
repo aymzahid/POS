@@ -6,6 +6,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { ServiceService } from 'src/app/services/service.service';
+import { GlobalVariable } from 'src/global';
 
 @Component({
   selector: 'app-charts',
@@ -20,26 +22,37 @@ export class ChartsPage implements OnInit {
   doughnutChart: any;
   lineChart: any;
 
-  constructor() {}
+  topfiveSoldProducts_labels: any = [];
+  topfiveSoldProducts_data: any = [];
+  topfivePurchasedProducts_labels: any = [];
+  topfivePurchasedProducts_data: any = [];
+
+  monthlysaleAmount: any = [];
+  monthlysaleMonth: any;
+  constructor(
+    private service: ServiceService,
+    private globals: GlobalVariable
+  ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.barChartMethod();
-    this.doughnutChartMethod();
-    this.lineChartMethod();
+    this.globals.loader();
+    this.getReports();
   }
+
+  ionViewWillEnter() {}
 
   barChartMethod() {
     // Now we need to supply a Chart element reference with an object that defines the type of chart we want to use, and the type of data we want to display.
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['BJP', 'INC', 'AAP', 'CPI', 'CPI-M', 'NCP'],
+        labels: this.topfiveSoldProducts_labels,
         datasets: [
           {
-            label: '# of Votes',
-            data: [200, 50, 30, 15, 20, 34],
+            label: 'No of  Units Sold',
+            data: this.topfiveSoldProducts_data,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -78,11 +91,12 @@ export class ChartsPage implements OnInit {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: ['BJP', 'Congress', 'AAP', 'CPM', 'SP'],
+        labels: this.topfivePurchasedProducts_labels,
+
         datasets: [
           {
             label: '# of Votes',
-            data: [50, 29, 15, 10, 7],
+            data: this.topfivePurchasedProducts_data,
             backgroundColor: [
               'rgba(255, 159, 64, 0.2)',
               'rgba(255, 99, 132, 0.2)',
@@ -122,7 +136,7 @@ export class ChartsPage implements OnInit {
         ],
         datasets: [
           {
-            label: 'Sell per week',
+            label: this.monthlysaleMonth,
             fill: false,
             // lineTension: 0.1,
             backgroundColor: 'rgba(75,192,192,0.4)',
@@ -140,11 +154,94 @@ export class ChartsPage implements OnInit {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40, 10, 5, 50, 10, 15],
+            data: this.monthlysaleAmount,
             spanGaps: false,
           },
         ],
       },
     });
+  }
+
+  // API Calls
+  getReports() {
+    this.service.topFiveSaleProduct().subscribe(
+      (res) => {
+        // console.log('topFiveSaleProduct', res);
+        this.topfiveSoldProducts_labels = res.productNames;
+        this.topfiveSoldProducts_data = res.totalQuantitySold;
+
+        console.log(
+          'Top Five Sold Products',
+          this.topfiveSoldProducts_labels,
+          this.topfiveSoldProducts_data
+        );
+
+        this.barChartMethod();
+      },
+      (err) => {
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
+      }
+    );
+
+    this.service.fetchMonthlySalesTotal().subscribe(
+      (res) => {
+        this.monthlysaleMonth = res[0].month_year;
+        this.monthlysaleAmount = res[0].total_amount;
+
+        console.log(
+          'MontlySalesTotal',
+          this.monthlysaleMonth,
+          this.monthlysaleAmount
+        );
+
+        this.lineChartMethod();
+      },
+      (err) => {
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
+      }
+    );
+    this.service.topFivePurchaseProduct().subscribe(
+      (res) => {
+        this.topfivePurchasedProducts_labels = res.productNames;
+        this.topfivePurchasedProducts_data = res.totalQuantitySold;
+
+        console.log(
+          'Top Five Purchased Products',
+          this.topfivePurchasedProducts_labels,
+          this.topfivePurchasedProducts_data
+        );
+
+        this.doughnutChartMethod();
+      },
+      (err) => {
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
+      }
+    );
+    this.service.fetchMonthlyPurchaseTotal().subscribe(
+      (res) => {
+        console.log('fetchMonthlyPurchaseTotal', res);
+      },
+      (err) => {
+        this.globals.presentToast(
+          'Something went wrong, try again later',
+          '',
+          'danger'
+        );
+      }
+    );
+
+    this.globals.dismiss();
   }
 }

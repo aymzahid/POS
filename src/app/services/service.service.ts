@@ -70,6 +70,30 @@ export class ServiceService {
 
     return this.http.get<any>(path);
   }
+
+  // Reports
+
+  topFiveSaleProduct() {
+    let path = this.globals.baseURL + 'TopFiveSaleProduct';
+
+    return this.http.get<any>(path);
+  }
+  fetchMonthlySalesTotal() {
+    let path = this.globals.baseURL + 'fetchMonthlySalesTotal';
+
+    return this.http.get<any>(path);
+  }
+  topFivePurchaseProduct() {
+    let path = this.globals.baseURL + 'TopFivePurchaseProduct';
+
+    return this.http.get<any>(path);
+  }
+  fetchMonthlyPurchaseTotal() {
+    let path = this.globals.baseURL + 'fetchMonthlyPurchaseTotal';
+
+    return this.http.get<any>(path);
+  }
+
   //POST
 
   addSale(data: any) {
@@ -95,7 +119,7 @@ export class ServiceService {
     let path = this.globals.baseURL + 'add-category';
     return this.http.post<any>(path, data);
   }
-  
+
   addSubCategory(data: any) {
     let path = this.globals.baseURL + 'add-sub-category';
     return this.http.post<any>(path, data);
