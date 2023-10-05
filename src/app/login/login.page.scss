@@ -1,0 +1,52 @@
+ion-content {
+  --padding-top: 6%;
+  --padding-start: 10%;
+  --padding-end: 10%;
+  --background: url("../../assets/bg/login.jpg") 0 0/100% 100% no-repeat;
+  --margin: 0;
+  .input-group {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+
+  .errors {
+    font-size: small;
+    color: #fff;
+    background: var(--ion-color-danger);
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .logo {
+    max-width: 250px;
+    border-radius: 20px;
+  }
+
+  ion-card {
+    // background-color: rgb(4 3 3 / 88%);
+    // backdrop-filter: blur(3px);
+
+    // ion-button {
+    //   --background: #ffa012;
+    // }
+
+    ion-card-subtitle {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 60%;
+    margin: auto;
+  }
+
+  ion-content {
+    --padding-top: 5%;
+  }
+}

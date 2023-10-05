@@ -16,7 +16,7 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: 'tabs',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -36,31 +36,47 @@ const routes: Routes = [
     path: 'invoice',
     loadChildren: () =>
       import('./pages/invoice/invoice.module').then((m) => m.InvoicePageModule),
-  },  {
+  },
+  {
     path: 'create-user',
-    loadChildren: () => import('./pages/create-user/create-user.module').then( m => m.CreateUserPageModule)
+    loadChildren: () =>
+      import('./pages/create-user/create-user.module').then(
+        (m) => m.CreateUserPageModule
+      ),
   },
   {
     path: 'product-modal',
-    loadChildren: () => import('./pages/product-modal/product-modal.module').then( m => m.ProductModalPageModule)
+    loadChildren: () =>
+      import('./pages/product-modal/product-modal.module').then(
+        (m) => m.ProductModalPageModule
+      ),
   },
   {
     path: 'add-product',
-    loadChildren: () => import('./pages/add-product/add-product.module').then( m => m.AddProductPageModule)
+    loadChildren: () =>
+      import('./pages/add-product/add-product.module').then(
+        (m) => m.AddProductPageModule
+      ),
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+    loadChildren: () =>
+      import('./pages/dashboard/dashboard.module').then(
+        (m) => m.DashboardPageModule
+      ),
   },
   {
     path: 'add-category',
-    loadChildren: () => import('./pages/add-category/add-category.module').then( m => m.AddCategoryPageModule)
+    loadChildren: () =>
+      import('./pages/add-category/add-category.module').then(
+        (m) => m.AddCategoryPageModule
+      ),
   },
   {
     path: 'charts',
-    loadChildren: () => import('./pages/charts/charts.module').then( m => m.ChartsPageModule)
+    loadChildren: () =>
+      import('./pages/charts/charts.module').then((m) => m.ChartsPageModule),
   },
-
 ];
 @NgModule({
   imports: [

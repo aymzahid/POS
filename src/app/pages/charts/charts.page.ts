@@ -21,6 +21,7 @@ export class ChartsPage implements OnInit {
   barChart: any;
   doughnutChart: any;
   lineChart: any;
+  time: any;
 
   topfiveSoldProducts_labels: any = [];
   topfiveSoldProducts_data: any = [];
@@ -41,7 +42,9 @@ export class ChartsPage implements OnInit {
     this.getReports();
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+
+  }
 
   barChartMethod() {
     // Now we need to supply a Chart element reference with an object that defines the type of chart we want to use, and the type of data we want to display.
@@ -244,4 +247,6 @@ export class ChartsPage implements OnInit {
 
     this.globals.dismiss();
   }
+
+
 }
