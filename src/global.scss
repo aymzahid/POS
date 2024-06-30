@@ -60,6 +60,14 @@
   }
 }
 
+.input-wrapper {
+  .native-wrapper {
+    .native-input {
+      padding-left: 10px !important;
+    }
+  }
+}
+
 .ion-select-class {
   .alert-wrapper {
     --min-width: 350px;

@@ -114,6 +114,11 @@ export class Tab1Page {
       }
     );
   }
+  handleChange(event: any) {
+    if (event.detail.value === 'logout') {
+      this.router.navigateByUrl('/login', { replaceUrl: true });
+    }
+  }
 
   cat_Changed(event: any) {
     console.log('main_cat changed', event.detail.value);

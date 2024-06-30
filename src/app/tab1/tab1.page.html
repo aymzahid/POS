@@ -21,6 +21,21 @@
           </ion-segment>
         </ion-col>
       </ion-row>
+      <ion-buttons slot="end">
+        <ion-select
+          style="text-transform: capitalize"
+           (ionChange)="handleChange($event)"
+          interface="popover"
+          mode="ios"
+          [interfaceOptions]="{
+    cssClass: 'custom_select'
+  }"
+          value=""
+          placeholder="log-out"
+        >
+          <ion-select-option value="logout">Logout</ion-select-option>
+        </ion-select>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 

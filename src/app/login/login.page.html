@@ -10,7 +10,7 @@
         <ion-card-title>
           <form (ngSubmit)="login()" [formGroup]="credentials">
             <div class="input-group">
-              <ion-item>
+              <ion-item lines="none">
                 <ion-input
                   type="email"
                   placeholder="Email"
@@ -24,7 +24,7 @@
                 <span *ngIf="email.errors?.required">Email is required</span>
                 <span *ngIf="email.errors?.email">Email is invalid</span>
               </div>
-              <ion-item>
+              <ion-item lines="none">
                 <ion-input
                   type="password"
                   placeholder="Password"
